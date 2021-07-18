@@ -1,16 +1,34 @@
-import Head from 'next/head'
-//import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-/**<Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} /> */
+import React, { useState } from "react";
+import Head from 'next/head';
 import {
-  Box, Flex, Text, Icon, SimpleGrid, VStack, Stack, Image,
-  Heading, List, ListItem, ListIcon, IconButton, Grid, Center, useBreakpointValue
-} from '@chakra-ui/react'
-import { CheckCircleIcon } from '@chakra-ui/icons'
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+  IoLogoFacebook, IoLogoTwitter, IoLogoInstagram
+} from 'react-icons/io5'
+
+import {
+  Box, Flex, Text, SimpleGrid, VStack, Stack, Image,
+  Heading, List, ListItem, ListIcon, Textarea, Center,
+  useBreakpointValue, FormControl, FormLabel, Button, Input,
+} from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
+import "swiper/components/thumbs/thumbs.min.css";
+// import Swiper core and required modules
+import SwiperCore, {
+  Navigation, Thumbs, Autoplay
+} from 'swiper/core';
+// install Swiper modules
+SwiperCore.use([Navigation, Thumbs, Autoplay]);
+
 import Navbar from '../components/navbar'
 
 export default function Home() {
+
+  const [thumbNailSwiper, setThumbNailSwiper] = useState(null);
+
   return (
     <>
       <Head>
@@ -23,68 +41,93 @@ export default function Home() {
       </Head>
 
       <main>
-        <Box
-          backgroundImage={useBreakpointValue({
-            base: 'url(2.png)', md: 'url(1.png)'
-          })}
-          backgroundSize={'cover'}
-          backgroundPosition={'center'}>
-          <nav>
-            <Navbar />
-          </nav>
-          <Flex w={'full'} h={'100vh'}>
-            <VStack
+        <div id="top">
+          <Box
+            backgroundImage={useBreakpointValue({
+              base: 'url(2.png)', md: 'url(1.png)'
+            })}
+            backgroundSize={'cover'}
+            backgroundPosition={'center'}>
+            <nav>
+              <Navbar />
+            </nav>
+            <Flex
               w={'full'}
-              color={'white'}
-              px={useBreakpointValue({ base: 4, md: 8 })}
-              justify={'center'}>
+              h={'100vh'}
+            >
+              <VStack
+                w={'full'}
+                color={'white'}
+                px={useBreakpointValue({ base: 4, md: 8 })}
+                justify={'center'}>
 
-              <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
-                <Heading
-                  fontWeight={600}
-                  fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
-                  lineHeight={1.2}>
-                  SkinPlus Medspa
-                </Heading>
-              </Stack>
-              <Stack direction={'row'}>
-                <Text>Enhancing your natural beauty</Text>
-              </Stack>
-            </VStack>
-          </Flex>
-        </Box>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} id>
-          <Stack spacing={4} justify={'center'} px={8}>
-            <Heading fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}>About Us</Heading>
-            <Text fontSize={'lg'} >
-              At SkinPlus Medspa, our goal is to maintain your original
-              beauty and physique and only enhance it so that you look
-              like the best version of yourself; and maybe 10 years
-              younger. SkinPlus Medspa provides a variety of
-              personalized services to its clientele to enhance
-              their look and maintain youth. Whether you are looking
-              for low cost noninvasive procedures, solutions for the
-              pigmentation, wrinkles or acne, or even looking to enhance
-              certain facial features or your physique, we are the place
-              for you. SkinPlus Medspa addresses all your skincare
-              concerns, PLUS body, hair loss and sexual health needs.
-              We are passionate about your satisfaction and strive to
-              make you look as good as you feel.
-            </Text>
-          </Stack>
-          <Flex pt={4}>
-            <Image
-              alt={'Model Picture'}
-              src={'8.png'}
-              height={useBreakpointValue({ base: '520', "2xl": "950" })}
-              pl={useBreakpointValue({ base: null, md: 48, "2xl": 98 })}
-            />
-          </Flex>
-        </SimpleGrid>
-        <SimpleGrid columns={{ base: 1, md: 2 }}
-          p={12}
-          backgroundColor="brand.sand">
-          <Flex >
+                <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
+                  <Heading
+                    fontWeight={600}
+                    fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
+                    lineHeight={1.2}>
+                    SkinPlus Medspa
+                  </Heading>
+                </Stack>
+                <Stack direction={'row'}>
+                  <Text>Enhancing your natural beauty</Text>
+                </Stack>
+              </VStack>
+            </Flex>
+          </Box>
+        </div>
+
+        <div id="about">
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={8} >
+            <Stack
+              spacing={4}
+              justify={'center'}
+              px={8}
+              align={{ base: 'center' }}
+            >
+              <Heading
+                fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}
+                pt={{ base: 5, md: 0 }}>
+                About Us
+              </Heading>
+              <Text
+                fontSize={'lg'}
+                pb={{ base: 5, md: 0 }}
+              >
+                At SkinPlus Medspa, our goal is to maintain your original
+                beauty and physique and only enhance it so that you look
+                like the best version of yourself; and maybe 10 years
+                younger. SkinPlus Medspa provides a variety of
+                personalized services to its clientele to enhance
+                their look and maintain youth. Whether you are looking
+                for low cost noninvasive procedures, solutions for the
+                pigmentation, wrinkles or acne, or even looking to enhance
+                certain facial features or your physique, we are the place
+                for you. SkinPlus Medspa addresses all your skincare
+                concerns, PLUS body, hair loss and sexual health needs.
+                We are passionate about your satisfaction and strive to
+                make you look as good as you feel.
+              </Text>
+            </Stack>
+            <Flex pt={4} display={{ base: 'none', md: 'block' }}>
+              <Image
+                alt={'Model Picture'}
+                src={'8.png'}
+                height={useBreakpointValue({ base: '520', "2xl": "950" })}
+                pl={useBreakpointValue({ base: null, md: 48, "2xl": 98 })}
+              />
+            </Flex>
+          </SimpleGrid>
+        </div>
+
+        <SimpleGrid
+          columns={{ base: 1, md: 2 }}
+          p={{ base: 0, md: 12 }}
+          bgColor="brand.olive"
+        >
+          <Flex display={{ base: 'none', md: 'block' }}>
             <Image
               alt={'Model Picture'}
               src={'3.png'}
@@ -93,7 +136,11 @@ export default function Home() {
             />
           </Flex>
           <Stack justify={'center'} px={8}>
-            <Text fontSize={'lg'} >
+            <Text
+              fontSize={'lg'}
+              color="white"
+              py={{ base: 5, md: 0 }}
+            >
               Owned and operated by physicians and certified professionals.
               We are committed to cleanliness, safety, comfort and
               professionalism. SkinPlus Medspa serve as a sanitary location
@@ -115,78 +162,313 @@ export default function Home() {
           </Stack>
         </SimpleGrid>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} p={16}>
-          <Stack spacing={4} justify={'center'} >
-            <Heading fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}>Our Services</Heading>
-            <Text fontSize={'lg'} >
-              SkinPlus uses ethically sourced, fair trade natural materials  that are expertly
-              crafted to match our client needs.
-            </Text>
-          </Stack>
-          <Stack>
-            <List spacing={3}>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Facial Care
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Vagina Rejuvenation
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Hair Restoration
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Cosmetic Products
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Acne Treatment
-              </ListItem>
-            </List>
-          </Stack>
-          <Stack>
-            <List spacing={3}>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Botox
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Fillers
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Non-evasive procedure
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Body Sculpting
-              </ListItem>
-              <ListItem>
-                <ListIcon as={CheckCircleIcon} color="green.500" />
-                Platelet-Rich Plasma (PRP)
-              </ListItem>
-            </List>
-          </Stack>
-        </SimpleGrid>
+        <div id="services">
+          <SimpleGrid
+            columns={{ base: 1, md: 3 }}
+            spacing={8}
+            p={{ base: 8, md: 16 }}
+            bgColor="brand.cream"
+          >
+            <Stack spacing={4} justify={'center'} >
+              <Heading
+                fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}
+                align={{ base: 'center' }}
+              >
+                Our Services
+              </Heading>
+              <Text fontSize={'xl'} >
+                SkinPlus uses ethically sourced, fair trade natural materials  that are expertly
+                crafted to match our client needs.
+              </Text>
+            </Stack>
+            <Stack>
+              <List spacing={3} fontSize="xl">
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Facial Care
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Vagina Rejuvenation
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Hair Restoration
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Cosmetic Products
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Acne Treatment
+                </ListItem>
+              </List>
+            </Stack>
+            <Stack>
+              <List spacing={3} fontSize="xl">
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Botox
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Fillers
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Non-evasive procedure
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Body Sculpting
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  Platelet-Rich Plasma (PRP)
+                </ListItem>
+              </List>
+            </Stack>
+          </SimpleGrid>
+        </div>
 
-        <Splide
-          options={{
-            rewind: true,
-            perPage: 2,
-            perMove: 1,
-            gap: '1rem',
-          }}>
-          <SplideSlide>
-            <img src="4.jpg" alt="Image 4" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src="5.jpg" alt="Image 5" />
-          </SplideSlide>
-        </Splide>
+        <Box bgColor="brand.brown" color="white">
+          <Center>
+            <Text
+              fontSize={{ base: "2xl", md: "6xl" }}
+              p={{ base: 8, md: 16 }}>
+              "We celebrate natural
+              <br />beauty and believe
+              <br />everyone is beautiful
+              <br />in their own way"
+            </Text>
+          </Center>
+          <Center pb={5}>
+            <Text fontSize={{ base: "xl", md: "2xl" }} borderBottom="2px">
+              CLARA AKAYULI - CEO
+            </Text>
+          </Center>
+        </Box>
+
+        <div id="#">
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={5}
+            px={{ base: 4, md: 16 }}
+            py={4}
+            bgColor={'brand.olive'}
+          >
+            <Stack spacing={4} justify={'center'}>
+              <Flex>
+                <Box borderLeft="2px" color="white">
+                  <Box pl={5}>
+                    <Heading fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}>Let&apos;s <br />
+                      Connect
+                    </Heading>
+                    <Text fontSize={'xl'} py={{ base: 4, md: 8 }}>
+                      We love hearing from our users.
+                      Connect with us on social media to share your feedback and thoughts
+                    </Text>
+                    <Flex py={5}>
+                      <a href="#">
+                        <IoLogoInstagram size={30} />
+                      </a>
+                      <Box px={8}>
+                        <a href="#">
+                          <IoLogoTwitter size={30} />
+                        </a>
+                      </Box>
+                      <a href="#">
+                        <IoLogoFacebook size={30} />
+                      </a>
+                    </Flex>
+                  </Box>
+                </Box>
+              </Flex>
+            </Stack>
+            <Stack>
+              <Swiper style={{
+                '--swiper-navigation-color': '#000',
+                '--swiper-pagination-color': '#fff'
+              }}
+                loop={true} spaceBetween={10} navigation={true}
+                thumbs={{ swiper: thumbNailSwiper }}
+                autoplay={{
+                  "delay": 2500,
+                  "disableOnInteraction": false
+                }}
+                className="mySwiper2">
+                <SwiperSlide>
+                  <img src="3.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="4.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="5.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="6.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="7.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="8.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="9.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="13.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="14.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="15.png" />
+                </SwiperSlide>
+              </Swiper>
+              <Swiper onSwiper={setThumbNailSwiper} loop={true} spaceBetween={10} slidesPerView={4}
+                freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}
+                className="mySwiper">
+                <SwiperSlide>
+                  <img src="3.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="4.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="5.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="6.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="7.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="8.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="9.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="13.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="14.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="15.png" />
+                </SwiperSlide>
+              </Swiper>
+            </Stack>
+          </SimpleGrid>
+        </div>
+
+        <div id="contact">
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={5}
+            px={{ base: 4, md: 16 }}
+            bgColor="brand.green" color="white"
+          >
+            <Stack spacing={4} justify={'center'}>
+              <Flex>
+                <Box>
+                  <Box pl={5} py={{ base: 4, md: 0 }}>
+                    <Heading
+                      display={{ base: 'none', md: 'block' }}
+                      fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
+                    >Get
+                      <br />
+                      In Touch
+                    </Heading>
+                    <Heading
+                      display={{ base: 'block', md: 'none' }}
+                      fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
+                    >Get In Touch
+                    </Heading>
+                  </Box>
+                  <Text
+                    fontSize={{ base: "xl", md: "2xl" }}
+                    pl={{ base: 0, md: 5 }}
+                  >
+                    We are open on Tueday - Sunday <br />
+                    from 10am - 7pm
+                  </Text>
+                  <Text
+                    fontSize={{ base: "xl", md: "2xl" }}
+                    pl={{ base: 0, md: 5 }}
+                  >
+                    NB: We are closed on Monday.
+                  </Text>
+                  <Text
+                    fontSize={{ base: "xl", md: "2xl" }}
+                    pl={{ base: 0, md: 5 }}
+                  >
+                    <address>Phone Number: <a href="tel:+233596068336">0596068336</a>
+                    </address>
+                  </Text>
+                </Box>
+              </Flex>
+            </Stack>
+            <Stack py={5}>
+              <FormControl>
+                <FormLabel fontSize={{ md: "xl" }}>Name</FormLabel>
+                <Input
+                  type="text"
+                  name="name"
+                  _focus={{
+                    borderColor: 'brand.sand'
+                  }} />
+              </FormControl>
+              <FormControl>
+                <FormLabel fontSize={{ md: "xl" }}>Email address</FormLabel>
+                <Input
+                  type="email"
+                  name="email"
+                  _focus={{
+                    borderColor: 'brand.sand'
+                  }} />
+              </FormControl>
+              <FormControl>
+                <FormLabel fontSize={{ md: "xl" }}>Phone Number</FormLabel>
+                <Input
+                  type="tel"
+                  name="phone number"
+                  _focus={{
+                    borderColor: 'brand.sand'
+                  }} />
+              </FormControl>
+              <FormControl>
+                <FormLabel fontSize={{ md: "xl" }}>Message</FormLabel>
+                <Textarea
+                  name="message"
+                  rows="7"
+                  columns="30"
+                  _focus={{
+                    borderColor: 'brand.sand'
+                  }}>
+                </Textarea>
+              </FormControl>
+              <Stack spacing={6}>
+                <Button
+                  bgColor={'brand.green'}
+                  variant={'outline'}
+                  fontSize={{ md: "xl" }}
+                  _hover={{
+                    bgColor: 'brand.olive'
+                  }}
+                >
+                  Send
+                </Button>
+              </Stack>
+            </Stack>
+          </SimpleGrid>
+        </div>
+
       </main>
 
 
