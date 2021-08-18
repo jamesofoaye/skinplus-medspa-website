@@ -40,14 +40,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main
+        style={{
+          fontFamily: 'Lora'
+        }}
+      >
         <div id="top">
-          <Box
-            backgroundImage={useBreakpointValue({
-              base: 'url(2.png)', md: 'url(1.png)'
-            })}
-            backgroundSize={'cover'}
-            backgroundPosition={'center'}>
+          <Box bgColor={"brand.green"}>
             <nav>
               <Navbar />
             </nav>
@@ -60,18 +59,21 @@ export default function Home() {
                 color={'white'}
                 px={useBreakpointValue({ base: 4, md: 8 })}
                 justify={'center'}>
+                <Image
+                  src="/logo.svg"
+                  width={useBreakpointValue({ base: "200", md: "400" })}
+                  height={useBreakpointValue({ base: "200", md: "400" })}
+                />
 
-                <Stack maxW={'2xl'} align={'flex-start'} spacing={6}>
-                  <Heading
-                    fontWeight={600}
-                    fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
-                    lineHeight={1.2}>
-                    SkinPlus Medspa
-                  </Heading>
-                </Stack>
-                <Stack direction={'row'}>
-                  <Text>Enhancing your natural beauty</Text>
-                </Stack>
+                <Box direction={'row'}>
+                  <Text
+                    fontSize={useBreakpointValue({ base: "xl", md: "2xl" })}
+                    color={"brand.sand"}
+                    mt={5}
+                  >
+                    Enhancing your natural beauty
+                  </Text>
+                </Box>
               </VStack>
             </Flex>
           </Box>
@@ -88,6 +90,7 @@ export default function Home() {
               align={{ base: 'center' }}
             >
               <Heading
+                fontFamily={'Oswald'}
                 fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}
                 pt={{ base: 5, md: 0 }}>
                 About Us
@@ -111,7 +114,9 @@ export default function Home() {
                 make you look as good as you feel.
               </Text>
             </Stack>
-            <Flex pt={4} display={{ base: 'none', md: 'block' }}>
+            <Flex
+              pt={4}
+              display={{ base: 'none', md: 'block' }}>
               <Image
                 alt={'Model Picture'}
                 src={'8.png'}
@@ -135,7 +140,9 @@ export default function Home() {
               pl={40}
             />
           </Flex>
-          <Stack justify={'center'} px={8}>
+          <Stack
+            justify={'center'}
+            px={8}>
             <Text
               fontSize={'lg'}
               color="white"
@@ -169,8 +176,11 @@ export default function Home() {
             p={{ base: 8, md: 16 }}
             bgColor="brand.cream"
           >
-            <Stack spacing={4} justify={'center'} >
+            <Stack
+              spacing={4}
+              justify={'center'} >
               <Heading
+                fontFamily={'Oswald'}
                 fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}
                 align={{ base: 'center' }}
               >
@@ -182,57 +192,79 @@ export default function Home() {
               </Text>
             </Stack>
             <Stack>
-              <List spacing={3} fontSize="xl">
+              <List
+                spacing={3}
+                fontSize="xl">
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Facial Care
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Massage
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Vagina Rejuvenation
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
-                  Hair Restoration
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Laser Hair Removal
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Cosmetic Products
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Acne Treatment
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Fat Reduction &amp; Body Contouring
                 </ListItem>
               </List>
             </Stack>
             <Stack>
-              <List spacing={3} fontSize="xl">
+              <List
+                spacing={3}
+                fontSize="xl">
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Wax
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Botox
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Fillers
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
-                  Non-evasive procedure
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Threading
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Body Sculpting
                 </ListItem>
                 <ListItem>
-                  <ListIcon as={CheckCircleIcon} color="green.500" />
-                  Platelet-Rich Plasma (PRP)
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  PRP Injection &amp; Microneedling
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Skin Tightening
                 </ListItem>
               </List>
             </Stack>
           </SimpleGrid>
         </div>
 
-        <Box bgColor="brand.brown" color="white">
+        <Box
+          bgColor="brand.brown"
+          color="white">
           <Center>
             <Text
               fontSize={{ base: "2xl", md: "6xl" }}
@@ -244,7 +276,9 @@ export default function Home() {
             </Text>
           </Center>
           <Center pb={5}>
-            <Text fontSize={{ base: "xl", md: "2xl" }} borderBottom="2px">
+            <Text
+              fontSize={{ base: "xl", md: "2xl" }}
+              borderBottom="2px">
               CLARA AKAYULI - CEO
             </Text>
           </Center>
@@ -258,11 +292,21 @@ export default function Home() {
             py={4}
             bgColor={'brand.olive'}
           >
-            <Stack spacing={4} justify={'center'}>
+            <Stack
+              spacing={4}
+              justify={'center'}
+            >
               <Flex>
-                <Box borderLeft="2px" color="white">
+                <Box
+                  borderLeft="2px"
+                  color="white"
+                >
                   <Box pl={5}>
-                    <Heading fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}>Let&apos;s <br />
+                    <Heading
+                      fontFamily={'Oswald'}
+                      fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
+                    >
+                      Let&apos;s <br />
                       Connect
                     </Heading>
                     <Text fontSize={'xl'} py={{ base: 4, md: 8 }}>
@@ -367,110 +411,122 @@ export default function Home() {
           </SimpleGrid>
         </div>
 
-        <div id="contact">
-          <SimpleGrid
-            columns={{ base: 1, md: 2 }}
-            spacing={5}
-            px={{ base: 4, md: 16 }}
-            bgColor="brand.green" color="white"
+        <SimpleGrid
+          columns={{ base: 1, md: 2 }}
+          spacing={5}
+          px={{ base: 4, md: 16 }}
+          bgColor="brand.green" color="white"
+        >
+          <Stack
+            spacing={4}
+            justify={'center'}
           >
-            <Stack spacing={4} justify={'center'}>
-              <Flex>
-                <Box>
-                  <Box pl={5} py={{ base: 4, md: 0 }}>
-                    <Heading
-                      display={{ base: 'none', md: 'block' }}
-                      fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
-                    >Get
-                      <br />
-                      In Touch
-                    </Heading>
-                    <Heading
-                      display={{ base: 'block', md: 'none' }}
-                      fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
-                    >Get In Touch
-                    </Heading>
-                  </Box>
-                  <Text
-                    fontSize={{ base: "xl", md: "2xl" }}
-                    pl={{ base: 0, md: 5 }}
+            <Flex>
+              <Box>
+                <Box
+                  pl={5}
+                  py={{ base: 4, md: 0 }}>
+                  <Heading
+                    fontFamily={'Oswald'}
+                    display={{ base: 'none', md: 'block' }}
+                    fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
                   >
-                    We are open on Tueday - Sunday <br />
-                    from 10am - 7pm
-                  </Text>
-                  <Text
-                    fontSize={{ base: "xl", md: "2xl" }}
-                    pl={{ base: 0, md: 5 }}
-                  >
-                    NB: We are closed on Monday.
-                  </Text>
-                  <Text
-                    fontSize={{ base: "xl", md: "2xl" }}
-                    pl={{ base: 0, md: 5 }}
-                  >
-                    <address>Phone Number: <a href="tel:+233596068336">0596068336</a>
-                    </address>
-                  </Text>
+                    Get<br />
+                    In Touch
+                  </Heading>
+                  <Heading
+                    fontFamily={'Oswald'}
+                    display={{ base: 'block', md: 'none' }}
+                    fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
+                  >Get In Touch
+                  </Heading>
                 </Box>
-              </Flex>
-            </Stack>
-            <Stack py={5}>
-              <FormControl>
-                <FormLabel fontSize={{ md: "xl" }}>Name</FormLabel>
-                <Input
-                  type="text"
-                  name="name"
-                  _focus={{
-                    borderColor: 'brand.sand'
-                  }} />
-              </FormControl>
-              <FormControl>
-                <FormLabel fontSize={{ md: "xl" }}>Email address</FormLabel>
-                <Input
-                  type="email"
-                  name="email"
-                  _focus={{
-                    borderColor: 'brand.sand'
-                  }} />
-              </FormControl>
-              <FormControl>
-                <FormLabel fontSize={{ md: "xl" }}>Phone Number</FormLabel>
-                <Input
-                  type="tel"
-                  name="phone number"
-                  _focus={{
-                    borderColor: 'brand.sand'
-                  }} />
-              </FormControl>
-              <FormControl>
-                <FormLabel fontSize={{ md: "xl" }}>Message</FormLabel>
-                <Textarea
-                  name="message"
-                  rows="7"
-                  columns="30"
-                  _focus={{
-                    borderColor: 'brand.sand'
-                  }}>
-                </Textarea>
-              </FormControl>
-              <Stack spacing={6}>
-                <Button
-                  bgColor={'brand.green'}
-                  variant={'outline'}
-                  fontSize={{ md: "xl" }}
-                  _hover={{
-                    bgColor: 'brand.olive'
-                  }}
+                <Text
+                  fontSize={{ base: "xl", md: "2xl" }}
+                  pl={{ base: 0, md: 5 }}
                 >
-                  Send
-                </Button>
-              </Stack>
+                  We are open on Tuesday - Sunday <br />
+                  from 10am - 7pm
+                </Text>
+                <Text
+                  fontSize={{ base: "xl", md: "2xl" }}
+                  pl={{ base: 0, md: 5 }}
+                >
+                  NB: We are closed on Monday.
+                </Text>
+                <Text
+                  fontSize={{ base: "xl", md: "2xl" }}
+                  pl={{ base: 0, md: 5 }}
+                >
+                  <address>Phone Number: <a href="tel:+233596068336">0596068336</a>
+                  </address>
+                </Text>
+              </Box>
+            </Flex>
+          </Stack>
+          <Stack py={5}>
+            <FormControl>
+              <FormLabel fontSize={{ md: "xl" }}>
+                Name
+              </FormLabel>
+              <Input
+                type="text"
+                name="name"
+                _focus={{
+                  borderColor: 'brand.sand'
+                }} />
+            </FormControl>
+            <FormControl>
+              <FormLabel fontSize={{ md: "xl" }}>
+                Email address
+              </FormLabel>
+              <Input
+                type="email"
+                name="email"
+                _focus={{
+                  borderColor: 'brand.sand'
+                }} />
+            </FormControl>
+            <FormControl>
+              <FormLabel fontSize={{ md: "xl" }}>
+                Phone Number
+              </FormLabel>
+              <Input
+                type="tel"
+                name="phone number"
+                _focus={{
+                  borderColor: 'brand.sand'
+                }} />
+            </FormControl>
+            <FormControl>
+              <FormLabel fontSize={{ md: "xl" }}>
+                Message
+              </FormLabel>
+              <Textarea
+                name="message"
+                rows="7"
+                columns="30"
+                _focus={{
+                  borderColor: 'brand.sand'
+                }}>
+              </Textarea>
+            </FormControl>
+            <Stack spacing={6}>
+              <Button
+                bgColor={'brand.green'}
+                variant={'outline'}
+                fontSize={{ md: "xl" }}
+                _hover={{
+                  bgColor: 'brand.olive'
+                }}
+              >
+                Send
+              </Button>
             </Stack>
-          </SimpleGrid>
-        </div>
+          </Stack>
+        </SimpleGrid>
 
       </main>
-
 
       <footer>
         <Box align="center">
