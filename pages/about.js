@@ -4,15 +4,16 @@ import {
     Image, Heading, useBreakpointValue
 } from '@chakra-ui/react';
 import Navbar from '../components/navbar'
+import { PopupWidget } from "react-calendly";
 
 export default function About() {
     return (
         <>
             <Head>
                 <title>SkinPlus Medspa | About Us</title>
-                <meta name="description" content="SkinPlus Medspa provides a variety of 
-        personalized services to its clientele to enhance their look and maintain
-        youth."
+                <meta name="description" content="SkinPlus Medspa provides a variety of
+                personalized services to its clientele to enhance their look and maintain
+                youth."
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
@@ -26,6 +27,23 @@ export default function About() {
                     <Navbar />
                 </chakra.nav>
 
+                {/**Calendly Widget */}
+                <PopupWidget
+                    branding
+                    color="#1f3d33"
+                    pageSettings={{
+                        backgroundColor: '1f3d33',
+                        hideEventTypeDetails: false,
+                        hideGdprBanner: true,
+                        hideLandingPageDetails: false,
+                        primaryColor: 'c5ad8d',
+                        textColor: 'ffffff'
+                    }}
+                    text="Book an Appointment"
+                    textColor="#ffffff"
+                    url="https://calendly.com/jamesofoaye/consultation"
+                />
+                
                 <div id="about">
                     <SimpleGrid
                         columns={{ base: 1, md: 2 }}

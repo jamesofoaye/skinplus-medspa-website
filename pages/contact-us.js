@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import {
-    Box, Flex, Text, SimpleGrid, chakra, Stack, Image,
-    Heading, List, ListItem, ListIcon, Textarea, Center,
+    Box, Flex, Text, SimpleGrid, chakra, Stack, Heading, Textarea,
     useBreakpointValue, FormControl, FormLabel, Button, Input,
 } from '@chakra-ui/react';
 
 import Navbar from '../components/navbar'
+import { PopupWidget } from "react-calendly";
 
 export default function Home() {
     return (
@@ -27,6 +27,23 @@ export default function Home() {
                 <chakra.nav bgColor={"brand.green"}>
                     <Navbar />
                 </chakra.nav>
+
+                {/**Calendly Widget */}
+                <PopupWidget
+                    branding
+                    color="#1f3d33"
+                    pageSettings={{
+                        backgroundColor: '1f3d33',
+                        hideEventTypeDetails: false,
+                        hideGdprBanner: true,
+                        hideLandingPageDetails: false,
+                        primaryColor: 'c5ad8d',
+                        textColor: 'ffffff'
+                    }}
+                    text="Book an Appointment"
+                    textColor="#ffffff"
+                    url="https://calendly.com/jamesofoaye/consultation"
+                />
 
                 <SimpleGrid
                     columns={{ base: 1, md: 2 }}
@@ -63,19 +80,18 @@ export default function Home() {
                                     pl={{ base: 0, md: 5 }}
                                 >
                                     We are open on Tuesday - Sunday <br />
-                                    from 10am - 7pm
-                                </Text>
-                                <Text
-                                    fontSize={{ base: "xl", md: "2xl" }}
-                                    pl={{ base: 0, md: 5 }}
-                                >
+                                    from 10am - 7pm <br />
                                     NB: We are closed on Monday.
                                 </Text>
                                 <Text
                                     fontSize={{ base: "xl", md: "2xl" }}
                                     pl={{ base: 0, md: 5 }}
                                 >
-                                    <address>Phone Number: <a href="tel:+233596068336">0596068336</a>
+                                    <address>
+                                        Location: East Legon, Boundary Road.<br />
+                                        First floor of Grocery Express.<br />
+                                        Opposite Dufie Court.<br />
+                                        Phone Number: <a href="tel:+233596068336">0596068336</a>
                                     </address>
                                 </Text>
                             </Box>

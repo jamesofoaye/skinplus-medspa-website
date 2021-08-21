@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from 'next/head';
 import {
-  IoLogoFacebook, IoLogoTwitter, IoLogoInstagram
+  IoLogoFacebook, IoLogoTwitter, IoLogoInstagram, IoLogoWhatsapp
 } from 'react-icons/io5'
 
 import {
@@ -24,11 +24,11 @@ import SwiperCore, {
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
 
 import Navbar from '../components/navbar'
+import { PopupWidget } from "react-calendly";
 
 export default function Home() {
-
   const [thumbNailSwiper, setThumbNailSwiper] = useState(null);
-
+  
   return (
     <>
       <Head>
@@ -50,6 +50,24 @@ export default function Home() {
             <nav>
               <Navbar />
             </nav>
+
+            {/**Calendly Widget */}
+            <PopupWidget
+              branding
+              color="#1f3d33"
+              pageSettings={{
+                backgroundColor: '1f3d33',
+                hideEventTypeDetails: false,
+                hideGdprBanner: true,
+                hideLandingPageDetails: false,
+                primaryColor: 'c5ad8d',
+                textColor: 'ffffff'
+              }}
+              text="Book an Appointment"
+              textColor="#ffffff"
+              url="https://calendly.com/jamesofoaye/consultation"
+            />
+
             <Flex
               w={'full'}
               h={'100vh'}
@@ -78,6 +96,7 @@ export default function Home() {
             </Flex>
           </Box>
         </div>
+
 
         <div id="about">
           <SimpleGrid
@@ -221,7 +240,19 @@ export default function Home() {
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  Fat Reduction &amp; Body Contouring
+                  Acne Treatment
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Scar Removal
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Cellulite Treatment
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Scalp Pigmentation
                 </ListItem>
               </List>
             </Stack>
@@ -243,19 +274,31 @@ export default function Home() {
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  Threading
+                  Mole Removal
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  Body Sculpting
+                  Stretch Mark
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  PRP Injection &amp; Microneedling
+                  PRP &amp; Microneedling
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
                   Skin Tightening
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Derma Planning
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Chemical Peels
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={CheckCircleIcon} color="brand.green" />
+                  Hyperpigmentation
                 </ListItem>
               </List>
             </Stack>
@@ -314,16 +357,21 @@ export default function Home() {
                       Connect with us on social media to share your feedback and thoughts
                     </Text>
                     <Flex py={5}>
-                      <a href="#">
+                      <a href="#" target="_blank">
                         <IoLogoInstagram size={30} />
                       </a>
-                      <Box px={8}>
-                        <a href="#">
-                          <IoLogoTwitter size={30} />
+                      <Box pl={8}>
+                        <a href="#" target="_blank">
+                          <IoLogoWhatsapp size={30} />
                         </a>
                       </Box>
-                      <a href="#">
-                        <IoLogoFacebook size={30} />
+                      <Box px={8}>
+                        <a href="#" target="_blank">
+                          <IoLogoFacebook size={30} />
+                        </a>
+                      </Box>
+                      <a href="#" target="_blank">
+                        <IoLogoTwitter size={30} />
                       </a>
                     </Flex>
                   </Box>
@@ -446,19 +494,18 @@ export default function Home() {
                   pl={{ base: 0, md: 5 }}
                 >
                   We are open on Tuesday - Sunday <br />
-                  from 10am - 7pm
-                </Text>
-                <Text
-                  fontSize={{ base: "xl", md: "2xl" }}
-                  pl={{ base: 0, md: 5 }}
-                >
+                  from 10am - 7pm <br />
                   NB: We are closed on Monday.
                 </Text>
                 <Text
                   fontSize={{ base: "xl", md: "2xl" }}
                   pl={{ base: 0, md: 5 }}
                 >
-                  <address>Phone Number: <a href="tel:+233596068336">0596068336</a>
+                  <address>
+                    Location: East Legon, Boundary Road.<br />
+                    First floor of Grocery Express.<br />
+                    Opposite Dufie Court.<br />
+                    Phone Number: <a href="tel:+233596068336">0596068336</a>
                   </address>
                 </Text>
               </Box>
