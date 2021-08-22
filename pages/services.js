@@ -14,6 +14,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Navbar from '../components/navbar'
+import { IKImage, IKContext } from 'imagekitio-react'
 import { PopupWidget } from "react-calendly";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -92,7 +93,7 @@ export default function Services() {
 
         <Flex
           p={{ md: 20 }}
-          py={{ base: 5}}
+          py={{ base: 5 }}
           w="auto"
           justifyContent="center"
           alignItems="center"
@@ -208,176 +209,680 @@ export default function Services() {
               }}
               className="mySwiper2">
               <SwiperSlide>
-                <img src="1.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/1.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="2.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/2.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="3.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/3.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="5.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/5.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="6.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/6.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="7.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/7.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="9.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/9.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="10.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/10.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="11.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/11.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="14.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/14.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="16.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/16.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="17.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/17.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="18.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/18.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="19.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/19.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="21.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/21.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="30.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/30.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="31.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/31.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="33.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/33.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="34.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/34.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="36.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/36.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="37.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/37.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="38.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/38.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="39.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/39.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="40.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/40.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="41.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/41.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="42.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/42.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="43.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/43.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="44.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/44.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
             </Swiper>
             <Swiper onSwiper={setThumbNailSwiper} loop={true} spaceBetween={10} slidesPerView={4}
               freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}
               className="mySwiper">
               <SwiperSlide>
-                <img src="1.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/1.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="2.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/2.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="3.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/3.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="5.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/5.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="6.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/6.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="7.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/7.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="9.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/9.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="10.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/10.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="11.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/11.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="14.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/14.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="16.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/16.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="17.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/17.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="18.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/18.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="19.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/19.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="21.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/21.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="30.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/30.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="31.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/31.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="33.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/33.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="34.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/34.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="36.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/36.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="37.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/37.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="38.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/38.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="39.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/39.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="40.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/40.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="41.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/41.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="42.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/42.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="43.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/43.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="44.png" />
+                <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                  <IKImage
+                    path="/44.png"
+                    transformation={[{ height: 300, width: 400 }]}
+                    lqip={{ active: true }}
+                    loading="lazy"
+                    height="300"
+                    width="400"
+                  />
+                </IKContext>
               </SwiperSlide>
             </Swiper>
           </Stack>

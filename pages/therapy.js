@@ -6,6 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { PopupWidget } from "react-calendly";
 import Navbar from '../components/navbar'
+import { IKImage, IKContext } from 'imagekitio-react'
 
 export default function Therapy() {
     const Feature = (props) => {
@@ -156,7 +157,13 @@ export default function Therapy() {
                             h="full"
                             my={{ md: 24 }}
                         >
-                            <Image src={"/iv_saline_bags.jpg"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/iv_saline_bags.jpg"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -222,7 +229,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/Brainstorm-IV-Kit-Updated.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/Brainstorm-IV-Kit-Updated.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -288,7 +301,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Myers-Cocktail.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Myers-Cocktail.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -354,7 +373,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Inner-Bauty.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Inner-Bauty.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -421,7 +446,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Immunity.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Immunity.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -489,7 +520,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Get-Up-And-Go.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Get-Up-And-Go.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -557,7 +594,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Recovery.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Recovery.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
 
@@ -625,7 +668,13 @@ export default function Therapy() {
                             w="full"
                             h="full"
                         >
-                            <Image src={"/IV-Bag-Reboot.png"} />
+                            <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
+                                <IKImage
+                                    path="/IV-Bag-Reboot.png"
+                                    lqip={{ active: true }}
+                                    loading="lazy"
+                                />
+                            </IKContext>
                         </Box>
                     </SimpleGrid>
                 </Box>
