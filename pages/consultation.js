@@ -9,7 +9,7 @@ export default function Consultation() {
     return (
         <>
             <Head>
-                <title>SkinPlus Medspa | Consultation</title>
+                <title>SkinPlus Medspa Ghana | Consultation</title>
                 <meta name="description" content="SkinPlus Medspa provides a variety of 
                 personalized services to its clientele to enhance their look and maintain
                 youth."
@@ -24,22 +24,25 @@ export default function Consultation() {
                 <Navbar />
             </chakra.nav>
 
-            {/**Calendly Widget */}
-            <InlineWidget
-                pageSettings={{
-                    backgroundColor: '1f3d33',
-                    hideEventTypeDetails: false,
-                    hideGdprBanner: true,
-                    hideLandingPageDetails: false,
-                    primaryColor: 'c5ad8d',
-                    textColor: 'ffffff'
-                }}
-                styles={{
-                    height: '630px',
-                    minWidth: '320px'
-                }}
-                url="https://calendly.com/jamesofoaye/consultation"
-            />
+            <chakra.main>
+                {/**Calendly Widget */}
+                <InlineWidget
+                    pageSettings={{
+                        backgroundColor: '1f3d33',
+                        hideEventTypeDetails: false,
+                        hideGdprBanner: true,
+                        hideLandingPageDetails: false,
+                        primaryColor: 'c5ad8d',
+                        textColor: 'ffffff'
+                    }}
+                    styles={{
+                        height: '630px',
+                        minWidth: '320px'
+                    }}
+                    url="https://calendly.com/jamesofoaye/consultation"
+                />
+            </chakra.main>
+
 
             <chakra.footer>
                 <Box align="center">

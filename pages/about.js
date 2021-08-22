@@ -10,7 +10,7 @@ export default function About() {
     return (
         <>
             <Head>
-                <title>SkinPlus Medspa | About Us</title>
+                <title>SkinPlus Medspa Ghana | About Us</title>
                 <meta name="description" content="SkinPlus Medspa provides a variety of
                 personalized services to its clientele to enhance their look and maintain
                 youth."
@@ -39,7 +39,7 @@ export default function About() {
                         primaryColor: 'c5ad8d',
                         textColor: 'ffffff'
                     }}
-                    text="Book an Appointment"
+                    text="Book Free Appointment"
                     textColor="#ffffff"
                     url="https://calendly.com/jamesofoaye/consultation"
                 />

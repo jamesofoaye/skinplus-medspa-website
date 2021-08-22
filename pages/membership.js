@@ -1,15 +1,9 @@
 import Head from 'next/head';
 import {
-    chakra,
-    Box,
-    Flex,
-    useColorModeValue,
-    useBreakpointValue,
-    Icon,
-    SimpleGrid,
-    Button,
-    VStack,
-    Text,
+    chakra, Box, Flex, useColorModeValue,
+    useBreakpointValue, Icon, SimpleGrid,
+    Button, VStack, Stack, Text, Input,
+    FormControl, FormLabel,
 } from "@chakra-ui/react";
 import Navbar from '../components/navbar'
 import { PopupWidget } from "react-calendly";
@@ -22,7 +16,6 @@ export default function Services() {
                     boxSize={5}
                     mt={1}
                     mr={2}
-                    color={useColorModeValue("brand.500", "brand.300")}
                     viewBox="0 0 20 20"
                     fill="currentColor"
                 >
@@ -34,7 +27,7 @@ export default function Services() {
                 </Icon>
                 <chakra.p
                     fontSize="lg"
-                    color={useColorModeValue("gray.700", "gray.400")}
+                    color={"gray.700"}
                     {...props}
                 />
             </Flex>
@@ -44,7 +37,7 @@ export default function Services() {
     return (
         <>
             <Head>
-                <title>SkinPlus Medspa | Membership</title>
+                <title>SkinPlus Medspa Ghana | Membership</title>
                 <meta name="description" content="SkinPlus Medspa provides a variety of 
                 personalized services to its clientele to enhance their look and maintain
                 youth."
@@ -68,7 +61,7 @@ export default function Services() {
                     primaryColor: 'c5ad8d',
                     textColor: 'ffffff'
                 }}
-                text="Book an Appointment"
+                text="Book Free Appointment"
                 textColor="#ffffff"
                 url="https://calendly.com/jamesofoaye/consultation"
             />
@@ -81,7 +74,7 @@ export default function Services() {
             >
                 <Box
                     px={8}
-                    py={20}
+                    py={10}
                     mx="auto"
                 >
                     <SimpleGrid
@@ -96,46 +89,77 @@ export default function Services() {
                                 fontSize={{ base: "3xl", md: "4xl" }}
                                 fontWeight="extrabold"
                                 textAlign={{ base: "center", sm: "left" }}
-                                color={useColorModeValue("black")}
+                                color={useColorModeValue("brand.black")}
                                 lineHeight="shorter"
                                 letterSpacing="tight"
                             >
-                                Enroll in Our Membership Program
+                                Why get a Membership?
                             </chakra.h2>
-                            <chakra.p
+                            <VStack
+                                direction="column"
+                                flexGrow={1}
+                                spacing={5}
+                                alignItems="start"
                                 mb={6}
-                                fontSize={{ base: "lg", md: "xl" }}
-                                textAlign={{ base: "center", sm: "left" }}
-                                color={useColorModeValue("gray.600", "gray.500")}
                             >
-                                Let's put our heads together to build a successful partnership to
-                                benefit both your customers and your business.
-                            </chakra.p>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                variant={'outline'}
-                                color={'white'}
-                                fontSize={{ md: "xl" }}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                            >
-                                Become a Member
-                            </Button>
+                                <Feature>Discount</Feature>
+                                <Feature>Access to our VIP lounge</Feature>
+                                <Feature>Priority Scheduling</Feature>
+                                <Feature>Referals</Feature>
+                            </VStack>
                         </Box>
-                        <VStack
-                            direction="column"
-                            flexGrow={1}
-                            spacing={5}
-                            alignItems="start"
-                        >
-                            <Feature>Discount</Feature>
-                            <Feature>Access to our VIP lounge</Feature>
-                            <Feature>Priority Scheduling</Feature>
-                            <Feature>Referals</Feature>
-                        </VStack>
+                        <Stack>
+                            <FormControl>
+                                <FormLabel fontSize={{ md: "xl" }}>
+                                    Name
+                                </FormLabel>
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    placeholder={'Enter your name'}
+                                    _focus={{
+                                        borderColor: 'brand.sand'
+                                    }} />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel fontSize={{ md: "xl" }}>
+                                    Email address
+                                </FormLabel>
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    placeholder={'Enter your email'}
+                                    _focus={{
+                                        borderColor: 'brand.sand'
+                                    }} />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel fontSize={{ md: "xl" }}>
+                                    Phone Number
+                                </FormLabel>
+                                <Input
+                                    type="tel"
+                                    name="phone number"
+                                    placeholder={'Enter your phone number'}
+                                    _focus={{
+                                        borderColor: 'brand.green'
+                                    }} />
+                            </FormControl>
+                            <Stack spacing={6}>
+                                <Button
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    mt={2}
+                                    fontSize={{ md: "xl" }}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                    Become a Member
+                                </Button>
+                            </Stack>
+                        </Stack>
                     </SimpleGrid>
                 </Box>
             </Flex>
