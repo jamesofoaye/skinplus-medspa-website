@@ -91,7 +91,8 @@ export default function Services() {
         />
 
         <Flex
-          p={20}
+          p={{ md: 20 }}
+          py={{ base: 5}}
           w="auto"
           justifyContent="center"
           alignItems="center"
@@ -207,10 +208,13 @@ export default function Services() {
               }}
               className="mySwiper2">
               <SwiperSlide>
-                <img src="3.png" />
+                <img src="1.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="4.png" />
+                <img src="2.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="3.png" />
               </SwiperSlide>
               <SwiperSlide>
                 <img src="5.png" />
@@ -222,29 +226,83 @@ export default function Services() {
                 <img src="7.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="8.png" />
-              </SwiperSlide>
-              <SwiperSlide>
                 <img src="9.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="13.png" />
+                <img src="10.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="11.png" />
               </SwiperSlide>
               <SwiperSlide>
                 <img src="14.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="15.png" />
+                <img src="16.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="17.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="18.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="19.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="21.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="30.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="31.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="33.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="34.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="36.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="37.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="38.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="39.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="40.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="41.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="42.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="43.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="44.png" />
               </SwiperSlide>
             </Swiper>
             <Swiper onSwiper={setThumbNailSwiper} loop={true} spaceBetween={10} slidesPerView={4}
               freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}
               className="mySwiper">
               <SwiperSlide>
-                <img src="3.png" />
+                <img src="1.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="4.png" />
+                <img src="2.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="3.png" />
               </SwiperSlide>
               <SwiperSlide>
                 <img src="5.png" />
@@ -256,19 +314,70 @@ export default function Services() {
                 <img src="7.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="8.png" />
-              </SwiperSlide>
-              <SwiperSlide>
                 <img src="9.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="13.png" />
+                <img src="10.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="11.png" />
               </SwiperSlide>
               <SwiperSlide>
                 <img src="14.png" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src="15.png" />
+                <img src="16.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="17.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="18.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="19.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="21.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="30.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="31.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="33.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="34.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="36.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="37.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="38.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="39.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="40.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="41.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="42.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="43.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="44.png" />
               </SwiperSlide>
             </Swiper>
           </Stack>

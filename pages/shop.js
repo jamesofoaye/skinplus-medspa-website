@@ -18,7 +18,10 @@ export default function Shop() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <chakra.nav bgColor={"brand.green"}>
+            <chakra.nav
+                fontFamily={'Lora'}
+                bgColor={"brand.green"}
+            >
                 <Navbar />
             </chakra.nav>
 
@@ -42,6 +45,7 @@ export default function Shop() {
             <Flex
                 p={50}
                 w="full"
+                fontFamily={'Lora'}
                 alignItems="center"
                 justifyContent="center"
             >

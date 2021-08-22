@@ -24,7 +24,9 @@ export default function Consultation() {
                 <Navbar />
             </chakra.nav>
 
-            <chakra.main>
+            <chakra.main
+                fontFamily={'Lora'}
+            >
                 {/**Calendly Widget */}
                 <InlineWidget
                     pageSettings={{

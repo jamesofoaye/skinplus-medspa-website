@@ -45,7 +45,10 @@ export default function Services() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <chakra.nav bgColor={"brand.green"}>
+            <chakra.nav
+                bgColor={"brand.green"}
+                fontFamily={'Lora'}
+            >
                 <Navbar />
             </chakra.nav>
 
@@ -67,25 +70,28 @@ export default function Services() {
             />
 
             <Flex
-                p={20}
+                p={{ md: 20 }}
+                py={{ base: 5 }}
                 w="auto"
                 justifyContent="center"
                 alignItems="center"
+                fontFamily="Lora"
             >
                 <Box
-                    px={8}
-                    py={10}
+                    px={{ md: 8 }}
+                    py={{ md: 10 }}
                     mx="auto"
                 >
                     <SimpleGrid
                         alignItems="center"
                         columns={{ base: 1, lg: 2 }}
                         spacingY={{ base: 10, lg: 32 }}
-                        spacingX={{ base: 10, lg: 24 }}
+                        spacingX={{ base: 5, lg: 24 }}
                     >
                         <Box>
                             <chakra.h2
                                 mb={3}
+                                fontFamily={'Oswald'}
                                 fontSize={{ base: "3xl", md: "4xl" }}
                                 fontWeight="extrabold"
                                 textAlign={{ base: "center", sm: "left" }}
@@ -105,7 +111,7 @@ export default function Services() {
                                 <Feature>Discount</Feature>
                                 <Feature>Access to our VIP lounge</Feature>
                                 <Feature>Priority Scheduling</Feature>
-                                <Feature>Referals</Feature>
+                                <Feature>Referrals</Feature>
                             </VStack>
                         </Box>
                         <Stack>

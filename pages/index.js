@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from 'next/head';
 import {
-  IoLogoFacebook, IoLogoTwitter, IoLogoInstagram, IoLogoWhatsapp
+  IoLogoFacebook, IoLogoTwitter, IoLogoInstagram,
 } from 'react-icons/io5'
 
 import {
@@ -28,7 +28,7 @@ import { PopupWidget } from "react-calendly";
 
 export default function Home() {
   const [thumbNailSwiper, setThumbNailSwiper] = useState(null);
-  
+
   return (
     <>
       <Head>
@@ -357,20 +357,15 @@ export default function Home() {
                       Connect with us on social media to share your feedback and thoughts
                     </Text>
                     <Flex py={5}>
-                      <a href="#" target="_blank">
+                      <a href="https://www.instagram.com/skinplusgh/" target="_blank">
                         <IoLogoInstagram size={30} />
-                      </a>
-                      <Box pl={8}>
-                        <a href="#" target="_blank">
-                          <IoLogoWhatsapp size={30} />
-                        </a>
-                      </Box>
+                      </a>                      
                       <Box px={8}>
-                        <a href="#" target="_blank">
+                        <a href="https://www.facebook.com/skinplusmedspa" target="_blank">
                           <IoLogoFacebook size={30} />
                         </a>
                       </Box>
-                      <a href="#" target="_blank">
+                      <a href="https://twitter.com/skinplusmedspa" target="_blank">
                         <IoLogoTwitter size={30} />
                       </a>
                     </Flex>
@@ -391,11 +386,14 @@ export default function Home() {
                 }}
                 className="mySwiper2">
                 <SwiperSlide>
-                  <img src="3.png" />
+                  <img src="1.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="4.png" />
+                  <img src="2.png" />
                 </SwiperSlide>
+                <SwiperSlide>
+                  <img src="3.png" />
+                </SwiperSlide>                
                 <SwiperSlide>
                   <img src="5.png" />
                 </SwiperSlide>
@@ -404,31 +402,85 @@ export default function Home() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src="7.png" />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="8.png" />
-                </SwiperSlide>
+                </SwiperSlide>                
                 <SwiperSlide>
                   <img src="9.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="13.png" />
+                  <img src="10.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="11.png" />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src="14.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="15.png" />
+                  <img src="16.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="17.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="18.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="19.png" />
+                </SwiperSlide>                
+                <SwiperSlide>
+                  <img src="21.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="30.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="31.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="33.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="34.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="36.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="37.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="38.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="39.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="40.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="41.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="42.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="43.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="44.png" />
                 </SwiperSlide>
               </Swiper>
               <Swiper onSwiper={setThumbNailSwiper} loop={true} spaceBetween={10} slidesPerView={4}
                 freeMode={true} watchSlidesVisibility={true} watchSlidesProgress={true}
                 className="mySwiper">
                 <SwiperSlide>
-                  <img src="3.png" />
+                  <img src="1.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="4.png" />
+                  <img src="2.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="3.png" />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src="5.png" />
@@ -440,19 +492,70 @@ export default function Home() {
                   <img src="7.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="8.png" />
-                </SwiperSlide>
-                <SwiperSlide>
                   <img src="9.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="13.png" />
+                  <img src="10.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="11.png" />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src="14.png" />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src="15.png" />
+                  <img src="16.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="17.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="18.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="19.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="21.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="30.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="31.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="33.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="34.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="36.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="37.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="38.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="39.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="40.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="41.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="42.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="43.png" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="44.png" />
                 </SwiperSlide>
               </Swiper>
             </Stack>

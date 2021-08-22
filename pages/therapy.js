@@ -45,7 +45,10 @@ export default function Therapy() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <chakra.nav bgColor={"brand.green"}>
+            <chakra.nav
+                fontFamily={'Lora'}
+                bgColor={"brand.green"}
+            >
                 <Navbar />
             </chakra.nav>
 
@@ -67,15 +70,17 @@ export default function Therapy() {
             />
 
             <Flex
-                px={20}
+                px={{ base: 5, md: 8 }}
+                py={{ md: 10 }}
                 w="full"
                 justifyContent="center"
                 alignItems="center"
                 pos="absolute"
+                fontFamily={'Lora'}
             >
                 <Box
-                    px={8}
-                    py={20}
+                    p={{ md: 20 }}
+                    py={{ base: 5 }}
                     mx="auto"
                 >
                     <SimpleGrid
@@ -87,10 +92,10 @@ export default function Therapy() {
                     >
                         <Box>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -165,10 +170,10 @@ export default function Therapy() {
                     >
                         <Box order={{ base: "none", md: 2 }}>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -230,10 +235,10 @@ export default function Therapy() {
                     >
                         <Box>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -297,15 +302,15 @@ export default function Therapy() {
                     >
                         <Box order={{ base: "none", md: 2 }}>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
                             >
-                               Inner Beauty IV Kit
+                                Inner Beauty IV Kit
                             </chakra.h2>
                             <chakra.p
                                 mb={5}
@@ -362,10 +367,10 @@ export default function Therapy() {
                     >
                         <Box>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -430,10 +435,10 @@ export default function Therapy() {
                     >
                         <Box order={{ base: "none", md: 2 }}>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -497,10 +502,10 @@ export default function Therapy() {
                     >
                         <Box>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
@@ -566,10 +571,10 @@ export default function Therapy() {
                     >
                         <Box order={{ base: "none", md: 2 }}>
                             <chakra.h2
+                                fontFamily={'Oswald'}
                                 mb={4}
                                 fontSize={{ base: "2xl", md: "4xl" }}
                                 fontWeight="extrabold"
-                                letterSpacing="tight"
                                 textAlign={{ base: "center", md: "left" }}
                                 color={"gray.900"}
                                 lineHeight={{ md: "shorter" }}
