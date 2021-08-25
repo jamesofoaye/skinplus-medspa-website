@@ -136,21 +136,20 @@ export default function Therapy() {
                                 <Feature>Enhances the immune system</Feature>
                                 <Feature>Decreases artery plaque</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -209,21 +208,20 @@ export default function Therapy() {
                                 <Feature>Increase memory recall</Feature>
                                 <Feature>Enhance certain aspects of learning</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -281,21 +279,20 @@ export default function Therapy() {
                                 <Feature>Improves immunity</Feature>
                                 <Feature>Reduces chronic pain</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -353,21 +350,20 @@ export default function Therapy() {
                                 <Feature>Reduces wrinkles</Feature>
                                 <Feature>Quenches tired skin</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -426,21 +422,20 @@ export default function Therapy() {
                                 <Feature>Builds up your immune system</Feature>
                                 <Feature>Reduces duration of illnesses</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -500,21 +495,20 @@ export default function Therapy() {
                                 <Feature>Boosts your metabolism</Feature>
                                 <Feature>Improves performance</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -574,21 +568,20 @@ export default function Therapy() {
                                 <Feature>Replenishes essential nutrients</Feature>
                                 <Feature>Reduces inflammation</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
@@ -648,21 +641,20 @@ export default function Therapy() {
                                 <Feature>Reduces inflammation</Feature>
                                 <Feature>Fights fatigue</Feature>
                             </VStack>
-                            <Button
-                                w={{ base: "full", sm: "auto" }}
-                                size="lg"
-                                bgColor={'brand.green'}
-                                color={'white'}
-                                variant={'outline'}
-                                _hover={{
-                                    bgColor: 'brand.olive'
-                                }}
-                                as="a"
-                            >
-                                <Link href="/consultation">
-                                    Book Now
-                                </Link>
-                            </Button>
+                            <Link href="/consultation">
+                                <Button
+                                    w={{ base: "full", sm: "auto" }}
+                                    size="lg"
+                                    bgColor={'brand.green'}
+                                    color={'white'}
+                                    variant={'outline'}
+                                    _hover={{
+                                        bgColor: 'brand.olive'
+                                    }}
+                                >
+                                        Book Now                                
+                                </Button>
+                            </Link>
                         </Box>
                         <Box
                             w="full"
