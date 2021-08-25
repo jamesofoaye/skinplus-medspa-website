@@ -41,7 +41,7 @@ export default function Consultation() {
                         height: '630px',
                         minWidth: '320px'
                     }}
-                    url="https://calendly.com/jamesofoaye/consultation"
+                    url="https://calendly.com/skinplusmedspa/30min"
                 />
             </chakra.main>
 

@@ -66,7 +66,7 @@ export default function Home() {
               }}
               text="Book Free Appointment"
               textColor="#ffffff"
-              url="https://calendly.com/jamesofoaye/consultation"
+              url="https://calendly.com/skinplusmedspa/30min"
             />
 
             <Flex
@@ -247,7 +247,7 @@ export default function Home() {
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  Acne Treatment
+                  Acne Scars
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
@@ -269,7 +269,7 @@ export default function Home() {
                 fontSize="xl">
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
-                  Wax
+                  Waxing
                 </ListItem>
                 <ListItem>
                   <ListIcon as={CheckCircleIcon} color="brand.green" />
@@ -329,7 +329,7 @@ export default function Home() {
             <Text
               fontSize={{ base: "xl", md: "2xl" }}
               borderBottom="2px">
-              CLARA AKAYULI - CEO
+              DR. CLARA AKAYULI - CEO
             </Text>
           </Center>
         </Box>

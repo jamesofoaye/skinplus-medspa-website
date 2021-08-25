@@ -88,7 +88,7 @@ export default function Services() {
           }}
           text="Book Free Appointment"
           textColor="#ffffff"
-          url="https://calendly.com/jamesofoaye/consultation"
+          url="https://calendly.com/skinplusmedspa/30min"
         />
 
         <Flex
@@ -154,7 +154,7 @@ export default function Services() {
                 spacing={5}
                 alignItems="end"
               >
-                <Feature>Wax</Feature>
+                <Feature>Waxing</Feature>
                 <Feature>Botox</Feature>
                 <Feature>Fillers</Feature>
                 <Feature>Mole Removal</Feature>

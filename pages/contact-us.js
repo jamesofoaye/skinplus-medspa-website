@@ -42,7 +42,7 @@ export default function Home() {
                     }}
                     text="Book Free Appointment"
                     textColor="#ffffff"
-                    url="https://calendly.com/jamesofoaye/consultation"
+                    url="https://calendly.com/skinplusmedspa/30min"
                 />
 
                 <SimpleGrid
