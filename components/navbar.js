@@ -20,6 +20,10 @@ const NAV_ITEMS = [
         href: '/',
     },
     {
+        label: 'Direction to our Shop',
+        href: '/map',
+    },
+    {
         label: 'About',
         href: '/about',
     },
