@@ -1,6 +1,5 @@
 import {
-  chakra, Box,useColorModeValue,
-  Button,Stack,Image,Text,Icon,
+  chakra, Box, Button,Stack,Image,Text,Icon,
 } from "@chakra-ui/react";
 import Head from 'next/head';
 import Navbar from '../components/navbar'
@@ -62,8 +61,7 @@ const Maps = () => {
           fontSize={{ base: "2xl", md: "6xl" }}
           fontWeight="bold"
           lineHeight="none"
-          letterSpacing={{ base: "normal", md: "tight" }}
-          color={useColorModeValue("gray.900",'gray.100')}
+          letterSpacing={{ base: "normal", md: "tight" }}          
         >
           SkinPlus Medspa Location on Google Maps
         </chakra.h1>
