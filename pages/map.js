@@ -88,7 +88,7 @@ const Maps = () => {
             cursor="pointer"
           >
           <a href="https://goo.gl/maps/9b7q54865yi34By37">          
-            Get Directions to our shop on Google Maps
+            Get Directions on Google Maps
             <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
               <path
                 fillRule="evenodd"
