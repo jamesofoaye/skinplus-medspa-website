@@ -109,7 +109,7 @@ const Maps = () => {
       <iframe   
       style={mapStyle}   
       frameborder="0" 
-      src="https://www.google.com/maps/embed/v1/place?q=5.634764591621313,+-0.14598714013385528&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+      src="https://www.google.com/maps/embed/v1/place?q=5.6347457563982575,+-0.14585525702313948&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
       >
       </iframe>      
       </Box>
