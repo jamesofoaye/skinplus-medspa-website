@@ -75,7 +75,7 @@ export default function Login() {
                                         required: 'Required!....Enter your password'
                                     })}
                                 />
-                                <FormErrorMessage>
+                                <FormErrorMessage colorScheme="red">
                                     {errors.password && errors.password.message}
                                 </FormErrorMessage>
                             </FormControl>
