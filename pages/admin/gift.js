@@ -22,7 +22,7 @@ export default function PaymentPage() {
         formState: { errors, isSubmitting }
     } = useForm();
 
-    const [code] = useState(generateCode());
+   // const [code] = useState(generateCode());
 
     onAuthStateChanged(auth, (user) => {
         if (user) {

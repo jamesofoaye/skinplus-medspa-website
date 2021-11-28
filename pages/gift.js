@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
 import {
     chakra,
@@ -7,9 +7,41 @@ import {
     Flex,
     useColorModeValue,
     Link,
+    useToast
 } from "@chakra-ui/react";
+import {collection, query, where, getDoc} from 'firebase/firestore'
+import { db } from '../library/firebase'
 
 const Gift = () => {
+    const toast = useToast()
+    const [giftType, setGiftType] = useState("");
+    const [bg, setBg] = useState("");
+    const [bgMobile, setBgMobile] = useState("");
+
+    const getInfo = async () => {
+        const dataRef = collection(db, "xmas-gift-card-program")
+        const q = query(dataRef, where("code", "==", "123456"))
+        const querySnapshot = await getDoc(q)
+        setGiftType(querySnapshot.data().code)
+
+        toast({
+            title: "Successful",
+            description: "Added To system",
+            status: "success",
+            duration: 15000,
+            position: "top",
+            isClosable: true,
+        })
+    }
+
+    if (giftType === "birthday") {
+        setBg("/birthday-bg.jpg")
+        setBgMobile("/birthday-bg-mobile.jpg")
+    } else if (giftType === "christmas"){
+        setBg("/xmas-bg.jpg")
+        setBgMobile("/xmas-bg-mobile.jpg")
+   }
+
     return (
         <div>
             <Head>
