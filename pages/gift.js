@@ -7,9 +7,8 @@ import {
     Input, Textarea
 } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form';
-import {collection, query, where, getDoc, setDoc, doc} from 'firebase/firestore'
+import {collection, query, where, getDocs, setDoc, doc} from 'firebase/firestore'
 import { db } from '../library/firebase'
-import { async } from '@firebase/util';
 
 const Gift = () => {
     const toast = useToast()
@@ -26,21 +25,23 @@ const Gift = () => {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [message, setMessage] = useState("");
+    const [id, setId] = useState("");
     
     const onSubmit = async (values) => {
         try {
             const dataRef = collection(db, "xmas-gift-card-program")
             const q = query(dataRef, where("code", "==", values.code))
-            const querySnapshot = await getDoc(q)
+            const querySnapshot = await getDocs(q)
 
-            setGiftType(querySnapshot.data().giftType)
-            setCode(querySnapshot.data().code)
-            setStatus(querySnapshot.data().status)
-            setFrom(querySnapshot.data().from)
-            setTo(querySnapshot.data().to)
-            setMessage(querySnapshot.data().message)
-
-            console.log("id:", querySnapshot.data()._id)
+            querySnapshot.forEach((doc) => {                
+                setGiftType(doc.data().giftType)
+                setCode(doc.data().code)
+                setStatus(doc.data().status)
+                setFrom(doc.data().from)
+                setTo(doc.data().to)
+                setMessage(doc.data().message)
+                setId(doc.id)
+            })
 
             toast({
                 title: "Successful",
@@ -74,16 +75,16 @@ const Gift = () => {
         }
     };
 
-    /**const updateStatus = async () => {
-        const xmasGiftCardProgramCollection = doc(db, "xmas-gift-card-program", )
+    const updateStatus = async () => {
+        const xmasGiftCardProgramCollection = doc(db, "xmas-gift-card-program", id)
         //data to be sent
             const xmasGiftCardProgramPayload = {
                 status: "opened",
             };
             
-            await setDoc(dataRef, xmasGiftCardProgramPayload, { merge: true });
+        await setDoc(xmasGiftCardProgramCollection, xmasGiftCardProgramPayload, { merge: true });
 
-    }*/
+    }
 
     if (giftType === "birthday") {
         setBg("/birthday-bg.jpg")
@@ -183,6 +184,10 @@ const Gift = () => {
                         >
                             <Box p={6}>
                                 <Box>
+                                    {
+                                        //update status
+                                        updateStatus()
+                                    }
                                     <chakra.h1
                                         display="block"
                                         color={useColorModeValue("gray.800", "white")}
