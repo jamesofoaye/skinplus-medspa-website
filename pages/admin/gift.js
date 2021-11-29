@@ -51,17 +51,19 @@ export default function PaymentPage() {
             };
             
             await addDoc(xmasGiftCardProgramCollection, xmasGiftCardProgramPayload);
+
             toast({
                 title: "Successful",
                 description: "Added To system",
                 status: "success",
-                duration: 15000,
+                duration: 10000,
                 position: "top",
                 isClosable: true,
             })
+
             reset({values})
         } catch (error) {
-            const errorMessage = error.message;
+            const errorMessage = error.code;
             toast({
                 title: "Error",
                 description: errorMessage,
@@ -119,7 +121,7 @@ export default function PaymentPage() {
                                         <option value="birthday">Birthday Card</option>
                                         <option value="christmas">Christmas Card</option>
                                     </Select>
-                                    <FormErrorMessage>
+                                    <FormErrorMessage colorScheme="red">
                                         {errors.giftType && errors.giftType.message}
                                     </FormErrorMessage>
                                 </FormControl>
