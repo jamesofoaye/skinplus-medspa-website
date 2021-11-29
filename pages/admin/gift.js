@@ -14,7 +14,7 @@ import {
 import { auth, db } from '../../library/firebase'
 import { generateCode} from '../../library/GenerateCode'
 
-export default function PaymentPage() {
+export default function AdminGift() {
     const toast = useToast()
     const router = useRouter()
     const {

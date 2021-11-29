@@ -52,14 +52,25 @@ const Gift = () => {
             })
         } catch (error) {
             const errorMessage = error.code;
-            toast({
-                title: "Error",
-                description: errorMessage,
-                status: "error",
-                duration: 5000,
-                position: "top",
-                isClosable: true,
-            })
+            if (errorMessage === "invalid-argument") {                
+                toast({
+                    title: "Error",
+                    description: "Wrong Code!",
+                    status: "error",
+                    duration: 5000,
+                    position: "top",
+                    isClosable: true,
+                })
+            } else {
+                toast({
+                    title: "Error",
+                    description: errorMessage,
+                    status: "error",
+                    duration: 5000,
+                    position: "top",
+                    isClosable: true,
+                })
+            }
         }
     };
 
