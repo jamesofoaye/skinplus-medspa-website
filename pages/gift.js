@@ -25,18 +25,21 @@ const Gift = () => {
     const [status, setStatus] = useState("");
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
-    const [message, setTo] = useState("");
+    const [message, setMessage] = useState("");
     
     const onSubmit = async (values) => {
         try {
             const dataRef = collection(db, "xmas-gift-card-program")
             const q = query(dataRef, where("code", "==", values.code))
             const querySnapshot = await getDoc(q)
+
             setGiftType(querySnapshot.data().giftType)
             setCode(querySnapshot.data().code)
             setStatus(querySnapshot.data().status)
             setFrom(querySnapshot.data().from)
             setTo(querySnapshot.data().to)
+            setMessage(querySnapshot.data().message)
+
             console.log("id:", querySnapshot.data()._id)
 
             toast({
@@ -158,7 +161,7 @@ const Gift = () => {
                         h="100vh"
                         alignItems="center"
                         justifyContent="center"
-                        bgImage={"/xmas-bg.jpg"}
+                        bgImage={{base:bgMobile, md:bg}}
                         bgSize={"cover"}
                         bgPosition={'center'}
                         bgRepeat={"no-repeat"}
@@ -176,47 +179,15 @@ const Gift = () => {
                                         fontSize="2xl"
                                         mt={2}
                                     >
-                                        Message from to
+                                        Message from {from} to {to} 
                                     </chakra.h1>
                                     <chakra.p
                                         mt={2}
-                                        fontSize="sm"
+                                        fontSize="lg"
                                         color={useColorModeValue("gray.600", "gray.400")}
                                     >
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie
-                                        parturient et sem ipsum volutpat vel. Natoque sem et aliquam
-                                        mauris egestas quam volutpat viverra. In pretium nec senectus
-                                        erat. Et malesuada lobortis.
+                                        {message}
                                     </chakra.p>
-                                </Box>
-
-                                <Box mt={4}>
-                                    <Flex alignItems="center">
-                                        <Flex alignItems="center">
-                                            <Image
-                                                h={10}
-                                                fit="cover"
-                                                rounded="full"
-                                                src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
-                                                alt="Avatar"
-                                            />
-                                            <Link
-                                                mx={2}
-                                                fontWeight="bold"
-                                                color={useColorModeValue("gray.700", "gray.200")}
-
-                                            >
-                                                Jone Doe
-                                    </Link>
-                                        </Flex>
-                                        <chakra.span
-                                            mx={1}
-                                            fontSize="sm"
-                                            color={useColorModeValue("gray.600", "gray.300")}
-                                        >
-                                            21 SEP 2015
-                                </chakra.span>
-                                    </Flex>
                                 </Box>
                             </Box>
                         </Box>
