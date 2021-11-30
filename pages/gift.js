@@ -68,7 +68,7 @@ const Gift = () => {
             }  else {
                 toast({
                     title: "Error",
-                    description: "Wrong Code!",
+                    description: "Wrong Code. Please Try Again!",
                     status: "error",
                     duration: 5000,
                     position: "top",
@@ -80,7 +80,7 @@ const Gift = () => {
             if (errorMessage === "invalid-argument") {                
                 toast({
                     title: "Error",
-                    description: "Wrong Code!",
+                    description: "Wrong Code. Please Try Again!",
                     status: "error",
                     duration: 5000,
                     position: "top",
@@ -234,68 +234,21 @@ const Gift = () => {
                     <ModalHeader
                         fontSize="4xl"
                         fontWeight={'regular'}
+                        align={'center'}
                     >
                         Message from {from} to {to}
                     </ModalHeader>
                     <ModalBody>
                         <chakra.p
                             mt={2}
-                            fontSize="2xl"
+                            fontSize="3xl"
                             color={giftType === "birthday" ? "white" : "black"}
                         >
                             {message}
                         </chakra.p>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
                 </ModalContent>
             </Modal>
-
-            { /**
-                    <Flex
-                        p={50}
-                        w="full"
-                        h="100vh"
-                        alignItems="center"
-                        justifyContent="center"
-                        bgImage={{base:bgMobile, md:bg}}
-                        bgSize={"cover"}
-                        bgPosition={'center'}
-                        bgRepeat={"no-repeat"}
-                    >
-                        <Box
-                            mx="auto"
-                            maxW="2xl"
-                        >
-                            <Box p={6}>
-                                <Box>
-                                    {
-                                        //update status
-                                        updateStatus()
-                                    }
-                                    <chakra.h1
-                                        display="block"
-                                        color={useColorModeValue("gray.800", "white")}
-                                        fontWeight="bold"
-                                        fontSize="2xl"
-                                        mt={2}
-                                    >
-                                        Message from {from} to {to} 
-                                    </chakra.h1>
-                                    <chakra.p
-                                        mt={2}
-                                        fontSize="lg"
-                                        color={useColorModeValue("gray.600", "gray.400")}
-                                    >
-                                        {message}
-                                    </chakra.p>
-                                </Box>
-                            </Box>
-                        </Box>
-                    </Flex>  
-            */
-            }
         </div>
     );
 };
