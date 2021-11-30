@@ -94,7 +94,13 @@ export default function AdminGift() {
                 justify={'center'}
                 bg={"brand.green"}>
                 <chakra.form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack spacing={8} mx={'auto'} maxW={'xl'} py={12} px={6}>
+                    <Stack
+                        spacing={8}
+                        mx={'auto'}
+                        maxW={'xl'}
+                        py={12} px={6}
+                        fontFamily={'Lora'}
+                    >
                         <Stack align={'center'}>
                             <chakra.img src={'/logo.svg'}></chakra.img>
                             <Heading

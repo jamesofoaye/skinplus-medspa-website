@@ -43,62 +43,72 @@ export default function Login() {
 
 
     return (
-        <Flex
-            minH={'100vh'}
+        <Stack
+            h={'100vh'}
             align={'center'}
-            justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
-            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-                <Stack align={'center'}>
-                    <Heading fontSize={'2xl'}>Skinplus Medspa Admin Sign In</Heading>
-                </Stack>
-                <Box
-                    rounded={'lg'}
-                    bg={useColorModeValue('white', 'gray.700')}
-                    boxShadow={'lg'}
-                    p={8}>
-                    <Stack spacing={4}>
-                        <chakra.form onSubmit={handleSubmit(onSubmit)}>
-                            <FormControl>
-                                <FormLabel>Email address</FormLabel>
-                                <Input
-                                    type="email"
-                                    value={"frontdesk@skinplusofficial.com"}
-                                    disabled
-                                />
-                            </FormControl>
-                            <FormControl isRequired my={3}>
-                                <FormLabel>Password</FormLabel>
-                                <Input
-                                    type="password"
-                                    {...register('password', {
-                                        required: 'Required!....Enter your password'
-                                    })}
-                                />
-                                <FormErrorMessage colorScheme="red">
-                                    {errors.password && errors.password.message}
-                                </FormErrorMessage>
-                            </FormControl>
-                            <Stack spacing={10}>
-                                <Button
-                                    type="submit"
-                                    mt={2}
-                                    bgColor={'brand.green'}
-                                    variant={'outline'}
-                                    fontSize={{ md: "xl" }}
-                                    _hover={{
-                                        bgColor: 'brand.olive'
-                                    }}
-                                    color={"white"}
-                                    disabled={isSubmitting}
-                                >
-                                    Sign in
-                                </Button>
-                            </Stack>
-                        </chakra.form>
-                    </Stack>
-                </Box>
+            bg={"brand.green"}>
+            <Stack align={'center'}>
+                <chakra.img
+                    src={'/logo.svg'}
+                    mt={10}
+                ></chakra.img>
+                <Heading
+                    align={'center'}
+                    fontSize={'4xl'}
+                    fontWeight={'regular'}
+                    color="brand.sand"
+                    fontFamily={'Lora'}
+                    pb={5}
+                >
+                    Skinplus Medspa Admin Sign In
+                </Heading>
             </Stack>
-        </Flex >
+            <Box
+                rounded={'lg'}
+                bg={useColorModeValue('white', 'gray.700')}
+                boxShadow={'lg'}
+                p={8}>
+                <Stack spacing={4}>
+                    <chakra.form onSubmit={handleSubmit(onSubmit)}>
+                        <FormControl>
+                            <FormLabel>Email address</FormLabel>
+                            <Input
+                                type="email"
+                                value={"frontdesk@skinplusofficial.com"}
+                                disabled
+                            />
+                        </FormControl>
+                        <FormControl isRequired my={3}>
+                            <FormLabel>Password</FormLabel>
+                            <Input
+                                type="password"
+                                {...register('password', {
+                                    required: 'Required!....Enter your password'
+                                })}
+                            />
+                            <FormErrorMessage colorScheme="red">
+                                {errors.password && errors.password.message}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <Stack spacing={10}>
+                            <Button
+                                type="submit"
+                                mt={2}
+                                bgColor={'brand.green'}
+                                variant={'outline'}
+                                fontSize={{ md: "xl" }}
+                                _hover={{
+                                    bgColor: 'brand.olive'
+                                }}
+                                color={"white"}
+                                disabled={isSubmitting}
+                            >
+                                Sign in
+                            </Button>
+                        </Stack>
+                    </chakra.form>
+                </Stack>
+            </Box>
+        </Stack>
     );
 }
