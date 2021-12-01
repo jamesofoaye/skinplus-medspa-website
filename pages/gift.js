@@ -147,7 +147,7 @@ const Gift = () => {
                         px={5}
                         align={'center'}
                     >
-                       Enter the code you received through sms with sender name SkinPlus
+                       Enter the code you received via SMS from SkinPlus
                     </chakra.p>
                 </Stack>
                 <chakra.form onSubmit={handleSubmit(onSubmit)}>
