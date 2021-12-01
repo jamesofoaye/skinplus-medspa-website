@@ -7,8 +7,11 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { onSnapshot, collection } from "firebase/firestore";
 import {auth, db} from '../../library/firebase'
 import Head from "next/head";
+import { useRouter } from 'next/router'
 
 export default function Component({value}) {
+    const router = useRouter()
+    
     onAuthStateChanged(auth, (user) => {
         if (user) {
             if (user.email !== "frontdesk@skinplusofficial.com") {
