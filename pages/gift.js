@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import {
-    chakra, Box, Flex, useToast, FormControl, FormLabel, Heading, FormErrorMessage,
+    chakra, Box, useToast, FormControl, FormLabel, Heading, FormErrorMessage,
     Button, Stack, useColorModeValue, Input,  Modal, ModalOverlay, ModalContent,
-    ModalHeader, ModalFooter, ModalBody, useDisclosure,
+    ModalHeader, ModalBody, useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form';
 import {collection, query, where, getDocs, setDoc, doc} from 'firebase/firestore'

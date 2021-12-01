@@ -1,21 +1,23 @@
 import {useState, useEffect} from "react";
 import {
-    Flex, Button, useBreakpointValue, Stack, useClipboard,
-    Table, Thead, Tbody, Tr, Th, Td, chakra
+    Flex, Stack, Table, Thead, Tbody, Tr, Th, Td, chakra
 } from "@chakra-ui/react";
-import { HiOutlineClipboardCopy, HiClipboardCopy } from "react-icons/hi";
 import CopyButton from "../../components/copyButton";
+import { onAuthStateChanged } from 'firebase/auth';
 import { onSnapshot, collection } from "firebase/firestore";
-import { db } from '../../library/firebase'
+import {auth, db} from '../../library/firebase'
 import Head from "next/head";
 
 export default function Component({value}) {
-    const Data = [
-        { name: "Daggy", created: "7 days ago" },
-        { name: "Anubra", created: "23 hours ago" },
-        { name: "Josef", created: "A few seconds ago" },
-        { name: "Sage", created: "A few hours ago" },
-    ];
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            if (user.email !== "frontdesk@skinplusofficial.com") {
+                router.push('/admin/login')
+            }
+        } else {
+            router.push('/')
+        }
+    });
 
     const [data, setData] = useState([{
         id: "Loading...",

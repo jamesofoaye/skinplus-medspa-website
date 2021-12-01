@@ -1,4 +1,3 @@
-import { useState, useEffect, useCallback } from 'react'
 import {
     chakra, FormControl, FormLabel, Heading, Select,
     FormErrorMessage, Button, Flex, Box, Stack,
@@ -26,8 +25,6 @@ export default function AdminGift() {
         handleSubmit: handleSubmitSMS, register: registerSMS, reset: resetSMS,
         formState: { errors: errorsSMS, isSubmitting: isSubmittingSMS }
     } = useForm();
-
-   // const [code] = useState(generateCode());
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
