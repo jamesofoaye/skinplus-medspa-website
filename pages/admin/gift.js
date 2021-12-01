@@ -22,6 +22,11 @@ export default function AdminGift() {
         formState: { errors, isSubmitting }
     } = useForm();
 
+    const {
+        handleSubmit: handleSubmitSMS, register: registerSMS, reset: resetSMS,
+        formState: { errors: errorsSMS, isSubmitting: isSubmittingSMS }
+    } = useForm();
+
    // const [code] = useState(generateCode());
 
     onAuthStateChanged(auth, (user) => {
@@ -30,7 +35,7 @@ export default function AdminGift() {
                 router.push('/admin/login')
             }
         } else {
-            router.push('/admin/login')
+            router.push('/')
         }
     });
 
@@ -75,6 +80,49 @@ export default function AdminGift() {
         }
     };
 
+    const sendSMS = async (values) => {
+        try {
+            const Message = `Hello ${values.recipientName}, ${values.senderName} bought
+             a gift card for you from SkinPlus Medspa and left a message for you.
+             You can read the message by scanning the QR code on the gift card you will
+             recieve. Then open the link from the QR code and enter this code: ${values.code}
+             to open the message. You can Visit us on our website: www.skinplusofficial.com`
+
+            //send sms to recipient
+            const recipeintResponse = await fetch(
+                `https://api.dawurobo.com/send_sms?sender=SkinPlus&numbers=${values.recipientNumber}&message=${Message}&validate=false`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Message,
+                    })
+                });
+
+            toast({
+                title: "Successful",
+                description: "SMS sent",
+                status: "success",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+
+            resetSMS({values})
+        } catch (error) {
+            const errorMessage = error.message;
+            toast({
+                title: "Error",
+                description: errorMessage,
+                status: "error",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+        }
+    }
+
     return (
         <div>
             <Head>
@@ -97,7 +145,7 @@ export default function AdminGift() {
                     <Stack
                         spacing={8}
                         mx={'auto'}
-                        maxW={'xl'}
+                        w={'full'}
                         py={12} px={6}
                         fontFamily={'Lora'}
                     >
@@ -106,8 +154,11 @@ export default function AdminGift() {
                             <Heading
                                 fontSize={'4xl'}
                                 color="brand.sand"
+                                align={'center'}
+                                fontFamily={'Lora'}
+                                fontWeight={'regular'}
                             >
-                                SkinPlus MedSpa Gift Card
+                                Gift Card Admin Portal
                             </Heading>
                         </Stack>
                         <Box
@@ -180,7 +231,7 @@ export default function AdminGift() {
                                     </FormErrorMessage>
                                 </FormControl>
 
-                                <FormControl>
+                                <FormControl isRequired>
                                     <FormLabel fontSize={{ md: "xl" }}>
                                         Message
                                         </FormLabel>
@@ -208,7 +259,117 @@ export default function AdminGift() {
                                         }}
                                         isLoading={isSubmitting}
                                     >
-                                        Send
+                                        Save
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Box>
+                    </Stack>
+                </chakra.form>
+
+                <chakra.form onSubmit={handleSubmitSMS(sendSMS)}>
+                    <Stack
+                        spacing={8}
+                        mx={'auto'}
+                        w={'full'}
+                        py={12} px={6}
+                        fontFamily={'Lora'}
+                    >
+                        <Stack align={'center'}>
+                            <chakra.img src={'/logo.svg'}></chakra.img>
+                            <Heading
+                                fontSize={'4xl'}
+                                color="brand.sand"
+                                align={'center'}
+                                fontFamily={'Lora'}
+                                fontWeight={'regular'}
+                            >
+                                Gift Card SMS Portal
+                            </Heading>
+                        </Stack>
+                        <Box
+                            rounded={'lg'}
+                            bg={useColorModeValue('white', 'gray.700')}
+                            boxShadow={'lg'}
+                            p={8}>
+                            <Stack spacing={4}>
+                                <FormControl isRequired>
+                                    <FormLabel>From</FormLabel>
+                                    <Input
+                                        placeholder="Sender Name"
+                                        {...registerSMS('senderName', {
+                                            required: 'Required!....Enter sender name'
+                                        })}
+                                        _focus={{
+                                            borderColor: 'brand.sand'
+                                        }}
+                                    />
+                                    <FormErrorMessage colorScheme="red">
+                                        {errorsSMS.senderName && errorsSMS.senderName.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>To</FormLabel>
+                                    <Input
+                                        placeholder="Recipient Name"
+                                        {...registerSMS('recipientName', {
+                                            required: 'Required!....Enter recipient name'
+                                        })}
+                                        _focus={{
+                                            borderColor: 'brand.sand'
+                                        }}
+                                    />
+                                    <FormErrorMessage colorScheme="red">
+                                        {errorsSMS.recipientName && errorsSMS.recipientName.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>Recipient Number</FormLabel>
+                                    <Input
+                                        placeholder="Recipient Number"
+                                        {...registerSMS('recipientNumber', {
+                                            required: 'Required!....Enter recipient phone number'
+                                        })}
+                                        _focus={{
+                                            borderColor: 'brand.sand'
+                                        }}
+                                    />
+                                    <FormErrorMessage colorScheme="red">
+                                        {errorsSMS.recipientNumber && errorsSMS.recipientNumber.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                                <FormControl isRequired>
+                                    <FormLabel>Code</FormLabel>
+                                    <Input
+                                        placeholder="Code"
+                                        {...registerSMS('code', {
+                                            required: 'Required!....Enter code'
+                                        })}
+                                        _focus={{
+                                            borderColor: 'brand.sand'
+                                        }}
+                                    />
+                                    <FormErrorMessage colorScheme="red">
+                                        {errorsSMS.code && errorsSMS.code.message}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                                <Stack spacing={10}>
+                                    <Button
+                                        type="submit"
+                                        bgColor={'brand.green'}
+                                        color={"white"}
+                                        variant={'outline'}
+                                        fontSize={{ md: "xl" }}
+                                        _hover={{
+                                            bgColor: 'brand.olive'
+                                        }}
+                                        isLoading={isSubmittingSMS}
+                                    >
+                                        Send SMS
                                     </Button>
                                 </Stack>
                             </Stack>

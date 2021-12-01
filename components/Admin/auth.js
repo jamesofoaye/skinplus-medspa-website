@@ -101,7 +101,7 @@ export default function Login() {
                                     bgColor: 'brand.olive'
                                 }}
                                 color={"white"}
-                                disabled={isSubmitting}
+                                isLoading={isSubmitting}
                             >
                                 Sign in
                             </Button>

@@ -214,7 +214,7 @@ const Gift = () => {
                         <chakra.a href="tel:+233596068336">
                             0596068336 {''}
                         </chakra.a>
-                        if you didn&apos;t receive any SMS with your code
+                        if you didn&apos;t receive any SMS containing a code
                     </chakra.p>
                 </Stack>
             </Stack>
