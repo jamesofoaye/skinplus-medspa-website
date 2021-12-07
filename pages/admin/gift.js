@@ -79,11 +79,10 @@ export default function AdminGift() {
 
     const sendSMS = async (values) => {
         try {
-            const Message = `Hello ${values.recipientName}, ${values.senderName} bought
-             a gift card for you from SkinPlus Medspa and left a message for you.
-             You can read the message by scanning the QR code on the gift card you will
-             recieve. Then open the link from the QR code and enter this code: ${values.code}
-             to open the message. You can Visit us on our website: www.skinplusofficial.com`
+            const Message = `Hello ${values.recipientName}! You have received a SkinPlus Medspa gift card from ${values.senderName}.
+            ${values.senderName} left a personal message for you on our website that only you can see. You can read this message by
+            scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${values.code} to see your message.
+            You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`
 
             //send sms to recipient
             const recipeintResponse = await fetch(
