@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from '../../library/firebase'
 import { generateCode} from '../../library/GenerateCode'
+import GiftNavbar from "../../components/giftNavbar";
 
 export default function AdminGift() {
     const toast = useToast()
@@ -145,6 +146,7 @@ export default function AdminGift() {
                         py={12} px={6}
                         fontFamily={'Lora'}
                     >
+                        <GiftNavbar />
                         <Stack align={'center'}>
                             <chakra.img src={'/logo.svg'}></chakra.img>
                             <Heading
