@@ -133,248 +133,252 @@ export default function AdminGift() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Flex
-                minH={'100vh'}
-                align={'center'}
-                justify={'center'}
-                bg={"brand.green"}>
-                <chakra.form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack
-                        spacing={8}
-                        mx={'auto'}
-                        w={'full'}
-                        py={12} px={6}
-                        fontFamily={'Lora'}
-                    >
-                        <GiftNavbar />
-                        <Stack align={'center'}>
-                            <chakra.img src={'/logo.svg'}></chakra.img>
-                            <Heading
-                                fontSize={'4xl'}
-                                color="brand.sand"
-                                align={'center'}
-                                fontFamily={'Lora'}
-                                fontWeight={'regular'}
-                            >
-                                Gift Card Admin Portal
-                            </Heading>
-                        </Stack>
-                        <Box
-                            rounded={'lg'}
-                            bg={useColorModeValue('white', 'gray.700')}
-                            boxShadow={'lg'}
-                            p={8}>
-                            <Stack spacing={4}>
-                                <FormControl isRequired>
-                                    <FormLabel>Gift Card Type</FormLabel>
-                                    <Select
-                                        placeholder="Select Gift Card"
-                                        {...register('giftType', {
-                                            required: 'Required!....Gift Card',
-                                        })}
-                                    >
-                                        <option value="birthday">Birthday Card</option>
-                                        <option value="christmas">Christmas Card</option>
-                                    </Select>
-                                    <FormErrorMessage colorScheme="red">
-                                        {errors.giftType && errors.giftType.message}
-                                    </FormErrorMessage>
-                                </FormControl>
+            <chakra.div bg={"brand.green"}>
+                <GiftNavbar />
 
-                                <FormControl isRequired>
-                                    <FormLabel>From</FormLabel>
-                                    <Input
-                                        placeholder="Sender Name"
-                                        {...register('senderName', {
-                                            required: 'Required!....Enter sender name'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errors.senderName && errors.senderName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
+                <Flex
+                    minH={'100vh'}
+                    align={'center'}
+                    justify={'center'}
+                >
+                    <chakra.form onSubmit={handleSubmit(onSubmit)}>
+                        <Stack
+                            spacing={8}
+                            mx={'auto'}
+                            w={'full'}
+                            py={12} px={6}
+                            fontFamily={'Lora'}
+                        >
+                            
 
-                                <FormControl isRequired>
-                                    <FormLabel>To</FormLabel>
-                                    <Input
-                                        placeholder="Recipient Name"
-                                        {...register('recipientName', {
-                                            required: 'Required!....Enter recipient name'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errors.recipientName && errors.recipientName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                                <FormControl isRequired>
-                                    <FormLabel>Recipient Number</FormLabel>
-                                    <Input
-                                        placeholder="Recipient Number"
-                                        {...register('recipientNumber', {
-                                            required: 'Required!....Enter recipient phone number'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errors.recipientNumber && errors.recipientNumber.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                                <FormControl isRequired>
-                                    <FormLabel fontSize={{ md: "xl" }}>
-                                        Message
-                                        </FormLabel>
-                                    <Textarea
-                                        {...register('message', {
-                                            required: 'Required!....Enter message'
-                                        })}
-                                        rows="7"
-                                        columns="30"
-                                        placeholder="Message"
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}>
-                                    </Textarea>
-                                </FormControl>
-                                <Stack spacing={10}>
-                                    <Button
-                                        type="submit"
-                                        bgColor={'brand.green'}
-                                        color={"white"}
-                                        variant={'outline'}
-                                        fontSize={{ md: "xl" }}
-                                        _hover={{
-                                            bgColor: 'brand.olive'
-                                        }}
-                                        isLoading={isSubmitting}
-                                    >
-                                        Save
-                                    </Button>
-                                </Stack>
+                            <Stack align={'center'}>
+                                <chakra.img src={'/logo.svg'}></chakra.img>
+                                <Heading
+                                    fontSize={'4xl'}
+                                    color="brand.sand"
+                                    align={'center'}
+                                    fontFamily={'Lora'}
+                                    fontWeight={'regular'}
+                                >
+                                    Gift Card Admin Portal
+                                </Heading>
                             </Stack>
-                        </Box>
-                    </Stack>
-                </chakra.form>
+                            <Box
+                                rounded={'lg'}
+                                bg={useColorModeValue('white', 'gray.700')}
+                                boxShadow={'lg'}
+                                p={8}>
+                                <Stack spacing={4}>
+                                    <FormControl isRequired>
+                                        <FormLabel>Gift Card Type</FormLabel>
+                                        <Select
+                                            placeholder="Select Gift Card"
+                                            {...register('giftType', {
+                                                required: 'Required!....Gift Card',
+                                            })}
+                                        >
+                                            <option value="birthday">Birthday Card</option>
+                                            <option value="christmas">Christmas Card</option>
+                                        </Select>
+                                        <FormErrorMessage colorScheme="red">
+                                            {errors.giftType && errors.giftType.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
 
-                <chakra.form onSubmit={handleSubmitSMS(sendSMS)}>
-                    <Stack
-                        spacing={8}
-                        mx={'auto'}
-                        w={'full'}
-                        py={12} px={6}
-                        fontFamily={'Lora'}
-                    >
-                        <Stack align={'center'}>
-                            <chakra.img src={'/logo.svg'}></chakra.img>
-                            <Heading
-                                fontSize={'4xl'}
-                                color="brand.sand"
-                                align={'center'}
-                                fontFamily={'Lora'}
-                                fontWeight={'regular'}
-                            >
-                                Gift Card SMS Portal
-                            </Heading>
-                        </Stack>
-                        <Box
-                            rounded={'lg'}
-                            bg={useColorModeValue('white', 'gray.700')}
-                            boxShadow={'lg'}
-                            p={8}>
-                            <Stack spacing={4}>
-                                <FormControl isRequired>
-                                    <FormLabel>From</FormLabel>
-                                    <Input
-                                        placeholder="Sender Name"
-                                        {...registerSMS('senderName', {
-                                            required: 'Required!....Enter sender name'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errorsSMS.senderName && errorsSMS.senderName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>From</FormLabel>
+                                        <Input
+                                            placeholder="Sender Name"
+                                            {...register('senderName', {
+                                                required: 'Required!....Enter sender name'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errors.senderName && errors.senderName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
 
-                                <FormControl isRequired>
-                                    <FormLabel>To</FormLabel>
-                                    <Input
-                                        placeholder="Recipient Name"
-                                        {...registerSMS('recipientName', {
-                                            required: 'Required!....Enter recipient name'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errorsSMS.recipientName && errorsSMS.recipientName.message}
-                                    </FormErrorMessage>
-                                </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>To</FormLabel>
+                                        <Input
+                                            placeholder="Recipient Name"
+                                            {...register('recipientName', {
+                                                required: 'Required!....Enter recipient name'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errors.recipientName && errors.recipientName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
 
-                                <FormControl isRequired>
-                                    <FormLabel>Recipient Number</FormLabel>
-                                    <Input
-                                        placeholder="Recipient Number"
-                                        {...registerSMS('recipientNumber', {
-                                            required: 'Required!....Enter recipient phone number'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errorsSMS.recipientNumber && errorsSMS.recipientNumber.message}
-                                    </FormErrorMessage>
-                                </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Recipient Number</FormLabel>
+                                        <Input
+                                            placeholder="Recipient Number"
+                                            {...register('recipientNumber', {
+                                                required: 'Required!....Enter recipient phone number'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errors.recipientNumber && errors.recipientNumber.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
 
-                                <FormControl isRequired>
-                                    <FormLabel>Code</FormLabel>
-                                    <Input
-                                        placeholder="Code"
-                                        {...registerSMS('code', {
-                                            required: 'Required!....Enter code'
-                                        })}
-                                        _focus={{
-                                            borderColor: 'brand.sand'
-                                        }}
-                                    />
-                                    <FormErrorMessage colorScheme="red">
-                                        {errorsSMS.code && errorsSMS.code.message}
-                                    </FormErrorMessage>
-                                </FormControl>
-
-                                <Stack spacing={10}>
-                                    <Button
-                                        type="submit"
-                                        bgColor={'brand.green'}
-                                        color={"white"}
-                                        variant={'outline'}
-                                        fontSize={{ md: "xl" }}
-                                        _hover={{
-                                            bgColor: 'brand.olive'
-                                        }}
-                                        isLoading={isSubmittingSMS}
-                                    >
-                                        Send SMS
-                                    </Button>
+                                    <FormControl isRequired>
+                                        <FormLabel fontSize={{ md: "xl" }}>
+                                            Message
+                                            </FormLabel>
+                                        <Textarea
+                                            {...register('message', {
+                                                required: 'Required!....Enter message'
+                                            })}
+                                            rows="7"
+                                            columns="30"
+                                            placeholder="Message"
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}>
+                                        </Textarea>
+                                    </FormControl>
+                                    <Stack spacing={10}>
+                                        <Button
+                                            type="submit"
+                                            bgColor={'brand.green'}
+                                            color={"white"}
+                                            variant={'outline'}
+                                            fontSize={{ md: "xl" }}
+                                            _hover={{
+                                                bgColor: 'brand.olive'
+                                            }}
+                                            isLoading={isSubmitting}
+                                        >
+                                            Save
+                                        </Button>
+                                    </Stack>
                                 </Stack>
+                            </Box>
+                        </Stack>
+                    </chakra.form>
+
+                    <chakra.form onSubmit={handleSubmitSMS(sendSMS)}>
+                        <Stack
+                            spacing={8}
+                            mx={'auto'}
+                            w={'full'}
+                            py={12} px={6}
+                            fontFamily={'Lora'}
+                        >
+                            <Stack align={'center'}>
+                                <Heading
+                                    fontSize={'4xl'}
+                                    color="brand.sand"
+                                    align={'center'}
+                                    fontFamily={'Lora'}
+                                    fontWeight={'regular'}
+                                >
+                                    Gift Card SMS Portal
+                                </Heading>
                             </Stack>
-                        </Box>
-                    </Stack>
-                </chakra.form>
-            </Flex>
+                            <Box
+                                rounded={'lg'}
+                                bg={useColorModeValue('white', 'gray.700')}
+                                boxShadow={'lg'}
+                                p={8}>
+                                <Stack spacing={4}>
+                                    <FormControl isRequired>
+                                        <FormLabel>From</FormLabel>
+                                        <Input
+                                            placeholder="Sender Name"
+                                            {...registerSMS('senderName', {
+                                                required: 'Required!....Enter sender name'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errorsSMS.senderName && errorsSMS.senderName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                    <FormControl isRequired>
+                                        <FormLabel>To</FormLabel>
+                                        <Input
+                                            placeholder="Recipient Name"
+                                            {...registerSMS('recipientName', {
+                                                required: 'Required!....Enter recipient name'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errorsSMS.recipientName && errorsSMS.recipientName.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                    <FormControl isRequired>
+                                        <FormLabel>Recipient Number</FormLabel>
+                                        <Input
+                                            placeholder="Recipient Number"
+                                            {...registerSMS('recipientNumber', {
+                                                required: 'Required!....Enter recipient phone number'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errorsSMS.recipientNumber && errorsSMS.recipientNumber.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                    <FormControl isRequired>
+                                        <FormLabel>Code</FormLabel>
+                                        <Input
+                                            placeholder="Code"
+                                            {...registerSMS('code', {
+                                                required: 'Required!....Enter code'
+                                            })}
+                                            _focus={{
+                                                borderColor: 'brand.sand'
+                                            }}
+                                        />
+                                        <FormErrorMessage colorScheme="red">
+                                            {errorsSMS.code && errorsSMS.code.message}
+                                        </FormErrorMessage>
+                                    </FormControl>
+
+                                    <Stack spacing={10}>
+                                        <Button
+                                            type="submit"
+                                            bgColor={'brand.green'}
+                                            color={"white"}
+                                            variant={'outline'}
+                                            fontSize={{ md: "xl" }}
+                                            _hover={{
+                                                bgColor: 'brand.olive'
+                                            }}
+                                            isLoading={isSubmittingSMS}
+                                        >
+                                            Send SMS
+                                        </Button>
+                                    </Stack>
+                                </Stack>
+                            </Box>
+                        </Stack>
+                    </chakra.form>
+                </Flex>
+            </chakra.div>
         </div >
     )
 }

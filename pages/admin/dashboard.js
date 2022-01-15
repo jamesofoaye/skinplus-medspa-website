@@ -8,6 +8,7 @@ import { onSnapshot, collection } from "firebase/firestore";
 import {auth, db} from '../../library/firebase'
 import Head from "next/head";
 import { useRouter } from 'next/router'
+import GiftNavbar from "../../components/giftNavbar";
 
 export default function Component({value}) {
     const router = useRouter()
@@ -63,6 +64,8 @@ export default function Component({value}) {
                 bg="brand.green"
                 p={50}
             >
+                <GiftNavbar />
+                
                 <Flex>
                     <Stack
                         direction={{ base: "column" }}

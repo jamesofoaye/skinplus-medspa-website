@@ -1,82 +1,33 @@
 import {
-  chakra,
-  HStack,
-  Flex,
-  useDisclosure,
-  CloseButton,
-  VStack,
-  Button,
+  chakra, HStack, Flex, Button,
 } from "@chakra-ui/react";
-
-import { AiFillHome, AiOutlineInbox} from "react-icons/ai";
+import { useRouter } from 'next/router'
 
 export default function GiftNavbar() {
-  const mobileNav = useDisclosure();
-
-  const MobileNavContent = (
-    <VStack
-      pos="absolute"
-      top={0}
-      left={0}
-      right={0}
-      display={mobileNav.isOpen ? "flex" : "none"}
-      flexDirection="column"
-      p={2}
-      pb={4}
-      m={2}
-      spacing={3}
-      rounded="sm"
-      shadow="sm"
-    >
-      <CloseButton
-        aria-label="Close menu"
-        justifySelf="self-start"
-        onClick={mobileNav.onClose}
-      />
-      <Button w="full" variant="ghost" leftIcon={<AiFillHome />}>
-        Main Portal
-      </Button>
-      <Button
-        w="full"
-        variant="solid"
-        colorScheme="brand"
-        leftIcon={<AiOutlineInbox />}
-      >
-        Dashboard
-      </Button>
-    </VStack>
-  );
+  const router = useRouter()
 
   return (
-    <chakra.header
-      transition="box-shadow 0.2s"
-      borderTop="6px solid"
-      borderTopColor="brand.400"
-      w="full"
-      overflowY="hidden"
-      borderBottomWidth={2}
-      borderBottomColor={'gray.200'}
-    >
-      <chakra.div h="4.5rem" mx="auto" maxW="1200px">
+    <chakra.header w="full">
+      <chakra.div h="4.5rem" mx="auto">
         <Flex
           w="full"
           h="full"
           px="6"
+          pt={10}
           alignItems="center"
           justifyContent="space-between"
         >
-          <Flex justify="flex-end" align="center" color="gray.400">
+          <Flex justify="flex-end" align="center" mx="auto" color="white">
             <HStack spacing="5" display={{ base: "none", md: "flex" }}>
-              <Button colorScheme="brand" variant="ghost" size="sm">
+              <Button onClick={() => router.push('/admin/gift')}>
                 Main Portal
               </Button>
-              <Button colorScheme="brand" variant="solid" size="sm">
+              <Button onClick={() => router.push('/admin/dashboard')}>
                 Dashboard
               </Button>
             </HStack>
           </Flex>
         </Flex>
-        {MobileNavContent}
       </chakra.div>
     </chakra.header>
   );
