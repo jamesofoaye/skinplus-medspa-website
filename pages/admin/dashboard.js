@@ -65,14 +65,14 @@ export default function Component({value}) {
                 p={50}
             >
                 <GiftNavbar />
-                
+
                 <Flex>
                     <Stack
                         direction={{ base: "column" }}
                         w="full"
                         shadow="lg"
                     >
-                        <Table variant='simple' bg='brand.olive' color={'white'}>
+                        <Table variant='simple' bg='brand.olive' color={'white'} pt={5}>
                             <Thead>
                                 <Tr>
                                     <Th color={'white'}>From</Th>
