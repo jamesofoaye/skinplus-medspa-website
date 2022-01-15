@@ -72,7 +72,7 @@ export default function Component({value}) {
                         w="full"
                         shadow="lg"
                     >
-                        <Table variant='simple' bg='brand.olive' color={'white'} pt={5}>
+                        <Table variant='simple' bg='brand.olive' color={'white'} mt={5}>
                             <Thead>
                                 <Tr>
                                     <Th color={'white'}>From</Th>
