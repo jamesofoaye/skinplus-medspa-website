@@ -88,10 +88,21 @@ export default function Home() {
                                     pl={{ base: 0, md: 5 }}
                                 >
                                     <address>
-                                        Location: East Legon, Boundary Road.<br />
+                                        Ghana Location: East Legon, Boundary Road.<br />
                                         First floor of Grocery Express.<br />
                                         Opposite Dufie Court.<br />
                                         Phone Number: <a href="tel:+233596068336">0596068336</a>
+                                    </address>
+                                </Text>
+
+                                <Text
+                                    fontSize={{ base: "xl", md: "2xl" }}
+                                    pl={{ base: 0, md: 5 }}
+                                >
+                                    <address>
+                                        USA Location: 195 Central Ave, Floor 1.<br />
+                                        Newark NJ 07103.<br />
+                                        Phone Number: <a href="tel:+186237142926">86237142926</a>
                                     </address>
                                 </Text>
                             </Box>
