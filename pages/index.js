@@ -1114,6 +1114,7 @@ export default function Home() {
                 <Text
                                     fontSize={{ base: "xl", md: "2xl" }}
                                     pl={{ base: 0, md: 5 }}
+                                    pt={5}
                                 >
                                     <address>
                                         Ghana Location: East Legon, Boundary Road.<br />
@@ -1126,6 +1127,7 @@ export default function Home() {
                                 <Text
                                     fontSize={{ base: "xl", md: "2xl" }}
                                     pl={{ base: 0, md: 5 }}
+                                    pt={5}
                                 >
                                     <address>
                                         USA Location: 195 Central Ave, Floor 1.<br />
