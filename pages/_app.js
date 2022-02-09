@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
 //styles for image slider
@@ -25,4 +26,6 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default dynamic(() => Promise.resolve(MyApp), {
+    ssr: false,
+});

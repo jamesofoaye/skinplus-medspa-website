@@ -25,6 +25,8 @@ export default function Consultation() {
             </chakra.nav>
 
             <chakra.main
+                bg={'white'}
+                color={'black'}
                 fontFamily={'Lora'}
             >
                 {/**Calendly Widget */}

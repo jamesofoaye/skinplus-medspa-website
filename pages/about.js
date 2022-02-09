@@ -43,11 +43,14 @@ export default function About() {
                     textColor="#ffffff"
                     url="https://calendly.com/skinplusmedspa/30min"
                 />
-                
+
                 <div id="about">
                     <SimpleGrid
                         columns={{ base: 1, md: 2 }}
-                        spacing={8} >
+                        spacing={8}
+                        bg={'white'}
+                        color={'black'}
+                    >
                         <Stack
                             spacing={4}
                             justify={'center'}

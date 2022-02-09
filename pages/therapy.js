@@ -78,6 +78,7 @@ export default function Therapy() {
                 alignItems="center"
                 pos="absolute"
                 fontFamily={'Lora'}
+                bg="white"
             >
                 <Box
                     p={{ md: 20 }}
@@ -147,7 +148,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -219,7 +220,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -290,7 +291,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -361,7 +362,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -433,7 +434,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -506,7 +507,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -579,7 +580,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>
@@ -652,7 +653,7 @@ export default function Therapy() {
                                         bgColor: 'brand.olive'
                                     }}
                                 >
-                                        Book Now                                
+                                    Book Now
                                 </Button>
                             </Link>
                         </Box>

@@ -4,7 +4,6 @@ import {
   chakra,
   Box,
   Flex,
-  useColorModeValue,
   useBreakpointValue,
   Icon,
   SimpleGrid,
@@ -39,7 +38,7 @@ export default function Services() {
           boxSize={5}
           mt={1}
           mr={2}
-          color={useColorModeValue("brand.500", "brand.300")}
+          color={"green"}
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -51,7 +50,7 @@ export default function Services() {
         </Icon>
         <chakra.p
           fontSize="lg"
-          color={useColorModeValue("gray.700", "gray.400")}
+          color={"black"}
           {...props}
         />
       </Flex>
@@ -97,6 +96,8 @@ export default function Services() {
           w="auto"
           justifyContent="center"
           alignItems="center"
+          bg={'white'}
+          color={'black'}
         >
           <Box
             px={8}
@@ -115,7 +116,7 @@ export default function Services() {
                   fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
                   fontWeight="extrabold"
                   textAlign={{ base: "center", sm: "left" }}
-                  color={useColorModeValue("black")}
+                  color={"black"}
                   lineHeight="shorter"
                   letterSpacing="tight"
                 >
@@ -125,7 +126,7 @@ export default function Services() {
                   mb={6}
                   fontSize={{ base: "lg", md: "xl" }}
                   textAlign={{ base: "center", sm: "left" }}
-                  color={useColorModeValue("gray.600", "gray.500")}
+                  color={"black"}
                 >
                   SkinPlus uses ethically sourced, fair trade natural materials  that are expertly
                   crafted to match our client needs.

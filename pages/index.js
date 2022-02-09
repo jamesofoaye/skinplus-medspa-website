@@ -101,7 +101,10 @@ export default function Home() {
         <div id="about">
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
-            spacing={8} >
+            spacing={8}
+            bg={'white'}
+            color={'black'}
+          >
             <Stack
               spacing={4}
               justify={'center'}
@@ -200,11 +203,13 @@ export default function Home() {
             columns={{ base: 1, md: 3 }}
             spacing={8}
             p={{ base: 8, md: 16 }}
-            bgColor="brand.cream"
+            bg="brand.cream"
+            color={'black'}
           >
             <Stack
               spacing={4}
-              justify={'center'} >
+              justify={'center'}
+            >
               <Heading
                 fontFamily={'Oswald'}
                 fontSize={{ base: "xl", md: "3xl", xl: "6xl" }}

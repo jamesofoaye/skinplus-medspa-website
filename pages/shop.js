@@ -48,6 +48,7 @@ export default function Shop() {
                 fontFamily={'Lora'}
                 alignItems="center"
                 justifyContent="center"
+                bg="white"
             >
                 <Flex
                     justify="center"

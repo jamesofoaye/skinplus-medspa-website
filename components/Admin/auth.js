@@ -12,6 +12,7 @@ export default function Login() {
         handleSubmit, register,
         formState: { errors, isSubmitting }
     } = useForm();
+
     const toast = useToast()
     const router = useRouter()
 

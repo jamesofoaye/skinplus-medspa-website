@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import {
     chakra, Box, useToast, FormControl, FormLabel, Heading, FormErrorMessage,
-    Button, Stack, useColorModeValue, Input,  Modal, ModalOverlay, ModalContent,
+    Button, Stack, Input, Modal, ModalOverlay, ModalContent,
     ModalHeader, ModalBody, useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form';
-import {collection, query, where, getDocs, setDoc, doc} from 'firebase/firestore'
+import { collection, query, where, getDocs, setDoc, doc } from 'firebase/firestore'
 import { db } from '../library/firebase'
 
 const Gift = () => {
@@ -21,39 +21,39 @@ const Gift = () => {
     const [bg, setBg] = useState("");
     const [bgMobile, setBgMobile] = useState("");
     const [code, setCode] = useState("");
-    const [status, setStatus] = useState("");
+    //const [status, setStatus] = useState("");
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [message, setMessage] = useState("");
     const [id, setId] = useState("");
 
     const updateStatus = async () => {
-        const xmasGiftCardProgramCollection = doc(db, "xmas-gift-card-program", id)
+        const GiftCardProgramCollection = doc(db, "xmas-gift-card-program", id)
         //data to be sent
-        const xmasGiftCardProgramPayload = {
+        const GiftCardProgramPayload = {
             status: "opened",
         };
 
-        await setDoc(xmasGiftCardProgramCollection, xmasGiftCardProgramPayload, { merge: true });
+        await setDoc(GiftCardProgramCollection, GiftCardProgramPayload, { merge: true });
     }
-    
+
     const onSubmit = async (values) => {
         try {
             const dataRef = collection(db, "xmas-gift-card-program")
             const q = query(dataRef, where("code", "==", values.code))
             const querySnapshot = await getDocs(q)
 
-            querySnapshot.forEach((doc) => {                
+            querySnapshot.forEach((doc) => {
                 setGiftType(doc.data().giftType)
                 setCode(doc.data().code)
-                setStatus(doc.data().status)
+                //setStatus(doc.data().status)
                 setFrom(doc.data().from)
                 setTo(doc.data().to)
                 setMessage(doc.data().message)
                 setId(doc.id)
             })
 
-            if(code === values.code){
+            if (code === values.code) {
                 onOpen()
                 toast({
                     title: "Successful",
@@ -64,20 +64,11 @@ const Gift = () => {
                     isClosable: true,
                 })
                 updateStatus()
-                reset({values})
-            }  else {
-                toast({
-                    title: "Error",
-                    description: "Wrong Code. Please Try Again!",
-                    status: "error",
-                    duration: 5000,
-                    position: "top",
-                    isClosable: true,
-                })
+                reset({ values })
             }
         } catch (error) {
             const errorMessage = error.code;
-            if (errorMessage === "invalid-argument") {                
+            if (errorMessage === "invalid-argument") {
                 toast({
                     title: "Error",
                     description: "Wrong Code. Please Try Again!",
@@ -106,15 +97,18 @@ const Gift = () => {
         } else if (giftType === "christmas") {
             setBg("/xmas-bg.jpg")
             setBgMobile("/xmas-bg-mobile.jpg")
+        } else if (giftType === "valentine") {
+            setBg("/bg-vals.jpg")
+            setBgMobile("/bg-vals-mobile.jpg")
         }
-    },[giftType])
+    }, [giftType])
 
     return (
         <div>
             <Head>
                 <title>SkinPlus MedSpa Ghana | Gift Card Program</title>
                 <meta
-                    name="description" 
+                    name="description"
                     content="SkinPlus Medspa provides a variety of personalized services 
                     to its clientele to enhance their look and maintain youth."
                 />
@@ -147,20 +141,22 @@ const Gift = () => {
                         px={5}
                         align={'center'}
                     >
-                       Enter the code you received via SMS from SkinPlus
+                        Enter the code you received via SMS from SkinPlus
                     </chakra.p>
                 </Stack>
                 <chakra.form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack spacing={8}
-                           mx={'auto'}
-                           maxW={'xl'}
-                           py={12}
-                           px={6}
-                           justify={'center'}
+                    <Stack
+                        spacing={8}
+                        mx={'auto'}
+                        maxW={'xl'}
+                        py={12}
+                        px={6}
+                        justify={'center'}
                     >
                         <Box
                             rounded={'lg'}
-                            bg={useColorModeValue('white', 'gray.700')}
+                            bg={'white'}
+                            color="black"
                             boxShadow={'lg'}
                             p={8}>
                             <Stack spacing={4}>
@@ -172,6 +168,7 @@ const Gift = () => {
                                         {...register('code', {
                                             required: 'Required!....Enter code'
                                         })}
+                                        borderColor="brand.green"
                                         _focus={{
                                             borderColor: 'brand.sand'
                                         }}
@@ -224,15 +221,15 @@ const Gift = () => {
                 <ModalContent
                     fontFamily={'Sacramento'}
                     color={giftType === "birthday" ? "white" : "black"}
-                    bgImage={{base:bgMobile, md:bg}}
+                    bgImage={{ base: bgMobile, md: bg }}
                     bgSize={"cover"}
                     bgPosition={'center'}
                     bgRepeat={"no-repeat"}
-                    pl={giftType === "birthday" ? 0 : 100}
-                    pt={giftType === "birthday" ? 0 : 100}
+                    pl={giftType === "birthday" || giftType === "valentine" ? 0 : 100}
+                    pt={giftType === "birthday" || giftType === "valentine" ? 0 : 100}
                 >
                     <ModalHeader
-                        fontSize="4xl"
+                        fontSize="5xl"
                         fontWeight={'regular'}
                         align={'center'}
                     >
@@ -241,7 +238,7 @@ const Gift = () => {
                     <ModalBody>
                         <chakra.p
                             mt={2}
-                            fontSize="3xl"
+                            fontSize="5xl"
                             color={giftType === "birthday" ? "white" : "black"}
                         >
                             {message}

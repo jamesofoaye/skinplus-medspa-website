@@ -76,6 +76,8 @@ export default function Services() {
                 justifyContent="center"
                 alignItems="center"
                 fontFamily="Lora"
+                bg={'white'}
+                color={'black'}
             >
                 <Box
                     px={{ md: 8 }}
@@ -123,6 +125,7 @@ export default function Services() {
                                     type="text"
                                     name="name"
                                     placeholder={'Enter your name'}
+                                    borderColor="brand.green"
                                     _focus={{
                                         borderColor: 'brand.sand'
                                     }} />
@@ -135,6 +138,7 @@ export default function Services() {
                                     type="email"
                                     name="email"
                                     placeholder={'Enter your email'}
+                                    borderColor="brand.green"
                                     _focus={{
                                         borderColor: 'brand.sand'
                                     }} />
@@ -147,6 +151,7 @@ export default function Services() {
                                     type="tel"
                                     name="phone number"
                                     placeholder={'Enter your phone number'}
+                                    borderColor="brand.green"
                                     _focus={{
                                         borderColor: 'brand.green'
                                     }} />

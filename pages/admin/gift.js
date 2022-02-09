@@ -1,7 +1,7 @@
 import {
     chakra, FormControl, FormLabel, Heading, Select,
     FormErrorMessage, Button, Flex, Box, Stack,
-    useColorModeValue,useToast, Input, Textarea
+    useToast, Input, Textarea
 } from "@chakra-ui/react"
 import Head from 'next/head'
 import { useForm } from 'react-hook-form';
@@ -11,7 +11,7 @@ import {
     collection, addDoc, serverTimestamp,
 } from "firebase/firestore";
 import { auth, db } from '../../library/firebase'
-import { generateCode} from '../../library/GenerateCode'
+import { generateCode } from '../../library/GenerateCode'
 import GiftNavbar from "../../components/giftNavbar";
 
 export default function AdminGift() {
@@ -23,17 +23,18 @@ export default function AdminGift() {
     } = useForm();
 
     const {
-        handleSubmit: handleSubmitSMS, register: registerSMS, reset: resetSMS,
-        formState: { errors: errorsSMS, isSubmitting: isSubmittingSMS }
+        handleSubmit: handleSubmitSMS,
+        register: registerSMS,
+        reset: resetSMS,
+        formState: {
+            errors: errorsSMS,
+            isSubmitting: isSubmittingSMS
+        }
     } = useForm();
 
     onAuthStateChanged(auth, (user) => {
-        if (user) {
-            if (user.email !== "frontdesk@skinplusofficial.com") {               
-                router.push('/admin/login')
-            }
-        } else {
-            router.push('/')
+        if (user && user.email !== "frontdesk@skinplusofficial.com") {
+            router.push('/admin/login')
         }
     });
 
@@ -52,7 +53,7 @@ export default function AdminGift() {
                 code: generateCode(),
                 recipientNumber: values.recipientNumber,
             };
-            
+
             await addDoc(xmasGiftCardProgramCollection, xmasGiftCardProgramPayload);
 
             toast({
@@ -64,7 +65,7 @@ export default function AdminGift() {
                 isClosable: true,
             })
 
-            reset({values})
+            reset({ values })
         } catch (error) {
             const errorMessage = error.code;
             toast({
@@ -88,14 +89,14 @@ export default function AdminGift() {
             //send sms to recipient
             const recipeintResponse = await fetch(
                 `https://api.dawurobo.com/send_sms?sender=SkinPlus&numbers=${values.recipientNumber}&message=${Message}&validate=false`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        Message,
-                    })
-                });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Message,
+                })
+            });
 
             toast({
                 title: "Successful",
@@ -106,7 +107,7 @@ export default function AdminGift() {
                 isClosable: true,
             })
 
-            resetSMS({values})
+            resetSMS({ values })
         } catch (error) {
             const errorMessage = error.message;
             toast({
@@ -125,7 +126,7 @@ export default function AdminGift() {
             <Head>
                 <title>SkinPlus MedSpa Ghana | Gift Card Program</title>
                 <meta
-                    name="description" 
+                    name="description"
                     content="SkinPlus Medspa provides a variety of personalized services 
                     to its clientele to enhance their look and maintain youth."
                 />
@@ -149,8 +150,6 @@ export default function AdminGift() {
                             py={12} px={6}
                             fontFamily={'Lora'}
                         >
-                            
-
                             <Stack align={'center'}>
                                 <chakra.img src={'/logo.svg'}></chakra.img>
                                 <Heading
@@ -165,13 +164,17 @@ export default function AdminGift() {
                             </Stack>
                             <Box
                                 rounded={'lg'}
-                                bg={useColorModeValue('white', 'gray.700')}
+                                bg={'gray.100'}
                                 boxShadow={'lg'}
+                                color="black"
                                 p={8}>
                                 <Stack spacing={4}>
                                     <FormControl isRequired>
                                         <FormLabel>Gift Card Type</FormLabel>
                                         <Select
+                                            borderColor={"black"}
+                                            bg="gray.100"
+                                            color="black"
                                             placeholder="Select Gift Card"
                                             {...register('giftType', {
                                                 required: 'Required!....Gift Card',
@@ -179,6 +182,7 @@ export default function AdminGift() {
                                         >
                                             <option value="birthday">Birthday Card</option>
                                             <option value="christmas">Christmas Card</option>
+                                            <option value="valentine">Valentine Card</option>
                                         </Select>
                                         <FormErrorMessage colorScheme="red">
                                             {errors.giftType && errors.giftType.message}
@@ -189,11 +193,15 @@ export default function AdminGift() {
                                         <FormLabel>From</FormLabel>
                                         <Input
                                             placeholder="Sender Name"
+                                            borderColor={"black"}
                                             {...register('senderName', {
                                                 required: 'Required!....Enter sender name'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -205,11 +213,15 @@ export default function AdminGift() {
                                         <FormLabel>To</FormLabel>
                                         <Input
                                             placeholder="Recipient Name"
+                                            borderColor={"black"}
                                             {...register('recipientName', {
                                                 required: 'Required!....Enter recipient name'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -221,11 +233,15 @@ export default function AdminGift() {
                                         <FormLabel>Recipient Number</FormLabel>
                                         <Input
                                             placeholder="Recipient Number"
+                                            borderColor={"black"}
                                             {...register('recipientNumber', {
                                                 required: 'Required!....Enter recipient phone number'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -236,8 +252,9 @@ export default function AdminGift() {
                                     <FormControl isRequired>
                                         <FormLabel fontSize={{ md: "xl" }}>
                                             Message
-                                            </FormLabel>
+                                        </FormLabel>
                                         <Textarea
+                                            borderColor={"black"}
                                             {...register('message', {
                                                 required: 'Required!....Enter message'
                                             })}
@@ -246,7 +263,11 @@ export default function AdminGift() {
                                             placeholder="Message"
                                             _focus={{
                                                 borderColor: 'brand.sand'
-                                            }}>
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
+                                            }}
+                                        >
                                         </Textarea>
                                     </FormControl>
                                     <Stack spacing={10}>
@@ -290,7 +311,8 @@ export default function AdminGift() {
                             </Stack>
                             <Box
                                 rounded={'lg'}
-                                bg={useColorModeValue('white', 'gray.700')}
+                                bg={'gray.100'}
+                                color="black"
                                 boxShadow={'lg'}
                                 p={8}>
                                 <Stack spacing={4}>
@@ -298,11 +320,15 @@ export default function AdminGift() {
                                         <FormLabel>From</FormLabel>
                                         <Input
                                             placeholder="Sender Name"
+                                            borderColor={"black"}
                                             {...registerSMS('senderName', {
                                                 required: 'Required!....Enter sender name'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -314,11 +340,15 @@ export default function AdminGift() {
                                         <FormLabel>To</FormLabel>
                                         <Input
                                             placeholder="Recipient Name"
+                                            borderColor={"black"}
                                             {...registerSMS('recipientName', {
                                                 required: 'Required!....Enter recipient name'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -330,11 +360,15 @@ export default function AdminGift() {
                                         <FormLabel>Recipient Number</FormLabel>
                                         <Input
                                             placeholder="Recipient Number"
+                                            borderColor={"black"}
                                             {...registerSMS('recipientNumber', {
                                                 required: 'Required!....Enter recipient phone number'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
@@ -346,11 +380,15 @@ export default function AdminGift() {
                                         <FormLabel>Code</FormLabel>
                                         <Input
                                             placeholder="Code"
+                                            borderColor={"black"}
                                             {...registerSMS('code', {
                                                 required: 'Required!....Enter code'
                                             })}
                                             _focus={{
                                                 borderColor: 'brand.sand'
+                                            }}
+                                            _hover={{
+                                                borderColor: 'black'
                                             }}
                                         />
                                         <FormErrorMessage colorScheme="red">
