@@ -4,21 +4,19 @@ import { useRouter } from 'next/router';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../library/firebase'
 import {
-    chakra, FormControl, FormLabel, Heading, Select, Table, Thead, Tbody, Tr, Th, Td,
-    FormErrorMessage, Button, Flex, Stack, Input, Textarea, Box, Drawer, DrawerContent, useDisclosure, useToast
+    Table, Thead, Tbody, Tr, Th, Td, Flex, Stack, Box, Drawer, DrawerContent,
+    useDisclosure, useToast
 } from "@chakra-ui/react"
-import { useForm } from 'react-hook-form';
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, addDoc, serverTimestamp, onSnapshot
+    collection, onSnapshot
 } from "firebase/firestore";
-import { generateCode } from '../../library/GenerateCode'
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import CopyButton from "../../components/copyButton";
 
 let logout;
 
-export default function GiftDashboard({ children }) {
+export default function GiftDashboard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast()
@@ -117,6 +115,7 @@ export default function GiftDashboard({ children }) {
                         <Table variant='simple' bg='brand.olive' color={'white'} mt={5}>
                             <Thead>
                                 <Tr>
+                                    <Th color={'white'}>No.</Th>
                                     <Th color={'white'}>From</Th>
                                     <Th color={'white'}>To</Th>
                                     <Th color={'white'}>Message</Th>
@@ -125,9 +124,10 @@ export default function GiftDashboard({ children }) {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {data.map((details) => {
+                                {data.map((details, index) => {
                                     return (
                                         <Tr key={details.id}>
+                                            <Td>{index + 1}</Td>
                                             <Td>{details.from}</Td>
                                             <Td>{details.to}</Td>
                                             <Td>{details.message}</Td>

@@ -1,37 +1,26 @@
-import { useState, useEffect, useCallback } from 'react'
-import {
-  Box, Drawer, DrawerContent, Text, useDisclosure, useToast
-} from '@chakra-ui/react';
+import {useState, useEffect} from "react";
 import Head from 'next/head'
 import { useRouter } from 'next/router';
+import moment from 'moment';
 import { signOut } from 'firebase/auth';
-import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from '../../library/firebase'
+import {
+    Table, Thead, Tbody, Tr, Th, Td, Flex, Stack, Box, Drawer, DrawerContent,
+    useDisclosure, useToast, ListItem, UnorderedList,
+} from "@chakra-ui/react"
+import { onAuthStateChanged } from 'firebase/auth';
+import {
+    collection, onSnapshot
+} from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 
 let logout;
 
-export default function Dashboard({ children }) {
+export default function Appointments() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast()
   const router = useRouter()
-  const [data, setData] = useState()
-
-  /**const getUserData = useCallback(async() => {
-    if(user){
-      const docRef = doc(db, "users", user && user.uid);
-      const docSnap = await getDoc(docRef);
-  
-      setData(docSnap.data())
-      setProfilePicURL(docSnap.data().profilePhotoURL)
-      setUserName(docSnap.data().firstName + " " + docSnap.data().lastName)
-    }
-  }, [user, data])
-
-  useEffect(() => {
-    getUserData()
-  }, [getUserData])*/
 
   //Log out
   logout = () => {
@@ -43,17 +32,51 @@ export default function Dashboard({ children }) {
       duration: 2000,
       position: "top",
     })
-    router.push('/login')
+    router.push('/admin/login')
   };
+
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            router.push('/admin/login')
+        }
+    });
+
+    const [data, setData] = useState([]);
+
+    const dataRef = collection(db, "appointment");
+
+   useEffect(() =>
+        onSnapshot(dataRef, (snapshot) => {
+           console.log(snapshot.docs.map((doc) => doc.data() ))
+           setData(snapshot.docs.map((doc) => ({
+                //data from firebase
+                ...doc.data(),
+                //document Id from firebase
+                id: doc.id
+            })))
+            setData(snapshot.docs.map((doc) => (
+                //data from firebase
+                doc.data()
+            )))
+
+            const result = []
+
+            snapshot.forEach((doc) => {
+                result.push(doc.data());
+            });
+            setData(result)
+        }), []
+    );
 
   return (
     <>
       <Head>
-        <title>SkinPlus Medspa Ghana | Dashboard</title>
+        <title>SkinPlus Medspa Ghana | Gift Card</title>
         <meta 
             name="description" 
             content="SkinPlus Medspa provides a variety of personalized services to its clientele to enhance their look and maintain youth."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -84,9 +107,64 @@ export default function Dashboard({ children }) {
 
             <Box 
               ml={{ base: 0, md: 60 }} 
-              p="4" 
+              px={4}
+              pt={66}
             >
-              {children}
+              <Flex>
+                    <Stack
+                        direction={{ base: "column" }}
+                        w="full"
+                        shadow="lg"
+                    >
+                        <Table bg='brand.olive' color={'white'} mt={5}>
+                            <Thead>
+                                <Tr>
+                                    <Th color={'white'}>No.</Th>
+                                    <Th color={'white'}>Name</Th>
+                                    <Th color={'white'}>Phone Number</Th>
+                                    <Th color={'white'}>Previous Appointment Date and Time</Th>
+                                    <Th color={'white'}>Next Appointment Date and Time</Th>
+                                    <Th color={'white'}>Services</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {/**data && data.map((details, index) => {
+                                    return (
+                                        <Tr key={index}>
+                                            <Td>{index + 1}</Td>
+                                            <Td>{details.name}</Td>
+                                            <Td>{details.phone}</Td>
+                                            <Td>{details.nextAppointmentDate}</Td>
+                                            <Td>{details.prevAppointmentDate}</Td>
+                                            
+                                        </Tr>
+                                    );
+                                })*/}
+                                {data && data.map((details, index) => {
+                                    return(
+                                        <Tr key={index}>
+                                            <Td>{index + 1}</Td>
+                                            <Td>{details.name}</Td>
+                                            <Td>{details.phone}</Td>
+                                            <Td>{moment(details.prevAppointmentDate).calendar()}</Td>
+                                            <Td>{moment(details.nextAppointmentDate).format('LTS')}</Td>
+                                            <Td>
+                                                {details.services.map((service, index) => {
+                                                    return(
+                                                        <UnorderedList key={index}>
+                                                            <ListItem>{service}</ListItem>
+                                                        </UnorderedList>
+                                                    )
+                                                })}
+                                            </Td>
+                                                
+                                        </Tr>
+                                    )
+                                })}
+                            </Tbody>
+                        </Table>
+                    </Stack>
+                </Flex>
             </Box>
           </Box>
     </>
