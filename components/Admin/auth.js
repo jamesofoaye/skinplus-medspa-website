@@ -61,19 +61,21 @@ export default function Login() {
                     fontFamily={'Lora'}
                     pb={5}
                 >
-                    Skinplus Medspa Admin Sign In
+                 Admin Sign In
                 </Heading>
             </Stack>
             <Box
                 rounded={'lg'}
-                bg={useColorModeValue('white', 'gray.700')}
                 boxShadow={'lg'}
+                w={['95vw','30vw']}
                 p={8}>
                 <Stack spacing={4}>
                     <chakra.form onSubmit={handleSubmit(onSubmit)}>
                         <FormControl>
                             <FormLabel>Email address</FormLabel>
                             <Input
+                                borderWidth={2}
+                                borderColor={'white'}
                                 type="email"
                                 value={"frontdesk@skinplusofficial.com"}
                                 disabled
@@ -82,6 +84,8 @@ export default function Login() {
                         <FormControl isRequired my={3}>
                             <FormLabel>Password</FormLabel>
                             <Input
+                                borderWidth={1}
+                                borderColor={'brand.cream'}
                                 type="password"
                                 {...register('password', {
                                     required: 'Required!....Enter your password'
@@ -95,6 +99,8 @@ export default function Login() {
                             <Button
                                 type="submit"
                                 mt={2}
+                                borderWidth={1}
+                                borderColor={'brand.cream'}
                                 bgColor={'brand.green'}
                                 variant={'outline'}
                                 fontSize={{ md: "xl" }}

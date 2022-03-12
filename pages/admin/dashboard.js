@@ -1,25 +1,45 @@
 import {useState, useEffect} from "react";
+import Head from 'next/head'
+import { useRouter } from 'next/router';
+import { signOut } from 'firebase/auth';
+import { auth, db } from '../../library/firebase'
 import {
-    Flex, Stack, Table, Thead, Tbody, Tr, Th, Td, chakra
-} from "@chakra-ui/react";
-import CopyButton from "../../components/copyButton";
+    chakra, FormControl, FormLabel, Heading, Select, Table, Thead, Tbody, Tr, Th, Td,
+    FormErrorMessage, Button, Flex, Stack, Input, Textarea, Box, Drawer, DrawerContent, useDisclosure, useToast
+} from "@chakra-ui/react"
+import { useForm } from 'react-hook-form';
 import { onAuthStateChanged } from 'firebase/auth';
-import { onSnapshot, collection } from "firebase/firestore";
-import {auth, db} from '../../library/firebase'
-import Head from "next/head";
-import { useRouter } from 'next/router'
-import GiftNavbar from "../../components/giftNavbar";
+import {
+    collection, addDoc, serverTimestamp, onSnapshot
+} from "firebase/firestore";
+import { generateCode } from '../../library/GenerateCode'
+import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
+import CopyButton from "../../components/copyButton";
 
-export default function Component({value}) {
-    const router = useRouter()
+let logout;
+
+export default function GiftDashboard({ children }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const toast = useToast()
+  const router = useRouter()
+
+  //Log out
+  logout = () => {
+    signOut(auth);
+    toast({
+      title: "Success",
+      description: "Log Out Succesfully!. Redirecting....",
+      status: "success",
+      duration: 2000,
+      position: "top",
+    })
+    router.push('/admin/login')
+  };
 
     onAuthStateChanged(auth, (user) => {
-        if (user) {
-            if (user.email !== "frontdesk@skinplusofficial.com") {
-                router.push('/admin/login')
-            }
-        } else {
-            router.push('/')
+        if (!user) {
+            router.push('/admin/login')
         }
     });
 
@@ -45,28 +65,50 @@ export default function Component({value}) {
         ), []
     );
 
-    return (
-        <>
-            <Head>
-                <title>SkinPlus MedSpa Ghana | Gift Card Dashboard</title>
-                <meta
-                    name="description"
-                    content="SkinPlus Medspa provides a variety of personalized services
-                    to its clientele to enhance their look and maintain youth."
-                />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
 
-            <chakra.div
-                w="full"
-                h={'100vh'}
-                bg="brand.green"
-                p={50}
+  return (
+    <>
+      <Head>
+        <title>SkinPlus Medspa Ghana | Gift Card</title>
+        <meta 
+            name="description" 
+            content="SkinPlus Medspa provides a variety of personalized services to its clientele to enhance their look and maintain youth."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Box minH="100vh" bg={'gray.100'}>
+            <SidebarContent
+              onClose={() => onClose}
+              display={{ base: 'none', md: 'block' }}
+            />
+
+            <Drawer
+              autoFocus={false}
+              isOpen={isOpen}
+              placement="left"
+              onClose={onClose}
+              returnFocusOnClose={false}
+              onOverlayClick={onClose}
+              size="full">
+              <DrawerContent>
+                <SidebarContent onClose={onClose} />
+              </DrawerContent>
+            </Drawer>
+
+            {/* mobilenav */}
+            <MobileNav
+              onOpen={onOpen}
+              logout={logout}
+            />
+
+            <Box 
+              ml={{ base: 0, md: 60 }} 
+              px={4}
+              pt={66}
             >
-                <GiftNavbar />
-
-                <Flex>
+              <Flex>
                     <Stack
                         direction={{ base: "column" }}
                         w="full"
@@ -100,7 +142,8 @@ export default function Component({value}) {
                         </Table>
                     </Stack>
                 </Flex>
-            </chakra.div>
-        </>
-    );
+            </Box>
+          </Box>
+    </>
+  );
 }

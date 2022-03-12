@@ -1,23 +1,41 @@
+import Head from 'next/head'
+import { useRouter } from 'next/router';
+import { signOut } from 'firebase/auth';
+import { auth, db } from '../../library/firebase'
 import {
     chakra, FormControl, FormLabel, Heading, Select,
-    FormErrorMessage, Button, Flex, Box, Stack,
-    useToast, Input, Textarea
+    FormErrorMessage, Button, Flex, Stack, Input, Textarea, Box, Drawer, DrawerContent, useDisclosure, useToast
 } from "@chakra-ui/react"
-import Head from 'next/head'
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router'
 import { onAuthStateChanged } from 'firebase/auth';
 import {
     collection, addDoc, serverTimestamp,
 } from "firebase/firestore";
-import { auth, db } from '../../library/firebase'
 import { generateCode } from '../../library/GenerateCode'
-import GiftNavbar from "../../components/giftNavbar";
+import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 
-export default function AdminGift() {
-    const toast = useToast()
-    const router = useRouter()
-    const {
+let logout;
+
+export default function AdminGift({ children }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const toast = useToast()
+  const router = useRouter()
+
+  //Log out
+  logout = () => {
+    signOut(auth);
+    toast({
+      title: "Success",
+      description: "Log Out Succesfully!. Redirecting....",
+      status: "success",
+      duration: 2000,
+      position: "top",
+    })
+    router.push('/admin/login')
+  };
+
+  const {
         handleSubmit, register, reset,
         formState: { errors, isSubmitting }
     } = useForm();
@@ -33,7 +51,7 @@ export default function AdminGift() {
     } = useForm();
 
     onAuthStateChanged(auth, (user) => {
-        if (user && user.email !== "frontdesk@skinplusofficial.com") {
+        if (!user) {
             router.push('/admin/login')
         }
     });
@@ -121,37 +139,61 @@ export default function AdminGift() {
         }
     }
 
-    return (
-        <div>
-            <Head>
-                <title>SkinPlus MedSpa Ghana | Gift Card Program</title>
-                <meta
-                    name="description"
-                    content="SkinPlus Medspa provides a variety of personalized services 
-                    to its clientele to enhance their look and maintain youth."
-                />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+  return (
+    <>
+      <Head>
+        <title>SkinPlus Medspa Ghana | Gift Card</title>
+        <meta 
+            name="description" 
+            content="SkinPlus Medspa provides a variety of personalized services to its clientele to enhance their look and maintain youth."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-            <chakra.div bg={"brand.green"}>
-                <GiftNavbar />
+      <Box minH="100vh" bg={'gray.100'}>
+            <SidebarContent
+              onClose={() => onClose}
+              display={{ base: 'none', md: 'block' }}
+            />
 
-                <Flex
+            <Drawer
+              autoFocus={false}
+              isOpen={isOpen}
+              placement="left"
+              onClose={onClose}
+              returnFocusOnClose={false}
+              onOverlayClick={onClose}
+              size="full">
+              <DrawerContent>
+                <SidebarContent onClose={onClose} />
+              </DrawerContent>
+            </Drawer>
+
+            {/* mobilenav */}
+            <MobileNav
+              onOpen={onOpen}
+              logout={logout}
+            />
+
+            <Box 
+              ml={{ base: 0, md: 60 }} 
+            >
+              <Flex
                     minH={'100vh'}
                     align={'center'}
                     justify={'center'}
+                    direction={['column', 'row']}
+                    mt={[10, 0]}
                 >
                     <chakra.form onSubmit={handleSubmit(onSubmit)}>
                         <Stack
                             spacing={8}
                             mx={'auto'}
-                            w={'full'}
-                            py={12} px={6}
+                            w={['100vw',500]}
+                            pt={12} px={6}
                             fontFamily={'Lora'}
                         >
                             <Stack align={'center'}>
-                                <chakra.img src={'/logo.svg'}></chakra.img>
                                 <Heading
                                     fontSize={'4xl'}
                                     color="brand.sand"
@@ -159,12 +201,12 @@ export default function AdminGift() {
                                     fontFamily={'Lora'}
                                     fontWeight={'regular'}
                                 >
-                                    Gift Card Admin Portal
+                                    Gift Card Portal
                                 </Heading>
                             </Stack>
                             <Box
                                 rounded={'lg'}
-                                bg={'gray.100'}
+                                bg={'brand.cream'}
                                 boxShadow={'lg'}
                                 color="black"
                                 p={8}>
@@ -173,16 +215,16 @@ export default function AdminGift() {
                                         <FormLabel>Gift Card Type</FormLabel>
                                         <Select
                                             borderColor={"black"}
-                                            bg="gray.100"
+                                            bg="brand.cream"
                                             color="black"
                                             placeholder="Select Gift Card"
                                             {...register('giftType', {
                                                 required: 'Required!....Gift Card',
                                             })}
                                         >
-                                            <option value="birthday">Birthday Card</option>
-                                            <option value="christmas">Christmas Card</option>
-                                            <option value="valentine">Valentine Card</option>
+                                            <option value="birthday" style={{backgroundColor: 'white'}}>Birthday Card</option>
+                                            <option value="christmas" style={{backgroundColor: 'white'}}>Christmas Card</option>
+                                            <option value="valentine" style={{backgroundColor: 'white'}}>Valentine Card</option>
                                         </Select>
                                         <FormErrorMessage colorScheme="red">
                                             {errors.giftType && errors.giftType.message}
@@ -193,6 +235,7 @@ export default function AdminGift() {
                                         <FormLabel>From</FormLabel>
                                         <Input
                                             placeholder="Sender Name"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...register('senderName', {
                                                 required: 'Required!....Enter sender name'
@@ -213,6 +256,7 @@ export default function AdminGift() {
                                         <FormLabel>To</FormLabel>
                                         <Input
                                             placeholder="Recipient Name"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...register('recipientName', {
                                                 required: 'Required!....Enter recipient name'
@@ -233,6 +277,7 @@ export default function AdminGift() {
                                         <FormLabel>Recipient Number</FormLabel>
                                         <Input
                                             placeholder="Recipient Number"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...register('recipientNumber', {
                                                 required: 'Required!....Enter recipient phone number'
@@ -261,6 +306,7 @@ export default function AdminGift() {
                                             rows="7"
                                             columns="30"
                                             placeholder="Message"
+                                            _placeholder={{color: 'gray.500'}}
                                             _focus={{
                                                 borderColor: 'brand.sand'
                                             }}
@@ -295,7 +341,7 @@ export default function AdminGift() {
                             spacing={8}
                             mx={'auto'}
                             w={'full'}
-                            py={12} px={6}
+                            pt={12} px={6}
                             fontFamily={'Lora'}
                         >
                             <Stack align={'center'}>
@@ -311,7 +357,7 @@ export default function AdminGift() {
                             </Stack>
                             <Box
                                 rounded={'lg'}
-                                bg={'gray.100'}
+                                bg={'brand.cream'}
                                 color="black"
                                 boxShadow={'lg'}
                                 p={8}>
@@ -320,6 +366,7 @@ export default function AdminGift() {
                                         <FormLabel>From</FormLabel>
                                         <Input
                                             placeholder="Sender Name"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...registerSMS('senderName', {
                                                 required: 'Required!....Enter sender name'
@@ -340,6 +387,7 @@ export default function AdminGift() {
                                         <FormLabel>To</FormLabel>
                                         <Input
                                             placeholder="Recipient Name"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...registerSMS('recipientName', {
                                                 required: 'Required!....Enter recipient name'
@@ -360,6 +408,7 @@ export default function AdminGift() {
                                         <FormLabel>Recipient Number</FormLabel>
                                         <Input
                                             placeholder="Recipient Number"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...registerSMS('recipientNumber', {
                                                 required: 'Required!....Enter recipient phone number'
@@ -380,6 +429,7 @@ export default function AdminGift() {
                                         <FormLabel>Code</FormLabel>
                                         <Input
                                             placeholder="Code"
+                                            _placeholder={{color: 'gray.500'}}
                                             borderColor={"black"}
                                             {...registerSMS('code', {
                                                 required: 'Required!....Enter code'
@@ -416,7 +466,8 @@ export default function AdminGift() {
                         </Stack>
                     </chakra.form>
                 </Flex>
-            </chakra.div>
-        </div >
-    )
+            </Box>
+          </Box>
+    </>
+  );
 }

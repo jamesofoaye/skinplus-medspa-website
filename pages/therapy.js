@@ -115,8 +115,8 @@ export default function Therapy() {
                                 range of health benefits, which can include anti-aging, improved
                                 immune system minimized anxiety, reversed symptoms of hangovers
                                 and more. Although many may believe that nutrient deficiencies
-                                aren’t so common anymore, there are still many individuals who
-                                aren’t getting the essential nutrients our bodies need to
+                                aren&apos;t so common anymore, there are still many individuals who
+                                aren&apos;t getting the essential nutrients our bodies need to
                                 perform optimally.
 
                                 Because IV treatment is administered directly into the veins,
@@ -256,7 +256,7 @@ export default function Therapy() {
                                 lineHeight={{ md: "shorter" }}
                                 textShadow="2px 0 currentcolor"
                             >
-                                Myer's Cocktail Premix
+                                Myer&apos;s Cocktail Premix
                             </chakra.h2>
                             <chakra.p
                                 mb={5}
