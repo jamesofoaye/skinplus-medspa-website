@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { ChakraProvider } from "@chakra-ui/react"
 import { extendTheme } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 //styles for image slider
 import "../styles/styles.css"
 
@@ -21,7 +22,9 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Box fontFamily={'Lora'}>
+        <Component {...pageProps} />
+      </Box>
     </ChakraProvider>
   )
 }
