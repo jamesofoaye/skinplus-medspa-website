@@ -1,12 +1,15 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../library/firebase'
 import {
-    Table, Thead, Tbody, Tr, Th, Td, Flex, Stack, Box, Drawer, DrawerContent,
-    useDisclosure, useToast, ListItem, UnorderedList,
+    Table, Thead, Tbody, Tr, Th, Td, Flex, Stack, Box, Drawer, 
+    DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
+    Button, Modal, ModalOverlay, ModalContent, ModalHeader,
+    ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
+    FormLabel, chakra
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
@@ -17,7 +20,19 @@ import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 let logout;
 
 export default function Appointments() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { 
+    isOpen,
+    onOpen,
+    onClose
+  } = useDisclosure();
+
+  const { 
+    isOpen: isOpenModal,
+    onOpen: onOpenModal,
+    onClose: onCloseModal
+  } = useDisclosure();
+
+  const initialRef = useRef()
 
   const toast = useToast()
   const router = useRouter()
@@ -110,44 +125,134 @@ export default function Appointments() {
               px={4}
               pt={66}
             >
-              <Flex>
+                <Button 
+                    color={'white'} 
+                    bg={'brand.green'}
+                    mt={5}
+                    _hover={{
+                        backgroundColor: 'brand.green'
+                    }}
+                    position="static"
+                    onClick={onOpenModal}
+                >
+                    Add Appointment
+                </Button>
+
+                {/**Add Appointment Forms */}
+                <Modal
+                    initialFocusRef={initialRef}
+                    isOpen={isOpenModal}
+                    onClose={onCloseModal}
+                    isCentered
+                >
+                    <ModalOverlay />
+                    <ModalContent bgColor={'brand.green'}>
+                        <chakra.form>
+                            <ModalHeader>Add Appointment</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody pb={6}>
+                                <FormControl isRequired>
+                                    <FormLabel>Name</FormLabel>
+                                    <Input ref={initialRef} placeholder='Enter Name' />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Phone Number</FormLabel>
+                                    <Input placeholder='Enter Phone Number' />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Next Appointment Date And Time</FormLabel>
+                                    <Input 
+                                        placeholder='Next Appointment Date And Time'
+                                        type='datetime-local'
+                                    />
+                                </FormControl>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button bg={'brand.olive'} mr={3}>
+                                    Save
+                                </Button>
+                                <Button onClick={onCloseModal}>
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </chakra.form>
+                    </ModalContent>
+                </Modal>
+
+                <Flex>
                     <Stack
                         direction={{ base: "column" }}
                         w="full"
                         shadow="lg"
                     >
+
                         <Table bg='brand.olive' color={'white'} mt={5}>
                             <Thead>
                                 <Tr>
-                                    <Th color={'white'}>No.</Th>
-                                    <Th color={'white'}>Name</Th>
-                                    <Th color={'white'}>Phone Number</Th>
-                                    <Th color={'white'}>Previous Appointment Date and Time</Th>
-                                    <Th color={'white'}>Next Appointment Date and Time</Th>
-                                    <Th color={'white'}>Services</Th>
+                                    <Th 
+                                        color={'white'} 
+                                        fontSize={'lg'}
+                                    >
+                                        No.
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Name
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Phone Number
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Previous Appointment Date and Time
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Next Appointment Date and Time
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Services
+                                    </Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {/**data && data.map((details, index) => {
-                                    return (
-                                        <Tr key={index}>
-                                            <Td>{index + 1}</Td>
-                                            <Td>{details.name}</Td>
-                                            <Td>{details.phone}</Td>
-                                            <Td>{details.nextAppointmentDate}</Td>
-                                            <Td>{details.prevAppointmentDate}</Td>
-                                            
-                                        </Tr>
-                                    );
-                                })*/}
-                                {data && data.map((details, index) => {
+                                {data.length === 0 ? (
+                                    <Tr>
+                                        <Td>Loading...</Td>
+                                        <Td>Loading...</Td>
+                                        <Td>Loading...</Td>
+                                        <Td>Loading...</Td>
+                                        <Td>Loading...</Td>
+                                        <Td>Loading...</Td>     
+                                    </Tr>
+                                )  : data.map((details, index) => {
                                     return(
                                         <Tr key={index}>
                                             <Td>{index + 1}</Td>
                                             <Td>{details.name}</Td>
                                             <Td>{details.phone}</Td>
-                                            <Td>{moment(details.prevAppointmentDate).calendar()}</Td>
-                                            <Td>{moment(details.nextAppointmentDate).format('LTS')}</Td>
+                                            <Td>
+                                                {/**Formatted in Day, Month and Time */}
+                                                {moment(details.prevAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
+                                            </Td>
+                                            <Td>
+                                                {moment(details.nextAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
+                                            </Td>
                                             <Td>
                                                 {details.services.map((service, index) => {
                                                     return(
