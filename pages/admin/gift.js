@@ -16,7 +16,7 @@ import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 
 let logout;
 
-export default function AdminGift({ children }) {
+export default function AdminGift() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast()
@@ -58,7 +58,7 @@ export default function AdminGift({ children }) {
 
     const onSubmit = async (values) => {
         try {
-            //reference to the documents
+            //reference to the collection
             const xmasGiftCardProgramCollection = collection(db, "xmas-gift-card-program");
             //data to be sent
             const xmasGiftCardProgramPayload = {

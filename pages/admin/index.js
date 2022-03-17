@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../library/firebase'
+import { useForm, useFieldArray } from 'react-hook-form';
 import {
     Table, Thead, Tbody, Tr, Th, Td, Flex, Stack, Box, Drawer, 
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
@@ -13,7 +14,7 @@ import {
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, onSnapshot
+    collection, onSnapshot, addDoc, doc, deleteDoc
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 
@@ -31,6 +32,25 @@ export default function Appointments() {
     onOpen: onOpenModal,
     onClose: onCloseModal
   } = useDisclosure();
+
+  const {
+    handleSubmit, register, control,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {
+      services: [{ service: '' }]
+    }
+  });
+
+  const {
+    fields,
+    append,
+    remove,
+  } = useFieldArray({
+    control,
+    name: "services",
+  });
+
 
   const initialRef = useRef()
 
@@ -57,12 +77,12 @@ export default function Appointments() {
     });
 
     const [data, setData] = useState([]);
+    const [prevAppointmentDate, setPrevAppointmentDate] = useState();
 
     const dataRef = collection(db, "appointment");
 
    useEffect(() =>
         onSnapshot(dataRef, (snapshot) => {
-           console.log(snapshot.docs.map((doc) => doc.data() ))
            setData(snapshot.docs.map((doc) => ({
                 //data from firebase
                 ...doc.data(),
@@ -77,11 +97,56 @@ export default function Appointments() {
             const result = []
 
             snapshot.forEach((doc) => {
-                result.push(doc.data());
+                result.push({
+                    //data from firebase
+                    ...doc.data(), 
+                    //document Id from firebase
+                    id: doc.id
+                });
             });
             setData(result)
         }), []
     );
+
+    //Add New Appointment to system
+    const onSubmit = async (values) => {
+        try {
+            //reference to the collection
+            const appointmentCollection = collection(db, "appointment");
+            //data to be sent
+            const appointmentPayload = {
+                name: values.name,
+                phone: values.phone,
+                nextAppointmentDate: values.nextAppointmentDate,
+                prevAppointmentDate: "",
+                services: values.services.map(item => item.service)
+            };
+
+            await addDoc(appointmentCollection, appointmentPayload);
+
+            toast({
+                title: "Successful",
+                description: "Added To system",
+                status: "success",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+
+            //close Modal
+            onCloseModal()
+        } catch (error) {
+            const errorMessage = error.code;
+            toast({
+                title: "Error",
+                description: errorMessage,
+                status: "error",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+        }
+    };
 
   return (
     <>
@@ -147,18 +212,29 @@ export default function Appointments() {
                 >
                     <ModalOverlay />
                     <ModalContent bgColor={'brand.green'}>
-                        <chakra.form>
+                        <chakra.form onSubmit={handleSubmit(onSubmit)}>
                             <ModalHeader>Add Appointment</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody pb={6}>
                                 <FormControl isRequired>
                                     <FormLabel>Name</FormLabel>
-                                    <Input ref={initialRef} placeholder='Enter Name' />
+                                    <Input 
+                                        ref={initialRef} 
+                                        placeholder='Enter Name' 
+                                        {...register('name', {
+                                            required: 'Required!....Enter clients name'
+                                        })}
+                                    />
                                 </FormControl>
 
                                 <FormControl mt={4} isRequired>
                                     <FormLabel>Phone Number</FormLabel>
-                                    <Input placeholder='Enter Phone Number' />
+                                    <Input 
+                                        placeholder='Enter Phone Number'
+                                        {...register('phone', {
+                                            required: 'Required!....Enter clients phone number'
+                                        })}
+                                    />
                                 </FormControl>
 
                                 <FormControl mt={4} isRequired>
@@ -166,12 +242,66 @@ export default function Appointments() {
                                     <Input 
                                         placeholder='Next Appointment Date And Time'
                                         type='datetime-local'
+                                        {...register('nextAppointmentDate', {
+                                            required: 'Required!....Enter clients phone number'
+                                        })}
                                     />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Services</FormLabel>
+                                    <Box ml={5}>
+                                        <ul>
+                                            {fields.map((item, index) => {
+                                                return (
+                                                    <li key={item.id}>
+                                                        <Flex my={2}>
+                                                            <Input 
+                                                                {...register(`services.${index}.service`, {
+                                                                    required: 'Required!....Enter clients phone number',
+                                                                    value: ''
+                                                                })} 
+                                                            />
+
+                                                            {/**<Controller
+                                                                render={({ field }) => <Input {...field} />}
+                                                                name={`services.${index}.service`}
+                                                                control={control}
+                                                            />*/}
+
+                                                            <Button 
+                                                                type="button" 
+                                                                onClick={() => remove(index)}
+                                                                ml={2}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        </Flex>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </Box>
+
+                                    <Button
+                                        mt={5}
+                                        type="button"
+                                        onClick={() => {
+                                            append({ service: '' });
+                                        }}
+                                        >
+                                        Add Another Service
+                                    </Button>
                                 </FormControl>
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button bg={'brand.olive'} mr={3}>
+                                <Button 
+                                    bg={'brand.olive'} 
+                                    mr={3}
+                                    type={'submit'}
+                                    isLoading={isSubmitting}
+                                >
                                     Save
                                 </Button>
                                 <Button onClick={onCloseModal}>
@@ -228,6 +358,12 @@ export default function Appointments() {
                                     >
                                         Services
                                     </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                    >
+                                        Actions
+                                    </Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
@@ -239,6 +375,7 @@ export default function Appointments() {
                                         <Td>Loading...</Td>
                                         <Td>Loading...</Td>
                                         <Td>Loading...</Td>     
+                                        <Td>Loading...</Td>     
                                     </Tr>
                                 )  : data.map((details, index) => {
                                     return(
@@ -247,8 +384,16 @@ export default function Appointments() {
                                             <Td>{details.name}</Td>
                                             <Td>{details.phone}</Td>
                                             <Td>
-                                                {/**Formatted in Day, Month and Time */}
-                                                {moment(details.prevAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
+                                                    {/**Formatted in Day, Month and Time */}
+                                                {   
+                                                    details.prevAppointmentDate === "" 
+                                                        ? 
+                                                    "No Previous Appointment Date" 
+                                                        :
+                                                    ` ${moment(details.prevAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
+                                                    `
+                                                    //${setPrevAppointmentDate(details.prevAppointmentDate)}
+                                                }
                                             </Td>
                                             <Td>
                                                 {moment(details.nextAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
@@ -262,7 +407,29 @@ export default function Appointments() {
                                                     )
                                                 })}
                                             </Td>
-                                                
+                                            <Td>
+                                                <Flex>
+                                                    {/** Edit Appointment */}
+                                                    <Button 
+                                                        mx={3}
+                                                    >
+                                                        Edit
+                                                    </Button>
+
+                                                    {/** Delete Appointment */}
+                                                    <Button 
+                                                        bg={'red'}
+                                                        _hover={{
+                                                            bgColor: 'red'
+                                                        }}
+                                                        onClick={async () => {
+                                                            await deleteDoc(doc(db, "appointment", details.id))
+                                                        }}
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </Flex>
+                                            </Td>
                                         </Tr>
                                     )
                                 })}
