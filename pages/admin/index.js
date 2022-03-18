@@ -14,25 +14,42 @@ import {
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, onSnapshot, addDoc, doc, deleteDoc
+    collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, ArrayUnion 
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 
 let logout;
 
+const searchClient = algoliasearch(
+  'NBE0ZM82V1',
+  '666d0ae88f9b1998bf2777600bb7bb90'
+);
+
 export default function Appointments() {
+  //menu useDisclosure
   const { 
     isOpen,
     onOpen,
     onClose
   } = useDisclosure();
 
+  //Add Appointment useDisclosure
   const { 
     isOpen: isOpenModal,
     onOpen: onOpenModal,
     onClose: onCloseModal
   } = useDisclosure();
 
+  //Edit Appointment useDisclosure
+  const { 
+    isOpen: isOpenEditModal,
+    onOpen: onOpenEditModal,
+    onClose: onCloseEditModal
+  } = useDisclosure();
+
+  //Add Appointment useForm
   const {
     handleSubmit, register, control,
     formState: { errors, isSubmitting }
@@ -42,10 +59,37 @@ export default function Appointments() {
     }
   });
 
+  //Add Appointment useFieldArray
   const {
     fields,
     append,
     remove,
+  } = useFieldArray({
+    control,
+    name: "services",
+  });
+
+  //Edit Appointment useForm
+  const {
+    handleSubmit: handleSubmitEdit,
+    register: registerEdit, 
+    setValue,
+    formState: { 
+        errors: errorsEdit,
+        isSubmitting: isSubmittingEdit
+    }
+  } = useForm({
+    defaultValues: {
+      services: [{ service: '' }]
+    }
+  });
+
+  //Edit Appointment useFieldArray
+  const {
+    fields: fieldsEdit,
+    append: appendEdit,
+    remove: removeEdit,
+    replace
   } = useFieldArray({
     control,
     name: "services",
@@ -77,7 +121,7 @@ export default function Appointments() {
     });
 
     const [data, setData] = useState([]);
-    const [prevAppointmentDate, setPrevAppointmentDate] = useState();
+    const [editDocID, setEditDocID] = useState('');
 
     const dataRef = collection(db, "appointment");
 
@@ -109,7 +153,7 @@ export default function Appointments() {
     );
 
     //Add New Appointment to system
-    const onSubmit = async (values) => {
+    const onSubmit = async (values, e) => {
         try {
             //reference to the collection
             const appointmentCollection = collection(db, "appointment");
@@ -134,7 +178,50 @@ export default function Appointments() {
             })
 
             //close Modal
-            onCloseModal()
+            //onCloseModal()
+        } catch (error) {
+            const errorMessage = error.code;
+            toast({
+                title: "Error",
+                description: errorMessage,
+                status: "error",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+        }
+
+        //reset forms
+        e.target.reset()
+    };
+
+    //Edit Appointment
+    const onSubmitEdit = async (values, e) => {
+        try {
+            //reference to the document
+            const appointmentDocument = doc(db, "appointment", editDocID);
+            //data to be sent
+            const appointmentEditPayload = {
+                name: values.name,
+                phone: values.phone,
+                nextAppointmentDate: values.nextAppointmentDate,
+                prevAppointmentDate: values.prevAppointmentDate,
+                services: values.services.map(item => item.service)
+            };
+
+            await updateDoc(appointmentDocument, appointmentEditPayload);
+
+            toast({
+                title: "Successful",
+                description: "Edited Successfully",
+                status: "success",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+
+            //Close Modal
+            onCloseEditModal()
         } catch (error) {
             const errorMessage = error.code;
             toast({
@@ -190,18 +277,34 @@ export default function Appointments() {
               px={4}
               pt={66}
             >
-                <Button 
-                    color={'white'} 
-                    bg={'brand.green'}
-                    mt={5}
-                    _hover={{
-                        backgroundColor: 'brand.green'
-                    }}
-                    position="static"
-                    onClick={onOpenModal}
-                >
-                    Add Appointment
-                </Button>
+                <Flex>
+                    {/**Add Appointment Button */}
+                    <Button 
+                        color={'white'} 
+                        bg={'brand.green'}
+                        mt={5}
+                        _hover={{
+                            backgroundColor: 'brand.green'
+                        }}
+                        position="static"
+                        onClick={onOpenModal}
+                    >
+                        Add Appointment
+                    </Button>
+
+                    {/**
+                     * <Box mt={6}>
+                        //Algolia Search Widget 
+                        <InstantSearch
+                            indexName="skinplus"
+                            searchClient={searchClient}
+                        >
+                            <SearchBox />
+                            <Hits />
+                        </InstantSearch>
+                        </Box>
+                    */}
+                </Flex>
 
                 {/**Add Appointment Forms */}
                 <Modal
@@ -262,12 +365,6 @@ export default function Appointments() {
                                                                     value: ''
                                                                 })} 
                                                             />
-
-                                                            {/**<Controller
-                                                                render={({ field }) => <Input {...field} />}
-                                                                name={`services.${index}.service`}
-                                                                control={control}
-                                                            />*/}
 
                                                             <Button 
                                                                 type="button" 
@@ -343,24 +440,28 @@ export default function Appointments() {
                                     <Th 
                                         color={'white'}
                                         fontSize={'lg'}
+                                        textAlign={'center'}
                                     >
                                         Previous Appointment Date and Time
                                     </Th>
                                     <Th 
                                         color={'white'}
                                         fontSize={'lg'}
+                                        textAlign={'center'}
                                     >
                                         Next Appointment Date and Time
                                     </Th>
                                     <Th 
                                         color={'white'}
                                         fontSize={'lg'}
+                                        textAlign={'center'}
                                     >
                                         Services
                                     </Th>
                                     <Th 
                                         color={'white'}
                                         fontSize={'lg'}
+                                        textAlign={'center'}
                                     >
                                         Actions
                                     </Th>
@@ -392,7 +493,6 @@ export default function Appointments() {
                                                         :
                                                     ` ${moment(details.prevAppointmentDate).format('dddd, MMMM Do YYYY \\at LT')}
                                                     `
-                                                    //${setPrevAppointmentDate(details.prevAppointmentDate)}
                                                 }
                                             </Td>
                                             <Td>
@@ -412,6 +512,27 @@ export default function Appointments() {
                                                     {/** Edit Appointment */}
                                                     <Button 
                                                         mx={3}
+                                                        onClick={() => { 
+                                                            //set document id
+                                                            setEditDocID(details.id)
+                                                            //set name
+                                                            setValue('name', details.name, {
+                                                                shouldValidate: true,
+                                                                shouldDirty: true
+                                                            })
+                                                            //set phone number
+                                                            setValue('phone', details.phone, {
+                                                                shouldValidate: true,
+                                                                shouldDirty: true
+                                                            })
+                                                            //set Previous Appointment Date
+                                                            setValue('prevAppointmentDate', details.nextAppointmentDate, {
+                                                                shouldValidate: true,
+                                                                shouldDirty: true
+                                                            })
+                                                            //open Edit Modal
+                                                            onOpenEditModal()
+                                                        }}
                                                     >
                                                         Edit
                                                     </Button>
@@ -437,8 +558,108 @@ export default function Appointments() {
                         </Table>
                     </Stack>
                 </Flex>
+
+                {/**Edit Appointment Forms */}
+                <Modal
+                    isOpen={isOpenEditModal}
+                    onClose={onCloseEditModal}
+                    isCentered
+                >
+                    <ModalOverlay />
+                    <ModalContent bgColor={'brand.green'}>
+                        <chakra.form onSubmit={handleSubmitEdit(onSubmitEdit)}>
+                            <ModalHeader>Edit Appointment</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody pb={6}>
+                                <FormControl isRequired>
+                                    <FormLabel>Name</FormLabel>
+                                    <Input 
+                                        placeholder='Enter Name' 
+                                        {...registerEdit('name', {
+                                            required: 'Required!....Enter clients name'
+                                        })}
+                                    />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Phone Number</FormLabel>
+                                    <Input 
+                                        placeholder='Enter Phone Number'
+                                        {...registerEdit('phone', {
+                                            required: 'Required!....Enter clients phone number'
+                                        })}
+                                    />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Next Appointment Date And Time</FormLabel>
+                                    <Input 
+                                        placeholder='Next Appointment Date And Time'
+                                        type='datetime-local'
+                                        {...registerEdit('nextAppointmentDate', {
+                                            required: 'Required!....Enter clients phone number'
+                                        })}
+                                    />
+                                </FormControl>
+
+                                <FormControl mt={4} isRequired>
+                                    <FormLabel>Services</FormLabel>
+                                    <Box ml={5}>
+                                        <ul>
+                                            {fieldsEdit.map((item, index) => {
+                                                return (
+                                                    <li key={item.id}>
+                                                        <Flex my={2}>
+                                                            <Input 
+                                                                {...registerEdit(`services.${index}.service`, {
+                                                                    required: 'Required!....Enter clients phone number',
+                                                                })} 
+                                                            />
+
+                                                            <Button 
+                                                                type="button" 
+                                                                onClick={() => removeEdit(index)}
+                                                                ml={2}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        </Flex>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </Box>
+
+                                    <Button
+                                        mt={5}
+                                        type="button"
+                                        onClick={() => {
+                                            appendEdit({ service: '' });
+                                        }}
+                                        >
+                                        Add Another Service
+                                    </Button>
+                                </FormControl>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button 
+                                    bg={'brand.olive'} 
+                                    mr={3}
+                                    type={'submit'}
+                                    isLoading={isSubmittingEdit}
+                                >
+                                    Save
+                                </Button>
+                                <Button onClick={onCloseEditModal}>
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </chakra.form>
+                    </ModalContent>
+                </Modal>
             </Box>
-          </Box>
+        </Box>
     </>
   );
 }
