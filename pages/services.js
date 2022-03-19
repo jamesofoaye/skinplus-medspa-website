@@ -11,6 +11,7 @@ import {
   Text,
   Stack,
   Heading,
+  Image
 } from "@chakra-ui/react";
 import Navbar from '../components/navbar'
 import { IKImage, IKContext } from 'imagekitio-react'
@@ -101,21 +102,14 @@ export default function Services() {
         >
           <Box
             px={8}
-            mx="auto"
+            
           >
-            <SimpleGrid
-              alignItems="center"
-              columns={{ base: 1, md: 3 }}
-              spacingY={10}
-              spacingX={10}
-            >
-              <Box>
+            <Box maxW={'3xl'} mx="auto"  textAlign={ "center"}>
                 <chakra.h2
                   fontFamily={'Oswald'}
                   mb={3}
                   fontSize={{ base: "2xl", md: "5xl", xl: "6xl" }}
                   fontWeight="extrabold"
-                  textAlign={{ base: "center", sm: "left" }}
                   color={"black"}
                   lineHeight="shorter"
                   letterSpacing="tight"
@@ -125,13 +119,18 @@ export default function Services() {
                 <chakra.p
                   mb={6}
                   fontSize={{ base: "lg", md: "xl" }}
-                  textAlign={{ base: "center", sm: "left" }}
                   color={"black"}
                 >
                   SkinPlus uses ethically sourced, fair trade natural materials  that are expertly
                   crafted to match our client needs.
                 </chakra.p>
               </Box>
+            <SimpleGrid
+              alignItems="center"
+              columns={{ base: 1, md: 3 }}
+            >
+              <Image src={'/services-bg.svg'} width={500} height={200} />
+
               <VStack
                 direction="column"
                 flexGrow={1}
@@ -153,7 +152,7 @@ export default function Services() {
                 direction="column"
                 flexGrow={1}
                 spacing={5}
-                alignItems="end"
+                alignItems="start"
               >
                 <Feature>Waxing</Feature>
                 <Feature>Botox</Feature>
