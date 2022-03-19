@@ -1,11 +1,8 @@
 import Head from 'next/head';
 import {
   Container, SimpleGrid, Image, Flex, Heading, Box,
-  Text, Stack, StackDivider, Icon, useColorModeValue,
+  Text, Stack, StackDivider, useColorModeValue,
 } from '@chakra-ui/react';
-import {
-   IoLogoBitcoin
-} from 'react-icons/io5';
 import { PopupWidget } from "react-calendly";
 import Navbar from '../../components/navbar';
 
