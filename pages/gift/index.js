@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form';
 import { collection, query, where, getDocs, setDoc, doc } from 'firebase/firestore'
-import { db } from '../library/firebase'
+import { db } from '../../library/firebase'
 
 const Gift = () => {
     const toast = useToast()
