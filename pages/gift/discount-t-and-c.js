@@ -4,7 +4,7 @@ import {
   Text, Stack, StackDivider, Icon, useColorModeValue,
 } from '@chakra-ui/react';
 import {
-  IoAnalyticsSharp, IoLogoBitcoin, IoSearchSharp
+   IoLogoBitcoin
 } from 'react-icons/io5';
 import { PopupWidget } from "react-calendly";
 import Navbar from '../../components/navbar';
@@ -80,8 +80,6 @@ export default function DiscountTermsAndConditionsPage() {
                             />
 
                             <Terms
-                                icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
-                                iconBg={useColorModeValue('green.100', 'green.900')}
                                 text={'3. Discount Card cannot be reused'}
                             />
 
