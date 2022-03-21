@@ -118,7 +118,7 @@ export default function DiscountTermsAndConditionsPage() {
                                     right={['-85','-250px']}
                                     top={['-70px', '-20px']}
                                     transform={'rotate(20deg)'}
-                                    >
+                                >
                                     Click here for full list of services
                                 </Text>
                             </Box>
