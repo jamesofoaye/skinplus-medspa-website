@@ -235,8 +235,6 @@ export default function Appointments() {
         }
     };
 
-    let today = new Date();
-
   return (
     <>
       <Head>

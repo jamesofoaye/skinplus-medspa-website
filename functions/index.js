@@ -8,9 +8,9 @@ const moment = require('moment');
 const db = getFirestore();
 
 //send sms everyday at 6am
-exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 6:00")
+exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 8:00")
     .onRun(async(context) => {
-      functions.logger.info("This will be run everyday at 6:00am!",
+      functions.logger.info("This will be run everyday at 8:00am!",
         {structuredData: true}
       );
 
@@ -21,9 +21,9 @@ exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 6:00")
     });
 
 //send sms everyday at 8:30pm
-exports.send_SMS_At_Eight_Thirty_Pm = functions.pubsub.schedule("every day 20:30")
+exports.send_SMS_At_Eight_Thirty_Pm = functions.pubsub.schedule("every day 13:00")
     .onRun(async(context) => {
-      functions.logger.info("This will be run everyday at 8:30pm!",
+      functions.logger.info("This will be run everyday at 1:00pm!",
           {structuredData: true}
       );
 
@@ -43,18 +43,15 @@ const getAppointments = async () => {
 
     const formattedNextAppointmentDate   = moment(doc.data().nextAppointmentDate).format('L')
 
-    const formattedToday = moment(today, "MM-DD-YYYY").add(1, 'day').format('L')
+    const formattedToday = moment(today, "MM-DD-YYYY").add(2, 'days').format('L')
 
     //Appointment day message
-    const message = `Hello ${doc.data().name}, this is a reminder that you have an appointment at SkinPlus Medspa today at 
-    ${moment(doc.data().nextAppointmentDate).format('LT')}. You requested for the following services: 
-    ${doc.data().services.map((service, index ) => (index + 1) + ". " + service)}. 
-    See you soon`;
+    const message = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa Today at
+      ${moment(doc.data().nextAppointmentDate).format('LT')}. See you soon!`;
 
-    const nextDayReminder = `Hello ${doc.data().name}, this is a reminder that you have an appointment at SkinPlus Medspa tomorrow at 
-    ${moment(doc.data().nextAppointmentDate).format('LT')}. You requested for the following services: 
-    ${doc.data().services.map((service, index ) => (index + 1) + ". " + service)}. 
-    See you soon`;
+    //Two days before appointment
+    const twoDaysBeforeReminder = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa on 
+      ${moment(doc.data().nextAppointmentDate).add(2, 'days').calendar()}. See you soon!`;
 
     const conditionsToSend = async() => { 
       if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
@@ -66,11 +63,11 @@ const getAppointments = async () => {
           {structuredData: true}
         );
       } else if(formattedToday === formattedNextAppointmentDate) {
-        await sendMessage(doc.data().phone, nextDayReminder)
+        await sendMessage(doc.data().phone, twoDaysBeforeReminder)
         functions.logger.info("Second conditions worked!",
           {structuredData: true}
         );
-        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${nextDayReminder}`,
+        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${twoDaysBeforeReminder}`,
           {structuredData: true}
         );
       }
