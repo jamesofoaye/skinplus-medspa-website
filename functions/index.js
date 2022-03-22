@@ -1,18 +1,93 @@
 const functions = require("firebase-functions");
+const admin = require('firebase-admin');
+admin.initializeApp();
+const rp = require('request-promise');
+const { getFirestore } = require('firebase-admin/firestore');
+const moment = require('moment');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const db = getFirestore();
 
-exports.sendSMS = functions.pubsub.schedule("every 1 minutes")
-    .onRun((context) => {
-      //console.log("This will be run every 1 minutes!");
-      functions.logger.info("This will be run every 1 minutes!",
-          {structuredData: true}
+//send sms everyday at 6am
+exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 6:00")
+    .onRun(async(context) => {
+      functions.logger.info("This will be run everyday at 6:00am!",
+        {structuredData: true}
       );
+
+      //send message
+      await getAppointments()
+
       return null;
     });
+
+//send sms everyday at 8:30pm
+exports.send_SMS_At_Eight_Thirty_Pm = functions.pubsub.schedule("every day 20:30")
+    .onRun(async(context) => {
+      functions.logger.info("This will be run everyday at 8:30pm!",
+          {structuredData: true}
+      );
+
+      //send message
+      await getAppointments()
+
+      return null;
+    });
+
+//get all appointments from firestore and send message
+const getAppointments = async () => {
+  const snapshot = await db.collection("appointment").get();
+  
+  snapshot.forEach((doc) => {
+
+    let today = new Date();
+
+    const formattedNextAppointmentDate   = moment(doc.data().nextAppointmentDate).format('L')
+
+    const formattedToday = moment(today, "MM-DD-YYYY").add(1, 'day').format('L')
+
+    //Appointment day message
+    const message = `Hello ${doc.data().name}, this is a reminder that you have an appointment at SkinPlus Medspa today at 
+    ${moment(doc.data().nextAppointmentDate).format('LT')}. You requested for the following services: 
+    ${doc.data().services.map((service, index ) => (index + 1) + ". " + service)}. 
+    See you soon`;
+
+    const nextDayReminder = `Hello ${doc.data().name}, this is a reminder that you have an appointment at SkinPlus Medspa tomorrow at 
+    ${moment(doc.data().nextAppointmentDate).format('LT')}. You requested for the following services: 
+    ${doc.data().services.map((service, index ) => (index + 1) + ". " + service)}. 
+    See you soon`;
+
+    const conditionsToSend = async() => { 
+      if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
+        await sendMessage(doc.data().phone, message);
+        functions.logger.info("First Conditions worked!",
+          {structuredData: true}
+        );
+        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${message}`,
+          {structuredData: true}
+        );
+      } else if(formattedToday === formattedNextAppointmentDate) {
+        await sendMessage(doc.data().phone, nextDayReminder)
+        functions.logger.info("Second conditions worked!",
+          {structuredData: true}
+        );
+        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${nextDayReminder}`,
+          {structuredData: true}
+        );
+      }
+    }
+
+    conditionsToSend()
+  });
+}
+
+//send SMS function
+const sendMessage = (recipientNumber, message) => {
+  return rp({
+    method: 'POST',
+    uri: `https://api.dawurobo.com/send_sms?sender=SkinPlus&numbers=${recipientNumber}&message=${message}&validate=false`,
+    body: {
+      text: message,
+    },
+    json: true,
+  });
+}

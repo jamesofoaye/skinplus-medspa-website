@@ -235,6 +235,8 @@ export default function Appointments() {
         }
     };
 
+    let today = new Date();
+
   return (
     <>
       <Head>
@@ -401,6 +403,7 @@ export default function Appointments() {
                                 >
                                     Save
                                 </Button>
+
                                 <Button onClick={onCloseModal}>
                                     Cancel
                                 </Button>
