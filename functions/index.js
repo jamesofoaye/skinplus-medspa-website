@@ -7,8 +7,8 @@ const moment = require('moment');
 
 const db = getFirestore();
 
-//send sms everyday at 6am
-exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 8:00")
+//send sms everyday at 8am
+exports.send_SMS_At_Eight_Am = functions.pubsub.schedule("every day 8:00")
     .onRun(async(context) => {
       functions.logger.info("This will be run everyday at 8:00am!",
         {structuredData: true}
@@ -20,8 +20,8 @@ exports.send_SMS_At_Six_Am = functions.pubsub.schedule("every day 8:00")
       return null;
     });
 
-//send sms everyday at 8:30pm
-exports.send_SMS_At_Eight_Thirty_Pm = functions.pubsub.schedule("every day 13:00")
+//send sms everyday at 1:00pm
+exports.send_SMS_At_One_Pm = functions.pubsub.schedule("every day 13:00")
     .onRun(async(context) => {
       functions.logger.info("This will be run everyday at 1:00pm!",
           {structuredData: true}
