@@ -14,7 +14,7 @@ exports.send_SMS_At_Eight_Am = functions.pubsub.schedule("every day 8:00")
         {structuredData: true}
       );
 
-      //send message
+      //send appointment day reminder message
       await getAppointments()
 
       return null;
@@ -27,14 +27,39 @@ exports.send_SMS_At_One_Pm = functions.pubsub.schedule("every day 13:00")
           {structuredData: true}
       );
 
-      //send message
-      await getAppointments()
+      //send 2 days reminder message
+      await getAppointmentsForOnePmSMS()
 
       return null;
     });
 
-//get all appointments from firestore and send message
+//get all appointments from firestore and send message at 8:00am
 const getAppointments = async () => {
+  const snapshot = await db.collection("appointment").get();
+  
+  snapshot.forEach((doc) => {
+    //Appointment day message
+    const message = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa Today at
+      ${moment(doc.data().nextAppointmentDate).format('LT')}. See you soon!`;
+
+    const conditionsToSend = async() => { 
+      if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
+        await sendMessage(doc.data().phone, message);
+        functions.logger.info("Appointment day reminder worked",
+          {structuredData: true}
+        );
+        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${message}`,
+          {structuredData: true}
+        );
+      }
+    }
+
+    conditionsToSend()
+  });
+}
+
+//get all appointments from firestore and send message at 1:00pm
+const getAppointmentsForOnePmSMS = async () => {
   const snapshot = await db.collection("appointment").get();
   
   snapshot.forEach((doc) => {
@@ -45,26 +70,14 @@ const getAppointments = async () => {
 
     const formattedToday = moment(today, "MM-DD-YYYY").add(2, 'days').format('L')
 
-    //Appointment day message
-    const message = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa Today at
-      ${moment(doc.data().nextAppointmentDate).format('LT')}. See you soon!`;
-
     //Two days before appointment
     const twoDaysBeforeReminder = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa on 
       ${moment(doc.data().nextAppointmentDate).add(2, 'days').calendar()}. See you soon!`;
 
-    const conditionsToSend = async() => { 
-      if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
-        await sendMessage(doc.data().phone, message);
-        functions.logger.info("First Conditions worked!",
-          {structuredData: true}
-        );
-        functions.logger.info(`Phone number: ${doc.data().phone} and message: ${message}`,
-          {structuredData: true}
-        );
-      } else if(formattedToday === formattedNextAppointmentDate) {
+    const conditionsToSendOnePmSMS = async() => { 
+      if(formattedToday === formattedNextAppointmentDate) {
         await sendMessage(doc.data().phone, twoDaysBeforeReminder)
-        functions.logger.info("Second conditions worked!",
+        functions.logger.info("2 days appointment reminder worked!",
           {structuredData: true}
         );
         functions.logger.info(`Phone number: ${doc.data().phone} and message: ${twoDaysBeforeReminder}`,
@@ -73,7 +86,7 @@ const getAppointments = async () => {
       }
     }
 
-    conditionsToSend()
+    conditionsToSendOnePmSMS()
   });
 }
 
