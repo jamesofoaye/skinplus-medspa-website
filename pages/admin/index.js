@@ -19,7 +19,7 @@ import {
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-import { generateUserId } from "../../library/generateUserId";
+import { generateUserId } from "../../library/GenerateUserId";
 
 let logout;
 
