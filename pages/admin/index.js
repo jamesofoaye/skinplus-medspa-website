@@ -10,15 +10,16 @@ import {
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
     Button, Modal, ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
-    FormLabel, chakra
+    FormLabel, chakra, Badge
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, ArrayUnion 
+    collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, enableIndexedDbPersistence , getCollectionFromCache, 
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+import { generateUserId } from "../../library/generateUserId";
 
 let logout;
 
@@ -125,19 +126,8 @@ export default function Appointments() {
 
     const dataRef = collection(db, "appointment");
 
-   useEffect(() =>
-        onSnapshot(dataRef, (snapshot) => {
-           setData(snapshot.docs.map((doc) => ({
-                //data from firebase
-                ...doc.data(),
-                //document Id from firebase
-                id: doc.id
-            })))
-            setData(snapshot.docs.map((doc) => (
-                //data from firebase
-                doc.data()
-            )))
-
+    useEffect(() =>
+        onSnapshot(dataRef, {includeMetadataChanges: true}, (snapshot) => {
             const result = []
 
             snapshot.forEach((doc) => {
@@ -148,7 +138,9 @@ export default function Appointments() {
                     id: doc.id
                 });
             });
+            
             setData(result)
+
         }), []
     );
 
@@ -159,11 +151,13 @@ export default function Appointments() {
             const appointmentCollection = collection(db, "appointment");
             //data to be sent
             const appointmentPayload = {
+                userId: generateUserId(),
                 name: values.name,
                 phone: values.phone,
                 nextAppointmentDate: values.nextAppointmentDate,
                 prevAppointmentDate: "",
-                services: values.services.map(item => item.service)
+                services: values.services.map(item => item.service),
+                status: 'confirmed'
             };
 
             await addDoc(appointmentCollection, appointmentPayload);
@@ -464,6 +458,13 @@ export default function Appointments() {
                                         fontSize={'lg'}
                                         textAlign={'center'}
                                     >
+                                        Status
+                                    </Th>
+                                    <Th 
+                                        color={'white'}
+                                        fontSize={'lg'}
+                                        textAlign={'center'}
+                                    >
                                         Actions
                                     </Th>
                                 </Tr>
@@ -476,6 +477,7 @@ export default function Appointments() {
                                         <Td>Loading...</Td>
                                         <Td>Loading...</Td>
                                         <Td>Loading...</Td>
+                                        <Td>Loading...</Td>     
                                         <Td>Loading...</Td>     
                                         <Td>Loading...</Td>     
                                     </Tr>
@@ -507,6 +509,14 @@ export default function Appointments() {
                                                         </UnorderedList>
                                                     )
                                                 })}
+                                            </Td>
+                                            <Td textTransform={'capitalize'}>
+                                                <Badge 
+                                                    fontSize={'md'} 
+                                                    colorScheme={details.status === 'cancelled' ? 'red' : 'purple'}
+                                                >
+                                                    {details.status}
+                                                </Badge>
                                             </Td>
                                             <Td>
                                                 <Flex>
