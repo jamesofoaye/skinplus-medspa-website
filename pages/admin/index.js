@@ -198,6 +198,7 @@ export default function Appointments() {
             const appointmentEditPayload = {
                 name: values.name,
                 phone: values.phone,
+                status: 'confirmed',
                 nextAppointmentDate: values.nextAppointmentDate,
                 prevAppointmentDate: values.prevAppointmentDate,
                 services: values.services.map(item => item.service)
