@@ -233,7 +233,7 @@ export default function Appointments() {
   return (
     <>
       <Head>
-        <title>SkinPlus Medspa Ghana | Gift Card</title>
+        <title>SkinPlus Medspa Ghana | Appointment Management</title>
         <meta 
             name="description" 
             content="SkinPlus Medspa provides a variety of personalized services to its clientele to enhance their look and maintain youth."
@@ -309,7 +309,7 @@ export default function Appointments() {
                     isCentered
                 >
                     <ModalOverlay />
-                    <ModalContent bgColor={'brand.green'}>
+                    <ModalContent bgColor={'brand.green'} color={'white'}>
                         <chakra.form onSubmit={handleSubmit(onSubmit)}>
                             <ModalHeader>Add Appointment</ModalHeader>
                             <ModalCloseButton />
@@ -578,7 +578,7 @@ export default function Appointments() {
                     isCentered
                 >
                     <ModalOverlay />
-                    <ModalContent bgColor={'brand.green'}>
+                    <ModalContent bgColor={'brand.green'} color="white">
                         <chakra.form onSubmit={handleSubmitEdit(onSubmitEdit)}>
                             <ModalHeader>Edit Appointment</ModalHeader>
                             <ModalCloseButton />

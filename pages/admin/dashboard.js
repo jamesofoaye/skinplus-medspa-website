@@ -67,7 +67,7 @@ export default function GiftDashboard() {
   return (
     <>
       <Head>
-        <title>SkinPlus Medspa Ghana | Gift Card</title>
+        <title>SkinPlus Medspa Ghana | Gift Card Dashboard</title>
         <meta 
             name="description" 
             content="SkinPlus Medspa provides a variety of personalized services to its clientele to enhance their look and maintain youth."

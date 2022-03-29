@@ -5,7 +5,7 @@ export default function PaymentPage() {
     return (
         <div>
             <Head>
-                <title>SkinPlus MedSpa Ghana | Gift Card Program</title>
+                <title>SkinPlus MedSpa Ghana | Admin Login</title>
                 <meta
                     name="description" 
                     content="SkinPlus Medspa provides a variety of personalized services 

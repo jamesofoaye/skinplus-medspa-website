@@ -100,7 +100,7 @@ const ManageAppointment = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Center py={6} bg={"brand.green"}>
+            <Center py={6} bg={"brand.green"} color="white">
                 <Box
                     maxW={'xl'}
                     w={'full'}
