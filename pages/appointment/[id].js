@@ -10,7 +10,7 @@ import { FiUser, FiPhone } from 'react-icons/fi'
 import { BsCalendar3, BsGlobe } from 'react-icons/bs'
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import { collection, query, where, getDocs, setDoc, doc } from 'firebase/firestore'
+import { collection, query, where, onSnapshot , setDoc, doc } from 'firebase/firestore'
 import { db } from '../../library/firebase'
 
 const ManageAppointment = () => {
@@ -23,21 +23,37 @@ const ManageAppointment = () => {
 
     const getData = useCallback(async() => {
         const q = query(collection(db, "appointment"), where("userId", "==", id));
-    
-            const querySnapshot = await getDocs(q);
 
+        onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 setData({
                     id: doc.id,
                     ...doc.data()
                 })   
             });
+        });
 
     }, [id])
 
     useEffect(() => { 
         getData()
     }, [getData])
+
+    //Confirm Appointment
+    const confirmAppointment = async() => {
+        const appointmentRef =  doc(db, 'appointment', data && data.id);
+        await setDoc(appointmentRef, {
+            status: "confirmed",
+        }, { merge: true });
+
+        toast({
+            title: "Success",
+            description: "Appointment Confirmed, See you soon!",
+            status: "success",
+            duration: 5000,
+            position: "top",
+        })
+    }
 
     //Cancel Appointment
     const cancelAppointment = async() => {
@@ -50,7 +66,7 @@ const ManageAppointment = () => {
             title: "Success",
             description: "Appointment Cancelled",
             status: "success",
-            duration: 3000,
+            duration: 5000,
             position: "top",
         })
     }
@@ -156,7 +172,22 @@ const ManageAppointment = () => {
                                 })}
                             </Text>                    
 
-                            <Stack mt={8} direction={'row'} spacing={4}>
+                            <Stack mt={8} direction={'row'} spacing={2}>
+                                <Button
+                                    flex={1}
+                                    fontSize={'lg'}
+                                    rounded={'full'}
+                                    bg={'brand.sand'}
+                                    _hover={{
+                                        bg: 'brand.sand',
+                                    }}
+                                    _focus={{
+                                        bg: 'brand.sand',
+                                    }}
+                                    onClick={confirmAppointment}
+                                >
+                                    Confirm
+                                </Button>
                                 <Button
                                     flex={1}
                                     fontSize={'lg'}
