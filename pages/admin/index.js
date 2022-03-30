@@ -14,7 +14,8 @@ import {
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, enableIndexedDbPersistence , getCollectionFromCache, 
+    collection, onSnapshot, addDoc, doc, query, where,
+    deleteDoc, updateDoc, orderBy, limit
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import algoliasearch from 'algoliasearch/lite';
@@ -124,10 +125,10 @@ export default function Appointments() {
     const [data, setData] = useState([]);
     const [editDocID, setEditDocID] = useState('');
 
-    const dataRef = collection(db, "appointment");
-
-    useEffect(() =>
-        onSnapshot(dataRef, {includeMetadataChanges: true}, (snapshot) => {
+    useEffect(() => {
+        const q = query(collection(db, "appointment"), orderBy('nextAppointmentDate')/** , limit(7)*/);
+        
+        onSnapshot(q, {includeMetadataChanges: true}, (snapshot) => {
             const result = []
 
             snapshot.forEach((doc) => {
@@ -140,9 +141,8 @@ export default function Appointments() {
             });
             
             setData(result)
-
-        }), []
-    );
+        })
+    }, []);
 
     //Add New Appointment to system
     const onSubmit = async (values, e) => {
@@ -365,6 +365,10 @@ export default function Appointments() {
                                                                 type="button" 
                                                                 onClick={() => remove(index)}
                                                                 ml={2}
+                                                                bg={'red'}
+                                                                _hover={{
+                                                                    backgroundColor: 'red'
+                                                                }}
                                                             >
                                                                 Delete
                                                             </Button>
@@ -380,6 +384,10 @@ export default function Appointments() {
                                         type="button"
                                         onClick={() => {
                                             append({ service: '' });
+                                        }}
+                                        bg={'brand.olive'}
+                                        _hover={{
+                                            backgroundColor: 'brand.olive'
                                         }}
                                         >
                                         Add Another Service
@@ -397,7 +405,13 @@ export default function Appointments() {
                                     Save
                                 </Button>
 
-                                <Button onClick={onCloseModal}>
+                                <Button 
+                                    onClick={onCloseModal}
+                                    bg={'red.500'}
+                                    _hover={{
+                                        backgroundColor: 'red.500'
+                                    }}
+                                >
                                     Cancel
                                 </Button>
                             </ModalFooter>
@@ -524,6 +538,11 @@ export default function Appointments() {
                                                     {/** Edit Appointment */}
                                                     <Button 
                                                         mx={3}
+                                                        bg={'brand.sand'}
+                                                        _hover={{
+                                                            backgroundColor: 'brand.sand'
+                                                        }}
+                                                        position="static"
                                                         onClick={() => { 
                                                             //set document id
                                                             setEditDocID(details.id)
@@ -555,6 +574,7 @@ export default function Appointments() {
                                                         _hover={{
                                                             bgColor: 'red'
                                                         }}
+                                                         position="static"
                                                         onClick={async () => {
                                                             await deleteDoc(doc(db, "appointment", details.id))
                                                         }}
@@ -632,6 +652,10 @@ export default function Appointments() {
                                                                 type="button" 
                                                                 onClick={() => removeEdit(index)}
                                                                 ml={2}
+                                                                bg={'red'}
+                                                                _hover={{
+                                                                    backgroundColor: 'red'
+                                                                }}
                                                             >
                                                                 Delete
                                                             </Button>
@@ -648,6 +672,10 @@ export default function Appointments() {
                                         onClick={() => {
                                             appendEdit({ service: '' });
                                         }}
+                                        bg={'brand.olive'}
+                                        _hover={{
+                                            backgroundColor: 'brand.olive'
+                                        }}
                                         >
                                         Add Another Service
                                     </Button>
@@ -663,7 +691,13 @@ export default function Appointments() {
                                 >
                                     Save
                                 </Button>
-                                <Button onClick={onCloseEditModal}>
+                                <Button 
+                                    onClick={onCloseEditModal}
+                                    bg={'red.500'}
+                                    _hover={{
+                                        backgroundColor: 'red.500'
+                                    }}
+                                >
                                     Cancel
                                 </Button>
                             </ModalFooter>
