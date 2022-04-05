@@ -40,7 +40,7 @@ export default function Home() {
                         primaryColor: 'c5ad8d',
                         textColor: 'ffffff'
                     }}
-                    text="Book Free Appointment"
+                    text="Book Free Consultation"
                     textColor="#ffffff"
                     url="https://calendly.com/skinplusmedspa/30min"
                 />
