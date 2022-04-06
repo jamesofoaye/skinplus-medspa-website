@@ -126,7 +126,7 @@ export default function Appointments() {
     const [editDocID, setEditDocID] = useState('');
 
     useEffect(() => {
-        const q = query(collection(db, "appointment"), orderBy('nextAppointmentDate')/** , limit(7)*/);
+        const q = query(collection(db, "appointment"), where("nextAppointmentDate", ">=", moment().format()), orderBy("nextAppointmentDate")/** , limit(7)*/);
         
         onSnapshot(q, {includeMetadataChanges: true}, (snapshot) => {
             const result = []
