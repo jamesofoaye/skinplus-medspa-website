@@ -10,17 +10,29 @@ import {
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
     Button, Modal, ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
-    FormLabel, chakra, Badge
+    InputGroup, InputRightElement, FormLabel, chakra, Badge, IconButton
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
     collection, onSnapshot, addDoc, doc, query, where,
-    deleteDoc, updateDoc, orderBy, limit
+    deleteDoc, updateDoc, orderBy, limit, getDocs 
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 import { generateUserId } from "../../library/GenerateUserId";
+import { AiOutlineSearch } from 'react-icons/ai'
+
+import {
+  Pagination,
+  usePagination,
+  PaginationPage,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationPageGroup,
+  PaginationContainer,
+  PaginationSeparator
+} from "@ajna/pagination";
 
 let logout;
 
@@ -86,6 +98,15 @@ export default function Appointments() {
     }
   });
 
+  //Search useForm
+  const {
+    handleSubmit: handleSubmitSearch,
+    register: registerSearch, 
+    formState: {
+        isSubmitting: isSubmittingSearch
+    }
+  } = useForm();
+
   //Edit Appointment useFieldArray
   const {
     fields: fieldsEdit,
@@ -124,9 +145,10 @@ export default function Appointments() {
 
     const [data, setData] = useState([]);
     const [editDocID, setEditDocID] = useState('');
+    const [searchResult, setSearchResult] = useState('');
 
     useEffect(() => {
-        const q = query(collection(db, "appointment"), where("nextAppointmentDate", ">=", moment().format()), orderBy("nextAppointmentDate")/** , limit(7)*/);
+        const q = query(collection(db, "appointment"), where("nextAppointmentDate", ">=", moment().format()), orderBy("nextAppointmentDate"), orderBy("name", "asc"), limit(10));
         
         onSnapshot(q, {includeMetadataChanges: true}, (snapshot) => {
             const result = []
@@ -143,6 +165,55 @@ export default function Appointments() {
             setData(result)
         })
     }, []);
+
+    // // states
+    // const [appointmentTotal, setAppointmentTotal] = useState(undefined);
+    // const [pokemons, setPokemons] = useState([]);
+
+    // // constants
+    // const outerLimit = 2;
+    // const innerLimit = 2;
+
+    // const { pages, pagesCount, offset, currentPage, setCurrentPage, 
+    //     setIsDisabled, isDisabled, pageSize, setPageSize
+    // } = usePagination({
+    //     total: appointmentTotal,
+    //     limits: {
+    //         outer: outerLimit,
+    //         inner: innerLimit
+    //     },
+    //     initialState: {
+    //         pageSize: 5,
+    //         isDisabled: false,
+    //         currentPage: 1
+    //     }
+    // });
+    
+    // // effects
+    // useEffect(() => {
+    //     fetchPokemons(pageSize, offset)
+    //     .then((pokemons) => {
+    //         setAppointmentTotal(pokemons.count);
+    //         setPokemons(pokemons.results);
+    //     })
+    //     .catch((error) => console.log("App =>", error));
+    // }, [currentPage, pageSize, offset]);
+
+    // // handlers
+    // const handlePageChange = (nextPage) => {
+    //     // -> request new data using the page number
+    //     setCurrentPage(nextPage);
+    // };
+
+    // const handlePageSizeChange = (event) => {
+    //     const pageSize = Number(event.target.value);
+
+    //     setPageSize(pageSize);
+    // };
+
+    // const handleDisableClick = () => {
+    //     setIsDisabled((oldState) => !oldState);
+    // };
 
     //Add New Appointment to system
     const onSubmit = async (values, e) => {
@@ -230,6 +301,47 @@ export default function Appointments() {
         }
     };
 
+    //Search
+    const onSubmitSearch = async (values, e) => {
+        try {
+            console.log(values)
+            const q = query(
+                    collection(db, "appointment"),
+                    where("name", "==", values.search.toUpperCase() || "name", "==", values.search.toLowerCase())
+                );
+
+            const querySnapshot = await getDocs(q);
+
+            const result = []
+
+            querySnapshot.forEach((doc) => {
+                result.push({
+                    //data from firebase
+                    ...doc.data(), 
+                    //document Id from firebase
+                    id: doc.id
+                });
+
+                setSearchResult(result)
+            });
+
+            e.target.reset()
+            
+        } catch (error) {
+            const errorMessage = error.code;
+            toast({
+                title: "Error",
+                description: errorMessage,
+                status: "error",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+            })
+        }
+    };
+
+    console.log("Search Result",searchResult)
+
   return (
     <>
       <Head>
@@ -298,7 +410,53 @@ export default function Appointments() {
                             <Hits />
                         </InstantSearch>
                         </Box>
-                    */}
+                    */
+                    }
+                    <chakra.form 
+                        onSubmit={handleSubmitSearch(onSubmitSearch)}
+                        width='60vw'
+                    >
+                        <InputGroup 
+                            size='md' 
+                            mx={4} 
+                            mt={5}
+                        >
+                            <Input
+                                pr='4.5rem'
+                                placeholder='Search...'
+                                borderColor='brand.olive'
+                                borderWidth={2}
+                                color='brand.green'
+                                _placeholder={{
+                                    color: 'brand.green'
+                                }}
+                                _focus={{ 
+                                    borderColor: 'brand.olive'
+                                }}
+                                _hover={{ 
+                                    borderColor: 'brand.olive'
+                                }}
+                                {...registerSearch('search', {
+                                    required: 'Required!....Enter clients name'
+                                })}
+                            />
+                            <InputRightElement>
+                                <IconButton
+                                    bg={'brand.green'}
+                                    aria-label='Search'
+                                    icon={<AiOutlineSearch />}
+                                    _hover={{ 
+                                        borderColor: 'brand.olive'
+                                    }}
+                                    _focus={{ 
+                                        borderColor: 'brand.olive'
+                                    }}
+                                    type='submit'
+                                    isLoading={isSubmittingSearch}
+                                />
+                            </InputRightElement>
+                        </InputGroup>
+                    </chakra.form>
                 </Flex>
 
                 {/**Add Appointment Forms */}
