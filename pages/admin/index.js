@@ -10,7 +10,7 @@ import {
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
     Button, Modal, ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
-    InputGroup, InputRightElement, FormLabel, chakra, Badge, IconButton
+    FormLabel, chakra, Badge
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
@@ -19,27 +19,10 @@ import {
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 import { generateUserId } from "../../library/GenerateUserId";
-import { AiOutlineSearch } from 'react-icons/ai'
-
-import {
-  Pagination,
-  usePagination,
-  PaginationPage,
-  PaginationNext,
-  PaginationPrevious,
-  PaginationPageGroup,
-  PaginationContainer,
-  PaginationSeparator
-} from "@ajna/pagination";
+import Fuse from 'fuse.js';
 
 let logout;
-
-const searchClient = algoliasearch(
-  'NBE0ZM82V1',
-  '666d0ae88f9b1998bf2777600bb7bb90'
-);
 
 export default function Appointments() {
   //menu useDisclosure
@@ -98,15 +81,6 @@ export default function Appointments() {
     }
   });
 
-  //Search useForm
-  const {
-    handleSubmit: handleSubmitSearch,
-    register: registerSearch, 
-    formState: {
-        isSubmitting: isSubmittingSearch
-    }
-  } = useForm();
-
   //Edit Appointment useFieldArray
   const {
     fields: fieldsEdit,
@@ -145,10 +119,9 @@ export default function Appointments() {
 
     const [data, setData] = useState([]);
     const [editDocID, setEditDocID] = useState('');
-    const [searchResult, setSearchResult] = useState('');
 
     useEffect(() => {
-        const q = query(collection(db, "appointment"), where("nextAppointmentDate", ">=", moment().format()), orderBy("nextAppointmentDate"), orderBy("name", "asc"), limit(10));
+        const q = query(collection(db, "appointment"), orderBy("nextAppointmentDate"));
         
         onSnapshot(q, {includeMetadataChanges: true}, (snapshot) => {
             const result = []
@@ -166,54 +139,27 @@ export default function Appointments() {
         })
     }, []);
 
-    // // states
-    // const [appointmentTotal, setAppointmentTotal] = useState(undefined);
-    // const [pokemons, setPokemons] = useState([]);
 
-    // // constants
-    // const outerLimit = 2;
-    // const innerLimit = 2;
+    //Search With Fuse
+    const [search, setSearch] = useState('');
 
-    // const { pages, pagesCount, offset, currentPage, setCurrentPage, 
-    //     setIsDisabled, isDisabled, pageSize, setPageSize
-    // } = usePagination({
-    //     total: appointmentTotal,
-    //     limits: {
-    //         outer: outerLimit,
-    //         inner: innerLimit
-    //     },
-    //     initialState: {
-    //         pageSize: 5,
-    //         isDisabled: false,
-    //         currentPage: 1
-    //     }
-    // });
-    
-    // // effects
-    // useEffect(() => {
-    //     fetchPokemons(pageSize, offset)
-    //     .then((pokemons) => {
-    //         setAppointmentTotal(pokemons.count);
-    //         setPokemons(pokemons.results);
-    //     })
-    //     .catch((error) => console.log("App =>", error));
-    // }, [currentPage, pageSize, offset]);
+    const fuse = new Fuse(data, {
+        keys: ['name'],
+        includeScore: true,
+        //make sure search returns perfect result
+        threshold: 0.2
+    });
 
-    // // handlers
-    // const handlePageChange = (nextPage) => {
-    //     // -> request new data using the page number
-    //     setCurrentPage(nextPage);
-    // };
+    const results = fuse.search(search);
+    /** Filter appointments to show appointments which dates is greater
+     * than right now. In other words, don't show past appointments */
+    const Appointments = data && data.filter((appointments) => appointments.nextAppointmentDate >= moment().format())
 
-    // const handlePageSizeChange = (event) => {
-    //     const pageSize = Number(event.target.value);
+    const appointmentResults = search ? results.map(appointment => appointment.item) : Appointments;
 
-    //     setPageSize(pageSize);
-    // };
-
-    // const handleDisableClick = () => {
-    //     setIsDisabled((oldState) => !oldState);
-    // };
+    const onSearch = ({ currentTarget }) => {
+        setSearch(currentTarget.value);
+    }
 
     //Add New Appointment to system
     const onSubmit = async (values, e) => {
@@ -301,47 +247,6 @@ export default function Appointments() {
         }
     };
 
-    //Search
-    const onSubmitSearch = async (values, e) => {
-        try {
-            console.log(values)
-            const q = query(
-                    collection(db, "appointment"),
-                    where("name", "==", values.search.toUpperCase() || "name", "==", values.search.toLowerCase())
-                );
-
-            const querySnapshot = await getDocs(q);
-
-            const result = []
-
-            querySnapshot.forEach((doc) => {
-                result.push({
-                    //data from firebase
-                    ...doc.data(), 
-                    //document Id from firebase
-                    id: doc.id
-                });
-
-                setSearchResult(result)
-            });
-
-            e.target.reset()
-            
-        } catch (error) {
-            const errorMessage = error.code;
-            toast({
-                title: "Error",
-                description: errorMessage,
-                status: "error",
-                duration: 5000,
-                position: "top",
-                isClosable: true,
-            })
-        }
-    };
-
-    console.log("Search Result",searchResult)
-
   return (
     <>
       <Head>
@@ -399,63 +304,29 @@ export default function Appointments() {
                         Add Appointment
                     </Button>
 
-                    {/**
-                     * <Box mt={6}>
-                        //Algolia Search Widget 
-                        <InstantSearch
-                            indexName="skinplus"
-                            searchClient={searchClient}
-                        >
-                            <SearchBox />
-                            <Hits />
-                        </InstantSearch>
-                        </Box>
-                    */
-                    }
-                    <chakra.form 
-                        onSubmit={handleSubmitSearch(onSubmitSearch)}
-                        width='60vw'
-                    >
-                        <InputGroup 
+                    <chakra.form width='75vw'>
+                        <Input
                             size='md' 
                             mx={4} 
                             mt={5}
-                        >
-                            <Input
-                                pr='4.5rem'
-                                placeholder='Search...'
-                                borderColor='brand.olive'
-                                borderWidth={2}
-                                color='brand.green'
-                                _placeholder={{
-                                    color: 'brand.green'
-                                }}
-                                _focus={{ 
-                                    borderColor: 'brand.olive'
-                                }}
-                                _hover={{ 
-                                    borderColor: 'brand.olive'
-                                }}
-                                {...registerSearch('search', {
-                                    required: 'Required!....Enter clients name'
-                                })}
-                            />
-                            <InputRightElement>
-                                <IconButton
-                                    bg={'brand.green'}
-                                    aria-label='Search'
-                                    icon={<AiOutlineSearch />}
-                                    _hover={{ 
-                                        borderColor: 'brand.olive'
-                                    }}
-                                    _focus={{ 
-                                        borderColor: 'brand.olive'
-                                    }}
-                                    type='submit'
-                                    isLoading={isSubmittingSearch}
-                                />
-                            </InputRightElement>
-                        </InputGroup>
+                            pr='4.5rem'
+                            position={'static'}
+                            placeholder='Search Clients Name...'
+                            borderColor='brand.olive'
+                            borderWidth={2}
+                            color='brand.green'
+                            _placeholder={{
+                                color: 'brand.green'
+                            }}
+                            _focus={{ 
+                                borderColor: 'brand.olive'
+                            }}
+                            _hover={{ 
+                                borderColor: 'brand.olive'
+                            }}
+                            value={search}
+                            onChange={onSearch}
+                        />
                     </chakra.form>
                 </Flex>
 
@@ -654,7 +525,7 @@ export default function Appointments() {
                                         <Td>Loading...</Td>     
                                         <Td>Loading...</Td>     
                                     </Tr>
-                                )  : data.map((details, index) => {
+                                )  : appointmentResults.map((details, index) => {
                                     return(
                                         <Tr key={index}>
                                             <Td>{index + 1}</Td>
