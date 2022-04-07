@@ -454,8 +454,7 @@ export default function Appointments() {
                         w="full"
                         shadow="lg"
                     >
-
-                        <Table bg='brand.olive' color={'white'} mt={5}>
+                        <Table bg='brand.olive' color={'white'} my={5}>
                             <Thead>
                                 <Tr>
                                     <Th 
