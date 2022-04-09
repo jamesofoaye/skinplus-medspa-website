@@ -27,7 +27,7 @@ export default function Login() {
                     duration: 2000,
                     position: "top",
                 })
-                router.replace('/admin/gift')
+                router.replace('/admin')
             })
             .catch((error) => {
                 const errorMessage = error.code;
