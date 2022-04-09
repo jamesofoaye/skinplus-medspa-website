@@ -10,7 +10,7 @@ import {
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
     Button, Modal, ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
-    FormLabel, chakra, Badge
+    FormLabel, chakra, Badge, InputGroup, InputRightElement  
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
@@ -142,23 +142,44 @@ export default function Appointments() {
 
     //Search With Fuse
     const [search, setSearch] = useState('');
+    const [searchDate, setSearchDate] = useState('');
 
     const fuse = new Fuse(data, {
-        keys: ['name'],
+        keys: [
+            'name', 
+            'nextAppointmentDate',
+            'status',
+        ],
         includeScore: true,
         //make sure search returns perfect result
-        threshold: 0.2
+        threshold: 0.001
     });
 
-    const results = fuse.search(search);
+    const results = fuse.search(search || searchDate);
+    const resultsDate = fuse.search(searchDate);
     /** Filter appointments to show appointments which dates is greater
      * than right now. In other words, don't show past appointments */
-    const Appointments = data && data.filter((appointments) => appointments.nextAppointmentDate >= moment().format())
+    
+    const Appointments = data && data.filter((appointments) => 
+        //show appointments which dates is greater than today or equal to today
+        appointments.nextAppointmentDate >= moment().format() || moment(appointments.nextAppointmentDate).format('LL') === moment().format('LL')
+    )
 
-    const appointmentResults = search ? results.map(appointment => appointment.item) : Appointments;
+    const appointmentResults = search || searchDate  ? results.map(appointment => appointment.item) : Appointments;
 
     const onSearch = ({ currentTarget }) => {
         setSearch(currentTarget.value);
+    }
+
+    const onSearchDate = ({ currentTarget }) => {
+        if(currentTarget.value === '') {
+            setSearchDate('');
+        } else {
+            setSearchDate(currentTarget.value);
+            resultsDate.forEach(appointment => {
+                results.push(appointment.item)
+            })
+        }
     }
 
     //Add New Appointment to system
@@ -174,7 +195,7 @@ export default function Appointments() {
                 nextAppointmentDate: values.nextAppointmentDate,
                 prevAppointmentDate: "",
                 services: values.services.map(item => item.service),
-                status: 'confirmed'
+                status: 'pending'
             };
 
             await addDoc(appointmentCollection, appointmentPayload);
@@ -215,7 +236,7 @@ export default function Appointments() {
             const appointmentEditPayload = {
                 name: values.name,
                 phone: values.phone,
-                status: 'confirmed',
+                status: 'pending',
                 nextAppointmentDate: values.nextAppointmentDate,
                 prevAppointmentDate: values.prevAppointmentDate,
                 services: values.services.map(item => item.service)
@@ -304,29 +325,40 @@ export default function Appointments() {
                         Add Appointment
                     </Button>
 
-                    <chakra.form width='75vw'>
-                        <Input
-                            size='md' 
-                            mx={4} 
-                            mt={5}
-                            pr='4.5rem'
-                            position={'static'}
-                            placeholder='Search Clients Name...'
-                            borderColor='brand.olive'
-                            borderWidth={2}
-                            color='brand.green'
-                            _placeholder={{
-                                color: 'brand.green'
-                            }}
-                            _focus={{ 
-                                borderColor: 'brand.olive'
-                            }}
-                            _hover={{ 
-                                borderColor: 'brand.olive'
-                            }}
-                            value={search}
-                            onChange={onSearch}
-                        />
+                    <chakra.form width='60vw'>
+                        <InputGroup size='md'>
+                            <Input
+                                size='md' 
+                                ml={4} 
+                                mt={5}
+                                pr='4.5rem'
+                                position={'static'}
+                                placeholder='Search Clients Name...'
+                                borderColor='brand.olive'
+                                borderWidth={2}
+                                color='brand.green'
+                                _placeholder={{
+                                    color: 'brand.green'
+                                }}
+                                _focus={{ 
+                                    borderColor: 'brand.olive'
+                                }}
+                                _hover={{ 
+                                    borderColor: 'brand.olive'
+                                }}
+                                value={search}
+                                onChange={onSearch}
+                            />
+                                                        
+                            <InputRightElement width={170} mt={5}>                       
+                                <Input 
+                                    type="date"
+                                    color='brand.green'
+                                    value={searchDate}
+                                    onChange={onSearchDate}
+                                />
+                            </InputRightElement>
+                        </InputGroup>
                     </chakra.form>
                 </Flex>
 
