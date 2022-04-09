@@ -10,7 +10,7 @@ import {
     DrawerContent, useDisclosure, useToast, ListItem, UnorderedList,
     Button, Modal, ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton,FormControl, Input,
-    FormLabel, chakra, Badge, InputGroup, InputRightElement  
+    FormLabel, chakra, Badge, InputGroup, InputRightElement, Text  
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
@@ -148,6 +148,7 @@ export default function Appointments() {
         keys: [
             'name', 
             'nextAppointmentDate',
+            'prevAppointmentDate',
             'status',
         ],
         includeScore: true,
@@ -181,6 +182,10 @@ export default function Appointments() {
             })
         }
     }
+
+    const sevenDays = moment().add(7, 'days').format('l');
+
+    console.log("sevend days ahead:", sevenDays)
 
     //Add New Appointment to system
     const onSubmit = async (values, e) => {
@@ -356,6 +361,7 @@ export default function Appointments() {
                                     color='brand.green'
                                     value={searchDate}
                                     onChange={onSearchDate}
+                                    position="inherit"
                                 />
                             </InputRightElement>
                         </InputGroup>
@@ -648,6 +654,16 @@ export default function Appointments() {
                                 })}
                             </Tbody>
                         </Table>
+                                                
+                        {appointmentResults.length === 0 && (
+                            <Text 
+                                fontSize={'2xl'} 
+                                textAlign='center'
+                                color={'brand.olive'}
+                            >
+                                No Appointments Found
+                            </Text>
+                        )}
                     </Stack>
                 </Flex>
 

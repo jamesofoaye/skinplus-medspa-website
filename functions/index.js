@@ -40,7 +40,7 @@ const getAppointments = async () => {
   snapshot.forEach((doc) => {
     //Appointment day message
     const message = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa Today at
-      ${moment(doc.data().nextAppointmentDate).format('LT')}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Cancel or Reschedule your appointment. See you soon!`;
+      ${moment(doc.data().nextAppointmentDate).format('LT')}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
 
     const conditionsToSend = async() => { 
       if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
@@ -72,7 +72,7 @@ const getAppointmentsForOnePmSMS = async () => {
 
     //Two days before appointment
     const twoDaysBeforeReminder = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa on 
-      ${moment(doc.data().nextAppointmentDate).add(2, 'days').calendar()}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Cancel or Reschedule your 
+      ${moment(doc.data().nextAppointmentDate).add(2, 'days').calendar()}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your 
       appointment. See you soon!`;
 
     const conditionsToSendOnePmSMS = async() => { 
