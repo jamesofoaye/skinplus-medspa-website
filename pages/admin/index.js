@@ -14,11 +14,10 @@ import {
 } from "@chakra-ui/react"
 import { onAuthStateChanged } from 'firebase/auth';
 import {
-    collection, onSnapshot, addDoc, doc, query, where,
-    deleteDoc, updateDoc, orderBy, limit, getDocs 
+    collection, onSnapshot, addDoc, doc, query, deleteDoc,
+    updateDoc, orderBy, 
 } from "firebase/firestore";
 import { SidebarContent, MobileNav } from '../../components/Admin/navbar'
-import algoliasearch from 'algoliasearch/lite';
 import { generateUserId } from "../../library/GenerateUserId";
 import Fuse from 'fuse.js';
 
@@ -119,6 +118,7 @@ export default function Appointments() {
 
     const [data, setData] = useState([]);
     const [editDocID, setEditDocID] = useState('');
+    const [userId] = useState(generateUserId());
 
     useEffect(() => {
         const q = query(collection(db, "appointment"), orderBy("nextAppointmentDate"));
@@ -183,18 +183,14 @@ export default function Appointments() {
         }
     }
 
-    const sevenDays = moment().add(7, 'days').format('l');
-
-    console.log("sevend days ahead:", sevenDays)
-
-    //Add New Appointment to system
+    //Add New Appointment
     const onSubmit = async (values, e) => {
         try {
             //reference to the collection
             const appointmentCollection = collection(db, "appointment");
             //data to be sent
             const appointmentPayload = {
-                userId: generateUserId(),
+                userId,
                 name: values.name,
                 phone: values.phone,
                 nextAppointmentDate: values.nextAppointmentDate,
@@ -213,6 +209,37 @@ export default function Appointments() {
                 position: "top",
                 isClosable: true,
             })
+
+            const sevenDays = moment().add(7, 'days').format('YYYY-MM-DD');
+                        
+            if(moment(values.nextAppointmentDate).format('YYYY-MM-DD') >= sevenDays) {
+                try {
+                    const Message = `Hi ${values.name}, your next appointment at SkinPlus Medspa is on ${moment(values.nextAppointmentDate).format('LL')}. 
+                    Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
+
+                    //send sms to recipient
+                    const recipeintResponse = await fetch(
+                        `https://api.dawurobo.com/send_sms?sender=SkinPlus&numbers=${values.phone}&message=${Message}&validate=false`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            Message,
+                        })
+                    });
+                } catch (error) {
+                    const errorMessage = error.code;
+                    toast({
+                        title: "Error",
+                        description: errorMessage,
+                        status: "error",
+                        duration: 5000,
+                        position: "top",
+                        isClosable: true,
+                    })
+                }
+            }
 
             //close Modal
             //onCloseModal()
@@ -257,6 +284,37 @@ export default function Appointments() {
                 position: "top",
                 isClosable: true,
             })
+
+            const sevenDays = moment().add(7, 'days').format('YYYY-MM-DD');
+                        
+            if(moment(values.nextAppointmentDate).format('YYYY-MM-DD') >= sevenDays) {
+                try {
+                    const Message = `Hi ${values.name}, your next appointment at SkinPlus Medspa is on ${moment(values.nextAppointmentDate).format('LL')}. 
+                    Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
+
+                    //send sms to recipient
+                    const recipeintResponse = await fetch(
+                        `https://api.dawurobo.com/send_sms?sender=SkinPlus&numbers=${values.phone}&message=${Message}&validate=false`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            Message,
+                        })
+                    });
+                } catch (error) {
+                    const errorMessage = error.code;
+                    toast({
+                        title: "Error",
+                        description: errorMessage,
+                        status: "error",
+                        duration: 5000,
+                        position: "top",
+                        isClosable: true,
+                    })
+                }
+            }
 
             //Close Modal
             onCloseEditModal()
@@ -655,7 +713,7 @@ export default function Appointments() {
                             </Tbody>
                         </Table>
                                                 
-                        {appointmentResults.length === 0 && (
+                        {data.length === 0 || appointmentResults.length === 0 && (
                             <Text 
                                 fontSize={'2xl'} 
                                 textAlign='center'
