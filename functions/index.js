@@ -66,13 +66,13 @@ const getAppointmentsForOnePmSMS = async () => {
 
     let today = new Date();
 
-    const formattedNextAppointmentDate   = moment(doc.data().nextAppointmentDate).format('L')
+    const formattedNextAppointmentDate  = moment(doc.data().nextAppointmentDate).format('L')
 
     const formattedToday = moment(today, "MM-DD-YYYY").add(2, 'days').format('L')
 
     //Two days before appointment
     const twoDaysBeforeReminder = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa on 
-      ${moment(doc.data().nextAppointmentDate).add(2, 'days').calendar()}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your 
+      ${moment(doc.data().nextAppointmentDate).calendar()}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your 
       appointment. See you soon!`;
 
     const conditionsToSendOnePmSMS = async() => { 
