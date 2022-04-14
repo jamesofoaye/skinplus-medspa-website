@@ -683,7 +683,7 @@ export default function Appointments() {
                                                                 shouldDirty: true
                                                             })
                                                             //set userId
-                                                            setValue('phone', details.userId, {
+                                                            setValue('userId', details.userId, {
                                                                 shouldValidate: true,
                                                                 shouldDirty: true
                                                             })
