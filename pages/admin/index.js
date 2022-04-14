@@ -118,7 +118,7 @@ export default function Appointments() {
 
     const [data, setData] = useState([]);
     const [editDocID, setEditDocID] = useState('');
-    const [userId] = useState(generateUserId());
+    const [userId, setUserId] = useState(generateUserId());
 
     useEffect(() => {
         const q = query(collection(db, "appointment"), orderBy("nextAppointmentDate"));
@@ -257,6 +257,8 @@ export default function Appointments() {
 
         //reset forms
         e.target.reset()
+        //set a new userId
+        setUserId(generateUserId())
     };
 
     //Edit Appointment
@@ -290,7 +292,7 @@ export default function Appointments() {
             if(moment(values.nextAppointmentDate).format('YYYY-MM-DD') >= sevenDays) {
                 try {
                     const Message = `Hi ${values.name}, your next appointment at SkinPlus Medspa is on ${moment(values.nextAppointmentDate).format('LL')}. 
-                    Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
+                    Visit ${`https://skinplusofficial.com/appointment/${values.userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
 
                     //send sms to recipient
                     const recipeintResponse = await fetch(
@@ -677,6 +679,11 @@ export default function Appointments() {
                                                             })
                                                             //set phone number
                                                             setValue('phone', details.phone, {
+                                                                shouldValidate: true,
+                                                                shouldDirty: true
+                                                            })
+                                                            //set userId
+                                                            setValue('phone', details.userId, {
                                                                 shouldValidate: true,
                                                                 shouldDirty: true
                                                             })

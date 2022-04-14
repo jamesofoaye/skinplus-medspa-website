@@ -192,8 +192,13 @@ const ManageAppointment = () => {
                                     flex={1}
                                     fontSize={'lg'}
                                     rounded={'full'}
+                                    bg={'red'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'red',
+                                    }}
                                     _focus={{
-                                        bg: 'brand.olive',
+                                        bg: 'red',
                                     }}
                                     onClick={cancelAppointment}
                                 >
