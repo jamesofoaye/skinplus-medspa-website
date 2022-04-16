@@ -42,8 +42,12 @@ const getAppointments = async () => {
     const message = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa Today at
       ${moment(doc.data().nextAppointmentDate).format('LT')}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
 
+    const cancelledAndRescheduled = doc.data().status
+
     const conditionsToSend = async() => { 
-      if(moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
+      if(cancelledAndRescheduled === 'cancelled' || cancelledAndRescheduled === 'rescheduled') {
+        return null
+      } else if (moment(doc.data().nextAppointmentDate).format('L') ===  moment().format('L')) {
         await sendMessage(doc.data().phone, message);
         functions.logger.info("Appointment day reminder worked",
           {structuredData: true}
@@ -70,13 +74,17 @@ const getAppointmentsForOnePmSMS = async () => {
 
     const formattedToday = moment(today, "MM-DD-YYYY").add(2, 'days').format('L')
 
+    const cancelledAndRescheduled = doc.data().status
+
     //Two days before appointment
     const twoDaysBeforeReminder = `Hello ${doc.data().name}, this is a reminder that you have ${doc.data().services.map((service) => service)} appointment at SkinPlus Medspa on 
       ${moment(doc.data().nextAppointmentDate).calendar()}. Visit ${`https://skinplusofficial.com/appointment/${doc.data().userId}`} to Confirm, Cancel or Reschedule your 
       appointment. See you soon!`;
 
     const conditionsToSendOnePmSMS = async() => { 
-      if(formattedToday === formattedNextAppointmentDate) {
+      if(cancelledAndRescheduled === 'cancelled' || cancelledAndRescheduled === 'rescheduled') {
+        return null
+      } else if(formattedToday === formattedNextAppointmentDate) {
         await sendMessage(doc.data().phone, twoDaysBeforeReminder)
         functions.logger.info("2 days appointment reminder worked!",
           {structuredData: true}
