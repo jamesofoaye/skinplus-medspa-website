@@ -14,7 +14,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "algoliasearch": "^4.13.0",
-    "firebase": "^9.5.0",
+    "firebase": "^9.8.1",
     "framer-motion": "^4.1.17",
     "fuse.js": "^6.5.3",
     "imagekitio-react": "^1.0.10",
