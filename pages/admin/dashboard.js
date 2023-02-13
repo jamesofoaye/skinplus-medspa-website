@@ -28,7 +28,7 @@ let logout;
 
 export default function GiftDashboard() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [isSubmittingSMS, setIsSubmittingSMS] = useState(false);
+	const [isSubmittingSMS, setIsSubmittingSMS] = useState({});
 
 	const toast = useToast();
 	const router = useRouter();
@@ -81,9 +81,10 @@ export default function GiftDashboard() {
 	);
 
 	const sendSMS = (data) => {
-		setIsSubmittingSMS(true);
-
-		const { recipientNumber, to, from, code } = data;
+		const { id, recipientNumber, to, from, code } = data;
+		setIsSubmittingSMS({
+			id: true,
+		});
 
 		try {
 			const Message = `Hello ${to}! You have received a SkinPlus Medspa gift card from ${from}. ${from} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
@@ -108,7 +109,9 @@ export default function GiftDashboard() {
 				}),
 			})
 				.then((res) => {
-					setIsSubmittingSMS(false);
+					setIsSubmittingSMS({
+						id: false,
+					});
 					toast({
 						title: "Successful",
 						description: "SMS sent",
@@ -120,7 +123,11 @@ export default function GiftDashboard() {
 				})
 				.catch((err) => {
 					const errorMessage = err.message;
-					setIsSubmittingSMS(false);
+
+					setIsSubmittingSMS({
+						id: false,
+					});
+
 					toast({
 						title: "Error",
 						description: errorMessage,
@@ -132,7 +139,11 @@ export default function GiftDashboard() {
 				});
 		} catch (error) {
 			const errorMessage = error.message;
-			setIsSubmittingSMS(false);
+
+			setIsSubmittingSMS({
+				id: false,
+			});
+
 			toast({
 				title: "Error",
 				description: errorMessage,
@@ -206,14 +217,13 @@ export default function GiftDashboard() {
 												<Td>
 													<Button
 														onClick={() => sendSMS(details)}
-														bgColor={"brand.green"}
-														color={"white"}
-														variant={"outline"}
-														fontSize={{ md: "xl" }}
+														bg="brand.sand"
+														color="white"
 														_hover={{
-															bgColor: "brand.olive",
+															bg: "brand.olive",
 														}}
-														isLoading={isSubmittingSMS}
+														pos="static"
+														isLoading={isSubmittingSMS[details.id]}
 													>
 														Notify
 													</Button>
