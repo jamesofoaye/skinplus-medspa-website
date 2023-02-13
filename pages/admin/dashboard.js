@@ -28,7 +28,6 @@ let logout;
 
 export default function GiftDashboard() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [isSubmittingSMS, setIsSubmittingSMS] = useState({});
 
 	const toast = useToast();
 	const router = useRouter();
@@ -81,9 +80,14 @@ export default function GiftDashboard() {
 	);
 
 	const sendSMS = (data) => {
-		const { id, recipientNumber, to, from, code } = data;
-		setIsSubmittingSMS({
-			id: true,
+		const { recipientNumber, to, from, code } = data;
+		toast({
+			title: "Processing...",
+			description: "Please Wait While SMS is being sent",
+			status: "info",
+			duration: 1500,
+			position: "top",
+			isClosable: true,
 		});
 
 		try {
@@ -109,9 +113,6 @@ export default function GiftDashboard() {
 				}),
 			})
 				.then((res) => {
-					setIsSubmittingSMS({
-						id: false,
-					});
 					toast({
 						title: "Successful",
 						description: "SMS sent",
@@ -124,10 +125,6 @@ export default function GiftDashboard() {
 				.catch((err) => {
 					const errorMessage = err.message;
 
-					setIsSubmittingSMS({
-						id: false,
-					});
-
 					toast({
 						title: "Error",
 						description: errorMessage,
@@ -139,10 +136,6 @@ export default function GiftDashboard() {
 				});
 		} catch (error) {
 			const errorMessage = error.message;
-
-			setIsSubmittingSMS({
-				id: false,
-			});
 
 			toast({
 				title: "Error",
@@ -223,8 +216,6 @@ export default function GiftDashboard() {
 															bg: "brand.sand",
 														}}
 														pos="static"
-														isLoading={isSubmittingSMS[details.id]}
-														loadingText={"Sending..."}
 													>
 														Notify
 													</Button>
