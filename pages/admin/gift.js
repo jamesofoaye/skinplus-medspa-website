@@ -115,10 +115,7 @@ export default function AdminGift() {
 		const { recipientNumber, recipientName, senderName, code } = values;
 
 		try {
-			const Message = `Hello ${recipientName}! You have received a SkinPlus Medspa gift card from ${senderName}.
-            ${senderName} left a personal message for you on our website that only you can see. You can read this message by
-            scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message.
-            You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
+			const Message = `Hello ${recipientName}! You have received a SkinPlus Medspa gift card from ${senderName}. ${senderName} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
 
 			const destinations = [
 				{
@@ -128,7 +125,7 @@ export default function AdminGift() {
 			];
 
 			//send sms to recipient
-			await fetch(`https://dawurobo-sms-api.vercel.app/v3/sms/send`, {
+			fetch("https://dawurobo-sms-api.vercel.app/v3/sms/send", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -138,16 +135,28 @@ export default function AdminGift() {
 					destinations: destinations,
 					message: Message,
 				}),
-			});
-
-			toast({
-				title: "Successful",
-				description: "SMS sent",
-				status: "success",
-				duration: 5000,
-				position: "top",
-				isClosable: true,
-			});
+			})
+				.then((res) => {
+					toast({
+						title: "Successful",
+						description: "SMS sent",
+						status: "success",
+						duration: 5000,
+						position: "top",
+						isClosable: true,
+					});
+				})
+				.catch((err) => {
+					const errorMessage = err.message;
+					toast({
+						title: "Error",
+						description: errorMessage,
+						status: "error",
+						duration: 5000,
+						position: "top",
+						isClosable: true,
+					});
+				});
 
 			resetSMS({ values });
 		} catch (error) {
