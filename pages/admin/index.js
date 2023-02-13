@@ -223,17 +223,19 @@ export default function Appointments() {
 
 	//Add New Appointment
 	const onSubmit = async (values, e) => {
+		const { name, phone, nextAppointmentDate, services } = values;
+
 		try {
 			//reference to the collection
 			const appointmentCollection = collection(db, "appointment");
 			//data to be sent
 			const appointmentPayload = {
 				userId,
-				name: values.name,
-				phone: values.phone,
-				nextAppointmentDate: values.nextAppointmentDate,
+				name: name,
+				phone: phone,
+				nextAppointmentDate: nextAppointmentDate,
 				prevAppointmentDate: "",
-				services: values.services.map((item) => item.service),
+				services: services.map((item) => item.service),
 				status: "pending",
 			};
 
@@ -250,16 +252,13 @@ export default function Appointments() {
 
 			const sevenDays = moment().add(7, "days").format("YYYY-MM-DD");
 
-			if (
-				moment(values.nextAppointmentDate).format("YYYY-MM-DD") >= sevenDays
-			) {
+			if (moment(nextAppointmentDate).format("YYYY-MM-DD") >= sevenDays) {
 				try {
-					const Message = `Hi ${
-						values.name
-					}, your next appointment at SkinPlus Medspa is on ${moment(
-						values.nextAppointmentDate
-					).format("LL")}. 
-                    Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
+					const Message = `Hi ${name}, your next appointment at SkinPlus Medspa is on ${moment(
+						nextAppointmentDate
+					).format(
+						"LL"
+					)}. Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
 
 					const destinations = [
 						{
@@ -315,17 +314,26 @@ export default function Appointments() {
 
 	//Edit Appointment
 	const onSubmitEdit = async (values, e) => {
+		const {
+			name,
+			phone,
+			nextAppointmentDate,
+			prevAppointmentDate,
+			services,
+			userId,
+		} = values;
+
 		try {
 			//reference to the document
 			const appointmentDocument = doc(db, "appointment", editDocID);
 			//data to be sent
 			const appointmentEditPayload = {
-				name: values.name,
-				phone: values.phone,
+				name: name,
+				phone: phone,
 				status: "pending",
-				nextAppointmentDate: values.nextAppointmentDate,
-				prevAppointmentDate: values.prevAppointmentDate,
-				services: values.services.map((item) => item.service),
+				nextAppointmentDate: nextAppointmentDate,
+				prevAppointmentDate: prevAppointmentDate,
+				services: services.map((item) => item.service),
 			};
 
 			await updateDoc(appointmentDocument, appointmentEditPayload);
@@ -341,21 +349,18 @@ export default function Appointments() {
 
 			const sevenDays = moment().add(7, "days").format("YYYY-MM-DD");
 
-			if (
-				moment(values.nextAppointmentDate).format("YYYY-MM-DD") >= sevenDays
-			) {
+			if (moment(nextAppointmentDate).format("YYYY-MM-DD") >= sevenDays) {
 				try {
-					const Message = `Hi ${
-						values.name
-					}, your next appointment at SkinPlus Medspa is on ${moment(
-						values.nextAppointmentDate
-					).format("LL")}. 
-                    Visit ${`https://skinplusofficial.com/appointment/${values.userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
+					const Message = `Hi ${name}, your next appointment at SkinPlus Medspa is on ${moment(
+						nextAppointmentDate
+					).format(
+						"LL"
+					)}. Visit ${`https://skinplusofficial.com/appointment/${userId}`} to Confirm, Cancel or Reschedule your appointment. See you soon!`;
 
 					const destinations = [
 						{
-							msgid: values.phone,
-							destination: values.phone,
+							msgid: phone,
+							destination: phone,
 						},
 					];
 
