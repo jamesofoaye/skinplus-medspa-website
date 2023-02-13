@@ -217,13 +217,14 @@ export default function GiftDashboard() {
 												<Td>
 													<Button
 														onClick={() => sendSMS(details)}
-														bg="brand.sand"
+														bg="brand.green"
 														color="white"
 														_hover={{
-															bg: "brand.olive",
+															bg: "brand.sand",
 														}}
 														pos="static"
 														isLoading={isSubmittingSMS[details.id]}
+														loadingText={"Sending..."}
 													>
 														Notify
 													</Button>
