@@ -111,66 +111,66 @@ export default function AdminGift() {
 		}
 	};
 
-	const sendSMS = async (values) => {
-		const { recipientNumber, recipientName, senderName, code } = values;
+	// const sendSMS = async (values) => {
+	// 	const { recipientNumber, recipientName, senderName, code } = values;
 
-		try {
-			const Message = `Hello ${recipientName}! You have received a SkinPlus Medspa gift card from ${senderName}. ${senderName} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
+	// 	try {
+	// 		const Message = `Hello ${recipientName}! You have received a SkinPlus Medspa gift card from ${senderName}. ${senderName} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
 
-			const destinations = [
-				{
-					msgid: recipientNumber,
-					destination: recipientNumber,
-				},
-			];
+	// 		const destinations = [
+	// 			{
+	// 				msgid: recipientNumber,
+	// 				destination: recipientNumber,
+	// 			},
+	// 		];
 
-			//send sms to recipient
-			fetch("https://dawurobo-sms-api.vercel.app/v3/sms/send", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					senderid: "SkinPlus",
-					destinations: destinations,
-					message: Message,
-				}),
-			})
-				.then((res) => {
-					toast({
-						title: "Successful",
-						description: "SMS sent",
-						status: "success",
-						duration: 5000,
-						position: "top",
-						isClosable: true,
-					});
-				})
-				.catch((err) => {
-					const errorMessage = err.message;
-					toast({
-						title: "Error",
-						description: errorMessage,
-						status: "error",
-						duration: 5000,
-						position: "top",
-						isClosable: true,
-					});
-				});
+	// 		//send sms to recipient
+	// 		fetch("https://dawurobo-sms-api.vercel.app/v3/sms/send", {
+	// 			method: "POST",
+	// 			headers: {
+	// 				"Content-Type": "application/json",
+	// 			},
+	// 			body: JSON.stringify({
+	// 				senderid: "SkinPlus",
+	// 				destinations: destinations,
+	// 				message: Message,
+	// 			}),
+	// 		})
+	// 			.then((res) => {
+	// 				toast({
+	// 					title: "Successful",
+	// 					description: "SMS sent",
+	// 					status: "success",
+	// 					duration: 5000,
+	// 					position: "top",
+	// 					isClosable: true,
+	// 				});
+	// 			})
+	// 			.catch((err) => {
+	// 				const errorMessage = err.message;
+	// 				toast({
+	// 					title: "Error",
+	// 					description: errorMessage,
+	// 					status: "error",
+	// 					duration: 5000,
+	// 					position: "top",
+	// 					isClosable: true,
+	// 				});
+	// 			});
 
-			resetSMS({ values });
-		} catch (error) {
-			const errorMessage = error.message;
-			toast({
-				title: "Error",
-				description: errorMessage,
-				status: "error",
-				duration: 5000,
-				position: "top",
-				isClosable: true,
-			});
-		}
-	};
+	// 		resetSMS({ values });
+	// 	} catch (error) {
+	// 		const errorMessage = error.message;
+	// 		toast({
+	// 			title: "Error",
+	// 			description: errorMessage,
+	// 			status: "error",
+	// 			duration: 5000,
+	// 			position: "top",
+	// 			isClosable: true,
+	// 		});
+	// 	}
+	// };
 
 	return (
 		<>
@@ -380,7 +380,7 @@ export default function AdminGift() {
 							</Stack>
 						</chakra.form>
 
-						<chakra.form onSubmit={handleSubmitSMS(sendSMS)}>
+						{/* <chakra.form onSubmit={handleSubmitSMS(sendSMS)}>
 							<Stack
 								spacing={8}
 								mx={"auto"}
@@ -512,7 +512,7 @@ export default function AdminGift() {
 									</Stack>
 								</Box>
 							</Stack>
-						</chakra.form>
+						</chakra.form> */}
 					</Flex>
 				</Box>
 			</Box>
