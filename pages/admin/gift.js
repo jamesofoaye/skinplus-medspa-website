@@ -128,20 +128,17 @@ export default function AdminGift() {
 			];
 
 			//send sms to recipient
-			const recipeintResponse = await fetch(
-				`https://dawurobo-sms-api.vercel.app/v3/sms/send`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						senderid: "SkinPlus",
-						destinations: destinations,
-						message: Message,
-					}),
-				}
-			);
+			await fetch(`https://dawurobo-sms-api.vercel.app/v3/sms/send`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					senderid: "SkinPlus",
+					destinations: destinations,
+					message: Message,
+				}),
+			});
 
 			toast({
 				title: "Successful",
