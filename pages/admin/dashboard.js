@@ -194,8 +194,8 @@ export default function GiftDashboard() {
 										<Th color={"white"}>To</Th>
 										<Th color={"white"}>Message</Th>
 										<Th color={"white"}>Recipient Number</Th>
-										<Th color={"white"}>Code</Th>
 										<Th color={"white"}>SMS</Th>
+										<Th color={"white"}>Code</Th>
 									</Tr>
 								</Thead>
 								<Tbody>
