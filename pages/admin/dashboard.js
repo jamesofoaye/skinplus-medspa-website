@@ -36,10 +36,10 @@ export default function GiftDashboard() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	 const { 
 		isOpen: isOpenSMS,
-		 onOpen: onOpenSMS,
-		  onClose: onCloseSMS
-		} = useDisclosure()
-		 const cancelRef = useRef()
+	 	onOpen: onOpenSMS,
+	 	onClose: onCloseSMS
+	} = useDisclosure()
+	const cancelRef = useRef()
 
 	const toast = useToast();
 	const router = useRouter();
@@ -73,6 +73,7 @@ export default function GiftDashboard() {
 			code: "Loading...",
 		},
 	]);
+	const [selectedData, setSelectedData] = useState({})
 
 	const dataRef = collection(db, "xmas-gift-card-program");
 
@@ -213,70 +214,71 @@ export default function GiftDashboard() {
 								<Tbody>
 									{data.map((details, index) => {
 										return (
-											<Box key={details.id}>
-												<Tr>
-													<Td>{index + 1}</Td>
-													<Td>{details.from}</Td>
-													<Td>{details.to}</Td>
-													<Td>{details.message}</Td>
-													<Td>{details.recipientNumber}</Td>
-													<Td>
-														<Button
-															onClick={() => onOpenSMS()}
-															bg="brand.green"
-															color="white"
-															_hover={{
-																bg: "brand.sand",
-															}}
-															pos="static"
-														>
-															Notify
-														</Button>
-													</Td>
-													<Td>
-														<CopyButton value={details.code} />
-													</Td>
-												</Tr>
-
-												<AlertDialog
-													isOpen={isOpenSMS}
-													leastDestructiveRef={cancelRef}
-													onClose={onCloseSMS}
-												>
-													<AlertDialogOverlay>
-													<AlertDialogContent>
-														<AlertDialogHeader fontSize="lg" fontWeight="bold">
-															SMS Notification
-														</AlertDialogHeader>
-
-														<AlertDialogBody>
-															Are you sure you want to send sms {details.to}?
-														</AlertDialogBody>
-
-														<AlertDialogFooter>
-														<Button ref={cancelRef} onClick={onCloseSMS}>
-															No
-														</Button>
-														<Button
-														 	bg="brand.green"
-															color="white"
-															_hover={{
-																bg: "brand.sand",
-															}}
-															pos="static"
-															onClick={() => sendSMS(details)} 
-															ml={3}
-														>
-															Yes
-														</Button>
-														</AlertDialogFooter>
-													</AlertDialogContent>
-													</AlertDialogOverlay>
-												</AlertDialog>
-											</Box>
+											<Tr  key={details.id}>
+												<Td>{index + 1}</Td>
+												<Td>{details.from}</Td>
+												<Td>{details.to}</Td>
+												<Td>{details.message}</Td>
+												<Td>{details.recipientNumber}</Td>
+												<Td>
+													<Button
+														onClick={() => {
+															setSelectedData(details)
+															onOpenSMS()
+														}}
+														bg="brand.green"
+														color="white"
+														_hover={{
+															bg: "brand.sand",
+														}}
+														pos="static"
+													>
+														Notify
+													</Button>
+												</Td>
+												<Td>
+													<CopyButton value={details.code} />
+												</Td>
+											</Tr>
 										);
 									})}
 								</Tbody>
+
+								<AlertDialog
+									isOpen={isOpenSMS}
+									leastDestructiveRef={cancelRef}
+									onClose={onCloseSMS}
+								>
+									<AlertDialogOverlay>
+									<AlertDialogContent>
+										<AlertDialogHeader fontSize="lg" fontWeight="bold">
+											SMS Notification
+										</AlertDialogHeader>
+
+										<AlertDialogBody>
+											Are you sure you want to send sms {selectedData.to}?
+										</AlertDialogBody>
+
+										<AlertDialogFooter>
+											<Button ref={cancelRef} onClick={onCloseSMS}>
+												No
+											</Button>
+											<Button
+												bg="brand.green"
+												color="white"
+												_hover={{
+													bg: "brand.sand",
+												}}
+												pos="static"
+												onClick={() => sendSMS(details)} 
+												ml={3}
+											>
+												Yes
+											</Button>
+											</AlertDialogFooter>
+										</AlertDialogContent>
+									</AlertDialogOverlay>
+								</AlertDialog>
 							</Table>
 						</Stack>
 					</Flex>
