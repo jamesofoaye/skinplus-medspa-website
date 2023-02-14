@@ -250,7 +250,7 @@ export default function GiftDashboard() {
 														</AlertDialogHeader>
 
 														<AlertDialogBody>
-															Are you sure you want to send sms {to}?
+															Are you sure you want to send sms {details.to}?
 														</AlertDialogBody>
 
 														<AlertDialogFooter>
