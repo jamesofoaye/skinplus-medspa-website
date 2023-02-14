@@ -104,7 +104,7 @@ export default function GiftDashboard() {
 		});
 
 		try {
-			const Message = `Hello ${to}! You have received a SkinPlus Medspa gift card from ${from}. ${from} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
+			const Message = `Hello ${to}! You have received a SkinPlus Medspa gift card from ${from}. ${from} left a personal message for you on our website that only you can see. You can read this message by scanning the QR code on the gift card. Open the link from the QR code or visit www.skinplusofficial.com/gift and enter this code: ${code} to see your message. You can call us on 0559378553 if you have any questions or Visit our website at www.skinplusofficial.com`;
 
 			const destinations = [
 				{
