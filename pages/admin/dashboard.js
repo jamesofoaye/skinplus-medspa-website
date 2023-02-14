@@ -26,7 +26,7 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { SidebarContent, MobileNav } from "../../components/Admin/navbar";
 import CopyButton from "../../components/copyButton";
 
@@ -75,11 +75,12 @@ export default function GiftDashboard() {
 	]);
 	const [selectedData, setSelectedData] = useState({})
 
-	const dataRef = collection(db, "xmas-gift-card-program");
+	const dataRef = collection(db, "xmas-gift-card-program")
+	const _query = query(dataRef, orderBy('createdAt', 'desc'));
 
 	useEffect(
 		() =>
-			onSnapshot(dataRef, (snapshot) =>
+			onSnapshot(_query, (snapshot) =>
 				setData(
 					snapshot.docs.map((doc) => ({
 						//data from firebase
@@ -134,6 +135,9 @@ export default function GiftDashboard() {
 						position: "top",
 						isClosable: true,
 					});
+
+					//close confirmation modal
+					onCloseSMS()
 				})
 				.catch((err) => {
 					const errorMessage = err.message;
