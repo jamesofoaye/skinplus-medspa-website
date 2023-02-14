@@ -270,7 +270,7 @@ export default function GiftDashboard() {
 													bg: "brand.sand",
 												}}
 												pos="static"
-												onClick={() => sendSMS(details)} 
+												onClick={() => sendSMS(selectedData)} 
 												ml={3}
 											>
 												Yes
