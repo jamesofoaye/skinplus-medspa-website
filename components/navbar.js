@@ -108,12 +108,17 @@ const DesktopNav = () => {
                     <Link
                         p={2}
                         href={navItem.href ?? '#'}
-                        fontSize={'lg'}
+                        fontSize={'sm'}
+                        letterSpacing={1.2}
+                        fontFamily={'sora'}
                         fontWeight={500}
+                        transition={'ease 0.4s'}
+                        textTransform={'uppercase'}
                         color={'white'}
                         _hover={{
                             textDecoration: 'none',
-                            fontSize: '2xl',
+                            fontSize: '1xl',
+                            color:"#BB9254"
                         }}>
                         {navItem.label}
                     </Link>
@@ -145,10 +150,15 @@ const MobileNavItem = ({ label, href }) => {
                 py={2}
                 as={Link}
                 href={href ?? '#'}
-                justify={'space-between'}
+                justify={'space-between'}fontFamily={'sora'}
+                fontWeight={500}
+                transition={'ease 0.4s'}
+                textTransform={'uppercase'}
                 align={'center'}
                 _hover={{
                     textDecoration: 'none',
+                    fontSize: '1xl',
+                    color:"#BB9254"
                 }}>
                 <Text
                     fontWeight={600}
