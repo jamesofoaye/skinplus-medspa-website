@@ -29,6 +29,7 @@ import {
   Input,
   HStack,
   Link,
+  Grid,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 
@@ -92,15 +93,22 @@ export default function Home() {
             />
 
             <Flex justify={'center'} mx={'auto'}>
-              <Flex
+              <Box
+                display={{ base: '', lg: 'flex' }}
                 w={'full'}
-                h={'100vh'}
+                h={{ base: '60vh', lg: '80vh' }}
                 align="center"
-                justify="space-between">
-                <Flex w={'full'} justify={'center'} mt={'-150px'} mr={'-200px'}>
+                justify="space-between"
+                mb={{ base: '10rem' }}>
+                <Flex
+                  justify={'center'}
+                  mt={{ base: '10px', lg: '200px' }}
+                  w={{ base: 'auto', lg: '100%' }}
+                  mr={{ base: '0', lg: '-180px' }}
+                  px={{ base: '0', lg: '2rem' }}>
                   {' '}
                   <Text
-                    fontSize={useBreakpointValue({ base: 'xl', md: '4xl' })}
+                    fontSize={useBreakpointValue({ base: 'xl', md: '3xl' })}
                     color={'brand.black'}
                     fontWeight={'60%'}
                     textAlign={'center'}>
@@ -111,39 +119,53 @@ export default function Home() {
                     </Text>
                   </Text>
                 </Flex>
-                <Flex w={'full'} align="center" justify="end">
+                <Flex
+                  w={{ base: 'auto', lg: '100%' }}
+                  mt={{ base: '5rem', lg: '0' }}
+                  align="center"
+                  justify={{ base: 'center', lg: 'end' }}>
                   <Image
                     src="skin.png"
-                    boxSize="100vh"
+                    boxSize={{ base: '70vh', lg: '100vh' }}
+                    mt={{ base: '-5rem', lg: '10rem' }}
                     objectFit="cover"
                     display={'flex'}
-                    justifyContent={'end'}
+                    justifyContent={{ base: 'center', lg: 'end' }}
                     alt="Skin care"
                   />
                 </Flex>
-              </Flex>
+              </Box>
             </Flex>
           </Box>
         </div>
 
         <div id="welcomeWord">
-          <Box w={'90%'} mx={'auto'} h={'30vh'} mt={'30px'} mb={'30px'}>
-            <Flex justify={'space-around'}>
-              <Box boxSize="lg">
+          <Box
+            mx={'auto'}
+            h={{ base: 'auto', lg: '30vh' }}
+            mt={'30px'}
+            mb={'0px'}>
+            <Box
+              w={{ base: '', lg: '80%' }}
+              mx={{ base: '', lg: 'auto' }}
+              display={{ lg: 'flex' }}
+              justify={{ base: 'none', lg: 'center' }}>
+              <Box>
                 <Image
                   src="welcome.jpg"
                   alt="skin plus"
-                  borderRadius={'30px'}
+                  borderRadius={{ base: '0', lg: '30px' }}
+                  w={{ base: 'auto', lg: '60vw' }}
                 />
               </Box>
               <Box
                 borderRadius={'10px'}
                 bgColor={'white'}
                 boxShadow={'md'}
-                h={'25vh'}
-                w={'45%'}
-                ml={'-400px'}
-                mt={'50px'}
+                h={{ base: 'base', lg: '30vh' }}
+                w={{ base: 'auto', lg: '70%' }}
+                ml={{ base: '0px', md: '0px', lg: '-80px' }}
+                mt={{ base: '5px', lg: '30px' }}
                 px={'4'}>
                 <Text
                   textColor={'brand.green'}
@@ -152,7 +174,7 @@ export default function Home() {
                   textAlign={'center'}>
                   Quality and Comfort
                   <Text
-                    fontSize={'xs'}
+                    fontSize={{ base: 'sm', md: 'sm', xl: 'lg' }}
                     fontFamily={'sans-serif'}
                     textColor={'brand.gray'}>
                     Experience the epitome of luxury at our spa, where
@@ -165,28 +187,33 @@ export default function Home() {
                   </Text>
                 </Text>
               </Box>
-            </Flex>
+            </Box>
           </Box>
         </div>
 
         <div id="about">
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
+            mb={'2rem'}
             spacing={4}
             color={'black'}
-            mt={'10rem'}
-            ml={'4rem'}
-            overflow={'hidden'}
-            h={'30rem'}>
+            mt={{ base: '1rem', lg: '10rem' }}
+            ml={'2rem'}
+            w={{ base: '100%', lg: '90%' }}
+            mx={'auto'}
+            h={'auto'}>
             <Stack
-              mt={'-20rem'}
+              mt={{ base: '0', lg: '0rem' }}
+              py={{ base: '2rem' }}
+              bgColor={'brand.cream'}
               spacing={2}
               justify={'center'}
-              px={8}
+              px={4}
               align={{ base: 'justify' }}>
               <Heading
                 fontFamily={'Oswald'}
-                fontSize={{ base: 'xl', md: '3xl', xl: '6xl' }}
+                fontSize={{ base: 'xl', md: '2xl', xl: '4xl' }}
+                textColor={'brand.green'}
                 pt={{ base: 5, md: 0 }}>
                 About Us
               </Heading>
@@ -195,7 +222,14 @@ export default function Home() {
                 and physique and only enhance it so that you look like the best
                 version of yourself; and maybe 10 years younger. SkinPlus Medspa
                 provides a variety of personalized services to its clientele to
-                enhance their look and maintain youth...
+                enhance their look and maintain youth. Whether you are looking
+                for low cost noninvasive procedures, solutions for the
+                pigmentation, wrinkles or acne, or even looking to enhance
+                certain facial features or your physique, we are the place for
+                you. SkinPlus Medspa addresses all your skincare concerns, PLUS
+                body, hair loss and sexual health needs. We are passionate about
+                your satisfaction and strive to make you look as good as you
+                feel.
               </Text>
               <Link
                 p={2}
@@ -218,7 +252,7 @@ export default function Home() {
             <Flex pt={4} display={{ base: 'none', md: 'block' }}>
               <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
                 <chakra.div
-                  pl={useBreakpointValue({ base: null, md: 48, '2xl': 98 })}>
+                  pl={useBreakpointValue({ base: null, md: 0, '2xl': 98 })}>
                   <IKImage path="/8.png" />
                 </chakra.div>
               </IKContext>
@@ -226,19 +260,16 @@ export default function Home() {
           </SimpleGrid>
         </div>
 
-        <SimpleGrid
-          columns={{ base: 1, md: 2 }}
-          p={{ base: 0, md: 12 }}
-          bgColor="brand.olive">
+        <SimpleGrid columns={{ base: 1, md: 2 }} p={{ base: 0, md: 12 }}>
           <Flex display={{ base: 'none', md: 'block' }}>
             <IKContext urlEndpoint="https://ik.imagekit.io/4imk7wydrsn/">
-              <chakra.div px={40}>
+              <chakra.div px={20}>
                 <IKImage path="/3.png" />
               </chakra.div>
             </IKContext>
           </Flex>
-          <Stack justify={'center'} px={8}>
-            <Text fontSize={'lg'} color="white" py={{ base: 5, md: 0 }}>
+          <Stack justify={'center'} px={4} bgColor={'brand.cream'}>
+            <Text fontSize={'lg'} py={{ base: 5, md: 0 }}>
               Owned and operated by physicians and certified professionals. We
               are committed to cleanliness, safety, comfort and professionalism.
               SkinPlus Medspa serve as a sanitary location staffed with trained
@@ -370,12 +401,13 @@ export default function Home() {
           </SimpleGrid>
         </div>
 
-        <Box bgColor="brand.brown" color="white">
+        <Box bgColor="brand.green" color="white">
           <Center>
-            <Text fontSize={{ base: '2xl', md: '6xl' }} p={{ base: 8, md: 16 }}>
-              "We celebrate natural
-              <br />
-              beauty and believe
+            <Text
+              fontSize={{ base: '2xl', md: '6xl' }}
+              p={{ base: 8, md: 16 }}
+              textAlign={'center'}>
+              "We celebrate natural beauty and believe
               <br />
               everyone is beautiful
               <br />
@@ -1148,20 +1180,18 @@ export default function Home() {
                   <Heading
                     fontFamily={'Oswald'}
                     display={{ base: 'none', md: 'block' }}
-                    fontSize={{ base: '2xl', md: '5xl', xl: '6xl' }}>
-                    Get
-                    <br />
-                    In Touch
+                    fontSize={{ base: 'xl', md: '3xl', xl: '4xl' }}>
+                    Get In Touch
                   </Heading>
                   <Heading
                     fontFamily={'Oswald'}
                     display={{ base: 'block', md: 'none' }}
-                    fontSize={{ base: '2xl', md: '5xl', xl: '6xl' }}>
+                    fontSize={{ base: 'xl', md: '3xl', xl: '6xl' }}>
                     Get In Touch
                   </Heading>
                 </Box>
                 <Text
-                  fontSize={{ base: 'xl', md: '2xl' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   pl={{ base: 0, md: 5 }}>
                   We are open on Tuesday - Sunday <br />
                   from 10am - 7pm <br />
@@ -1169,7 +1199,7 @@ export default function Home() {
                 </Text>
 
                 <Text
-                  fontSize={{ base: 'xl', md: '2xl' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   pl={{ base: 0, md: 5 }}>
                   <Text my={5}>
                     <address>
@@ -1179,7 +1209,7 @@ export default function Home() {
                       <br />
                       Opposite Dufie Court.
                       <br />
-                      Phone Number: <a href="tel:+233596068336">0596068336</a>
+                      Phone Number: <a href="tel:+233596068336">059 606 8336</a>
                     </address>
                   </Text>
 
@@ -1188,7 +1218,7 @@ export default function Home() {
                     <br />
                     Newark NJ 07103.
                     <br />
-                    Phone Number: <a href="tel:+186237142926">86237142926</a>
+                    Phone Number: <a href="tel:+186237142926">862 371 42926</a>
                   </address>
                 </Text>
               </Box>
