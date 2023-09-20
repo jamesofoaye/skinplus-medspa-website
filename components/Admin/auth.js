@@ -1,6 +1,6 @@
 import {
-    Flex, Box, FormControl, FormLabel, FormErrorMessage, Input,
-    Stack, Button, Heading, useColorModeValue, useToast, chakra
+    Box, FormControl, FormLabel, FormErrorMessage, Input,
+    Stack, Button, Heading, useToast, chakra
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form';
@@ -61,14 +61,16 @@ export default function Login() {
                     fontFamily={'Lora'}
                     pb={5}
                 >
-                 Admin Sign In
+                    Admin Sign In
                 </Heading>
             </Stack>
             <Box
                 rounded={'lg'}
                 boxShadow={'lg'}
-                w={['95vw','30vw']}
-                p={8}>
+                w={['95vw', '30vw']}
+                p={8}
+                color={'white'}
+            >
                 <Stack spacing={4}>
                     <chakra.form onSubmit={handleSubmit(onSubmit)}>
                         <FormControl>

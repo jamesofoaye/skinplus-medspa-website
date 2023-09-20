@@ -1,6 +1,6 @@
 import {
     chakra, IconButton, Avatar, Box, CloseButton, Flex, HStack, VStack, Icon,
-    useColorModeValue, Text, Menu, MenuButton, MenuItem, MenuList,
+    Text, Menu, MenuButton, MenuItem, MenuList,
 } from '@chakra-ui/react';
 import { FiGift, FiMenu, FiChevronDown, FiList } from 'react-icons/fi';
 import { BsCalendarDay } from 'react-icons/bs';
@@ -38,7 +38,7 @@ export const SidebarContent = ({ onClose, ...rest }) => {
             <Flex h={['20', '36']} alignItems="center" mx="8" justifyContent="space-between">
                 <CloseButton color="white" display={{ base: 'flex', md: 'none' }} onClick={onClose} size={10} mr={5} />
 
-                <chakra.img src={'/logo.svg'} py={[0,5]} display={{ base: 'none', md: 'flex' }}></chakra.img>
+                <chakra.img src={'/logo.svg'} py={[0, 5]} display={{ base: 'none', md: 'flex' }}></chakra.img>
             </Flex>
 
             {LinkItems.map((link) => (
@@ -99,7 +99,7 @@ export const MobileNav = ({ onOpen, logout, ...rest }) => {
             alignItems="center"
             bg={["brand.green", "white"]}
             borderBottomWidth="1px"
-            borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+            borderBottomColor={'gray.200'}
             justifyContent={{ base: 'space-between', md: 'flex-end' }}
             position="fixed"
             top={0}
@@ -138,9 +138,9 @@ export const MobileNav = ({ onOpen, logout, ...rest }) => {
                         </MenuButton>
 
                         <MenuList bg={'white'}>
-                            <MenuItem 
-                                fontSize={'lg'} 
-                                fontWeight={600} 
+                            <MenuItem
+                                fontSize={'lg'}
+                                fontWeight={600}
                                 onClick={logout}
                             >
                                 Sign out

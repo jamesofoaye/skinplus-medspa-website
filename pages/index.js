@@ -53,7 +53,7 @@ export default function Home() {
             </nav>
 
             {/**Calendly Widget */}
-            <PopupWidget
+            {/* <PopupWidget
               branding
               color="#1f3d33"
               pageSettings={{
@@ -67,7 +67,15 @@ export default function Home() {
               text="Book Free Consultation"
               textColor="#ffffff"
               url="https://calendly.com/skinplusmedspa/30min"
-            />
+            /> */}
+            {/* <PopupWidget
+              url="https://calendly.com/skinplusmedspa/30min"
+              rootElement={document.getElementById("root")}
+              text="Book Free Consultation"
+              textColor="#ffffff"
+              branding
+              color="#1f3d33"
+            /> */}
 
             <Flex
               w={'full'}

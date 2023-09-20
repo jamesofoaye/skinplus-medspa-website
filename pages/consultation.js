@@ -40,7 +40,7 @@ export default function Consultation() {
                         textColor: 'ffffff'
                     }}
                     styles={{
-                        height: '630px',
+                        height: '1000px',
                         minWidth: '320px'
                     }}
                     url="https://calendly.com/skinplusmedspa/30min"

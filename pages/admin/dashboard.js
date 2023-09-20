@@ -17,11 +17,11 @@ import {
 	Drawer,
 	DrawerContent,
 	AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
+	AlertDialogBody,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogContent,
+	AlertDialogOverlay,
 	useDisclosure,
 	useToast,
 } from "@chakra-ui/react";
@@ -34,10 +34,10 @@ let logout;
 
 export default function GiftDashboard() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	 const { 
+	const {
 		isOpen: isOpenSMS,
-	 	onOpen: onOpenSMS,
-	 	onClose: onCloseSMS
+		onOpen: onOpenSMS,
+		onClose: onCloseSMS
 	} = useDisclosure()
 	const cancelRef = useRef()
 
@@ -218,7 +218,7 @@ export default function GiftDashboard() {
 								<Tbody>
 									{data.map((details, index) => {
 										return (
-											<Tr  key={details.id}>
+											<Tr key={details.id}>
 												<Td>{index + 1}</Td>
 												<Td>{details.from}</Td>
 												<Td>{details.to}</Td>
@@ -254,31 +254,31 @@ export default function GiftDashboard() {
 									onClose={onCloseSMS}
 								>
 									<AlertDialogOverlay>
-									<AlertDialogContent>
-										<AlertDialogHeader fontSize="lg" fontWeight="bold">
-											SMS Notification
-										</AlertDialogHeader>
+										<AlertDialogContent>
+											<AlertDialogHeader fontSize="lg" fontWeight="bold">
+												SMS Notification
+											</AlertDialogHeader>
 
-										<AlertDialogBody>
-											Are you sure you want to send sms {selectedData.to}?
-										</AlertDialogBody>
+											<AlertDialogBody>
+												Are you sure you want to send sms {selectedData.to}?
+											</AlertDialogBody>
 
-										<AlertDialogFooter>
-											<Button ref={cancelRef} onClick={onCloseSMS}>
-												No
-											</Button>
-											<Button
-												bg="brand.green"
-												color="white"
-												_hover={{
-													bg: "brand.sand",
-												}}
-												pos="static"
-												onClick={() => sendSMS(selectedData)} 
-												ml={3}
-											>
-												Yes
-											</Button>
+											<AlertDialogFooter>
+												<Button ref={cancelRef} onClick={onCloseSMS}>
+													No
+												</Button>
+												<Button
+													bg="brand.green"
+													color="white"
+													_hover={{
+														bg: "brand.sand",
+													}}
+													pos="static"
+													onClick={() => sendSMS(selectedData)}
+													ml={3}
+												>
+													Yes
+												</Button>
 											</AlertDialogFooter>
 										</AlertDialogContent>
 									</AlertDialogOverlay>
