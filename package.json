@@ -13,7 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@splitbee/web": "^0.3.0",
-    "firebase": "^10.4.0",
+    "firebase": "^10.6.0",
     "framer-motion": "^9.0.3",
     "fuse.js": "^6.6.2",
     "imagekitio-react": "^2.0.0",
